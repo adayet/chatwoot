@@ -6,6 +6,10 @@ name: Build image → GHCR
 on:
   push:
     branches: [klimabazar]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'CUSTOMIZATIONS.md'
   workflow_dispatch:
 
 concurrency:
