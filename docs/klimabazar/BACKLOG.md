@@ -14,6 +14,7 @@ Zasada **sidecar-first**: co da się zrobić jako sidecar / feature-flag / custo
 | **F5** | BaseLinker + wFirma jako **natywne sekcje w prawym panelu Kontakt** (zamiast iframe Dashboard App) | Fork — front (Vue) | Średnie (panel kontaktu) | Wspólna infra dla BL i wFirma — budujemy raz. Dane dalej z sidecarów |
 | **F6** | ✅ **ZROBIONE** — Wątki „rozwiązane": nie znikają (domyślny filtr=Wszystkie), status na pasku+chip, wracają po odpowiedzi (reopen działa natywnie) | F6b front | — | Spec/plan: `F6-design.md`, `F6-plan.md`. Deploy po 16:00 (sha `8d0eade16`) |
 | **F7** | ✅ **ZROBIONE** — Foldery/filtrowanie marketplace+spam | **Natywnie** (właściciel): reguły automatyzacji `email`→`add_label` + foldery/widoki etykiet. **+ mały fork (Droga B):** domyślna lista wyklucza etykietę `spam` (znika z „Rozmowy", zostaje w `#spam`) | niska | `F7-spike.md`; fork w `ChatList.vue` (`HIDDEN_LABELS`) |
+| **F8** | Karta rozmowy: badge = liczba realnych wiadomości w wątku (zamiast nieprzeczytanych); data = czas ostatniej realnej wiadomości (zamiast `last_activity_at`) | Fork — backend (serializer listy, 2 pola przez scope `Message.chat`) + front (obie karty + nowy `MessageCountBadge`) | Średnie (karty + jbuilder) | Spec: `F8-card-meta-design.md`. Backend → deploy przez CI |
 
 ## Postęp (2026-06-11)
 Zrobione (czeka na deploy po 16:00, obraz `c85f972cf`): ~~**F6**~~ ✅, ~~**F1**~~ ✅, ~~**F2**~~ ✅, ~~**F7**~~ ✅.
