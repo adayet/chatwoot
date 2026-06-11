@@ -46,3 +46,28 @@ Czyli: reguły automatyzacji klasyfikują po domenie nadawcy → etykieta (+ ew.
 - Subject-matching natywnie słabe (content = treść, nie temat) — ale domena nadawcy pokrywa większość przypadków.
 - **Testować na lokalnym devie** (reguły + symulacja), dopiero potem ostrożnie na prod (ryzyko mislabel realnych klientów).
 - Reguły działają od momentu włączenia (nie taguje wstecz) — ewentualny backfill osobno.
+
+## Instrukcja samodzielnej konfiguracji (bez kodu, na koncie)
+
+**Model:** „folder" = zapisany filtr (Custom View), nie fizyczny kontener. Reguła automatyzacji nadaje **etykietę**; folder pokazuje rozmowy z tą etykietą. „Auto-resolve" chowa z widoku „Otwarte", ale rozmowa zostaje (widoczna w folderze / przy filtrze „Wszystkie").
+
+### A. Reguły (Ustawienia → Automatyzacja → Dodaj regułę)
+- **Zdarzenie:** „Utworzono rozmowę".
+- **Warunek:** `Email` **zawiera** `<domena>` (operator „zawiera"; dla kilku domen dodaj warunki z „LUB").
+- **Akcje:** `Dodaj etykietę: <kategoria>` (+ opcjonalnie `Rozwiąż rozmowę` lub `Wycisz`).
+
+Gotowe listy domen do wklejenia:
+- **kurier** → `inpost`, `paczkomaty`, `dpd.com.pl`, `dhl`, `gls-poland`, `furgonetka` (+ ew. `Rozwiąż rozmowę`)
+- **marketplace** → `allegro.pl`, `allegromail.pl`, `erli.pl`, `mail.erli.pl`, `kaufland-marketplace`, `olx.pl` (NIE auto-resolve — kupujący piszą realnie)
+- **spam** → `sprawdz-regulamin.pl`, `fast-hosting.mom`, `alibaba-inc.com`, `warsawexpo.eu`, `base.com` (+ `Rozwiąż`/`Wycisz`)
+- **dostawcy** → `thermosilesia.pl`, `iglotech.com`, `caldo-wentylacja.pl`, `carbolinepolska.pl`, `arpol-tools.com` (raczej tylko etykieta)
+
+### B. Foldery (lista rozmów → ikona Filtr)
+- Ustaw warunek (np. `Etykieta` = `kurier`) → zastosuj → **Zapisz jako folder** (nazwa np. „Kurierzy"). Folder pojawi się w lewym menu.
+- „Klienci" (czysty widok): `Etykieta` **nie zawiera** `kurier`/`spam`/`marketplace` (jeśli operator „nie zawiera" dostępny dla etykiet).
+
+### Do zweryfikowania w UI (1 rzecz)
+- Czy warunek `Email` ma operator **„zawiera"** (do dopasowania po domenie). Jeśli tylko „równa się" — trzeba per pełny adres albo zgłoś, dobierzemy obejście.
+
+### Zalecenie
+Najpierw przetestować 1–2 reguły na **lokalnym devie** (lub na bezpiecznej kategorii typu „spam"), zanim włączysz na żywych inboxach — ryzyko mislabel realnego klienta.
