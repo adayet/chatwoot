@@ -7,20 +7,21 @@ Zasada **sidecar-first**: co da się zrobić jako sidecar / feature-flag / custo
 
 | # | Feature | Gdzie żyje | Ryzyko konfliktów upstream | Zależności / uwagi |
 |---|---|---|---|---|
-| **F1** | Kolejność zakładek „Rozmowy": Wszystkie → Moje → Nieprzypisane | Fork — front (Vue) | Niskie | Dobry pierwszy „rozgrzewkowy" na pełnej pętli build→deploy |
-| **F2** | Kolorowanie agentów na listingu (każdy inny kolor) + podgląd 2 linijek wiadomości | Fork — front (Vue) | Średnie (komponent karty rozmowy) | Deterministyczny schemat kolorów (hash z ID/nazwy agenta) |
+| **F1** | ✅ **ZROBIONE** — Kolejność zakładek „Rozmowy": Wszystkie → Moje → Nieprzypisane + domyślnie „Wszystkie" | Fork — front (Vue) | Niskie | `ChatList.vue` (`ASSIGNEE_TAB_ORDER`) |
+| **F2** | ✅ **ZROBIONE** — Agent (avatar + nazwa) przy statusie w prawym górnym rogu + podgląd 2 linijek | Fork — front (Vue) | Średnie (karta rozmowy) | `ConversationCard.vue`, `MessagePreview.vue` (prop `multiline`) |
 | **F3** | Ukrycie modułów: Captain, Kampanie, (ew. Raporty) | Najpierw feature-flagi/config; residuum → front | Niskie | **Spike:** co wyłączysz w Super Admin → Features, a co trzeba ukryć w nawigacji |
 | **F4** | Integracja **wFirma** (po NIP: faktury, suma sprzedaży, zaległości) | **Sidecar** (FastAPI) + NIP jako custom attribute (natywnie) + wyświetlanie (patrz F5) | Backend: zero forka | **Zależność: dostęp do API wFirma** (token). Największy item |
 | **F5** | BaseLinker + wFirma jako **natywne sekcje w prawym panelu Kontakt** (zamiast iframe Dashboard App) | Fork — front (Vue) | Średnie (panel kontaktu) | Wspólna infra dla BL i wFirma — budujemy raz. Dane dalej z sidecarów |
 | **F6** | ✅ **ZROBIONE** — Wątki „rozwiązane": nie znikają (domyślny filtr=Wszystkie), status na pasku+chip, wracają po odpowiedzi (reopen działa natywnie) | F6b front | — | Spec/plan: `F6-design.md`, `F6-plan.md`. Deploy po 16:00 (sha `8d0eade16`) |
 | **F7** | ✅ **ZROBIONE** — Foldery/filtrowanie marketplace+spam | **Natywnie** (właściciel): reguły automatyzacji `email`→`add_label` + foldery/widoki etykiet. **+ mały fork (Droga B):** domyślna lista wyklucza etykietę `spam` (znika z „Rozmowy", zostaje w `#spam`) | niska | `F7-spike.md`; fork w `ChatList.vue` (`HIDDEN_LABELS`) |
 
-## Kolejność (wybór właściciela 2026-06-11)
-1. ~~**F6** — resolved behavior~~ ✅ ZROBIONE (deploy po 16:00)
-2. **F1** — reorder zakładek ← następny
-3. **F2** — kolory agentów + 2 linijki
-4. ~~**F7** — foldery/spam marketplace~~ ✅ SPIKE DONE — natywnie (automatyzacja + Custom Views), bez forka; konfiguracja po stronie właściciela (instrukcja w `F7-spike.md`)
-- Później (nieuszeregowane): F3 (ukrycie modułów), F5+F4 (panel Kontakt + wFirma)
+## Postęp (2026-06-11)
+Zrobione (czeka na deploy po 16:00, obraz `c85f972cf`): ~~**F6**~~ ✅, ~~**F1**~~ ✅, ~~**F2**~~ ✅, ~~**F7**~~ ✅.
+
+Zostało:
+- **F3** — ukrycie modułów (Captain, Kampanie, ew. Raporty)
+- **F4** — integracja wFirma (sidecar; zależy od dostępu do API wFirma)
+- **F5** — natywny panel Kontakt (BaseLinker + wFirma) zamiast iframe
 
 ## Co realnie dotyka forka
 Tylko F1, F2, F5 oraz F6b. F4 (backend), F3 i F7 (w dużej części) oraz prawdopodobnie F6a idą **bez forka** → bez konfliktów przy aktualizacjach Chatwoota.
