@@ -63,6 +63,58 @@ const showLabelsSection = computed(() => {
   return props.chat.labels?.length > 0 || hasSlaPolicyId.value;
 });
 
+// KLIMABAZAR F6: kolorowanie wiersza + badge wg stanu obslugi
+const HANDLING_STATES = {
+  new: {
+    labelKey: 'CHAT_LIST.HANDLING_STATE.NEW',
+    tone: 'bg-n-amber-2',
+    border: 'border-l-2 border-l-n-amber-9',
+    badge: 'bg-n-amber-3 text-n-amber-11',
+  },
+  inProgress: {
+    labelKey: 'CHAT_LIST.HANDLING_STATE.IN_PROGRESS',
+    tone: 'bg-n-blue-2',
+    border: 'border-l-2 border-l-n-blue-9',
+    badge: 'bg-n-blue-3 text-n-blue-11',
+  },
+  resolved: {
+    labelKey: 'CHAT_LIST.HANDLING_STATE.RESOLVED',
+    tone: 'bg-n-teal-2',
+    border: 'border-l-2 border-l-n-teal-9',
+    badge: 'bg-n-teal-3 text-n-teal-11',
+  },
+  snoozed: {
+    labelKey: 'CHAT_LIST.HANDLING_STATE.SNOOZED',
+    tone: 'bg-n-slate-2',
+    border: 'border-l-2 border-l-n-slate-8',
+    badge: 'bg-n-slate-3 text-n-slate-11',
+  },
+  pending: {
+    labelKey: 'CHAT_LIST.HANDLING_STATE.PENDING',
+    tone: 'bg-n-iris-2',
+    border: 'border-l-2 border-l-n-iris-9',
+    badge: 'bg-n-iris-3 text-n-iris-11',
+  },
+};
+
+const handlingStateKey = computed(() => {
+  const { status } = props.chat;
+  if (status === 'resolved') return 'resolved';
+  if (status === 'snoozed') return 'snoozed';
+  if (status === 'pending') return 'pending';
+  // open: rozroznienie nieobsluzony vs w toku
+  const hasAssignee = Boolean(props.chat.meta?.assignee?.id);
+  const hasReplied = Number(props.chat.first_reply_created_at) > 0;
+  return hasAssignee || hasReplied ? 'inProgress' : 'new';
+});
+
+const handlingState = computed(() => HANDLING_STATES[handlingStateKey.value]);
+
+// tlo tylko gdy wiersz nie jest aktywny/zaznaczony (zeby nie nadpisywac tych stanow)
+const handlingToneClass = computed(() =>
+  props.isActiveChat || props.selected ? '' : handlingState.value.tone
+);
+
 const messagePreviewClass = computed(() => {
   return [
     hasUnread.value ? 'font-medium text-n-slate-12' : 'text-n-slate-11',
@@ -103,13 +155,17 @@ watch(
 <template>
   <div
     class="relative flex items-start flex-grow-0 flex-shrink-0 w-auto max-w-full py-0 cursor-pointer conversation border-b border-n-slate-3 hover:border-n-surface-1 hover:bg-n-alpha-1 dark:hover:bg-n-alpha-3 group hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
-    :class="{
-      'active animate-card-select bg-n-background !border-n-surface-1':
-        isActiveChat,
-      'selected bg-n-slate-2 !border-n-surface-1': selected,
-      'px-0': compact,
-      'px-3': !compact,
-    }"
+    :class="[
+      {
+        'active animate-card-select bg-n-background !border-n-surface-1':
+          isActiveChat,
+        'selected bg-n-slate-2 !border-n-surface-1': selected,
+        'px-0': compact,
+        'px-3': !compact,
+      },
+      handlingState.border,
+      handlingToneClass,
+    ]"
     @click="$emit('click', $event)"
     @contextmenu="$emit('contextmenu', $event)"
   >
@@ -174,6 +230,13 @@ watch(
       >
         {{ currentContact.name }}
       </h4>
+      <!-- KLIMABAZAR F6: badge stanu obslugi -->
+      <span
+        class="inline-flex items-center mx-2 mt-1 px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 w-fit"
+        :class="handlingState.badge"
+      >
+        {{ $t(handlingState.labelKey) }}
+      </span>
       <VoiceCallStatus
         v-if="voiceCallData.status"
         key="voice-status-row"
