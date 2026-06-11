@@ -54,6 +54,10 @@ json.updated_at conversation.updated_at.to_f
 json.timestamp conversation.last_activity_at.to_i
 json.first_reply_created_at conversation.first_reply_created_at.to_i
 json.unread_count conversation.unread_incoming_messages.count
+# KLIMABAZAR F8: liczba realnych wiadomosci w watku (scope chat = bez aktywnosci i notatek prywatnych)
+json.chat_messages_count conversation.messages.chat.count
+# KLIMABAZAR F8: czas ostatniej realnej wiadomosci (na date karty zamiast last_activity_at)
+json.last_chat_message_at conversation.messages.chat.maximum(:created_at).to_i
 json.last_non_activity_message conversation.messages.where(account_id: conversation.account_id).non_activity_messages.first.try(:push_event_data)
 json.last_activity_at conversation.last_activity_at.to_i
 json.priority conversation.priority
