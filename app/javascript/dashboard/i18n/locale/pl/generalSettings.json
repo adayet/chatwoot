@@ -1,10 +1,10 @@
 {
   "GENERAL_SETTINGS": {
     "LIMIT_MESSAGES": {
-      "CONVERSATION": "You have exceeded the conversation limit. Hacker plan allows only 500 conversations.",
-      "INBOXES": "You have exceeded the inbox limit. Hacker plan only supports website live-chat. Additional inboxes like email, WhatsApp etc. require a paid plan.",
-      "AGENTS": "You have exceeded the agent limit. Your plan only allows {allowedAgents} agents.",
-      "NON_ADMIN": "Please contact your administrator to upgrade the plan and continue using all features."
+      "CONVERSATION": "Przekroczono limit rozmów. Plan Hacker pozwala tylko na 500 rozmów.",
+      "INBOXES": "Przekroczono limit skrzynek. Plan Hacker obsługuje tylko czat na żywo na stronie. Dodatkowe skrzynki, jak e-mail, WhatsApp itp., wymagają planu płatnego.",
+      "AGENTS": "Przekroczono limit agentów. Twój plan pozwala tylko na {allowedAgents} agentów.",
+      "NON_ADMIN": "Skontaktuj się z administratorem, aby uaktualnić plan i nadal korzystać ze wszystkich funkcji."
     },
     "TITLE": "Ustawienia konta",
     "SUBMIT": "Zaktualizuj ustawienia",
@@ -15,23 +15,23 @@
       "SUCCESS": "Ustawienia konta zostały pomyślnie zaktualizowane"
     },
     "ACCOUNT_DELETE_SECTION": {
-      "TITLE": "Delete your Account",
-      "NOTE": "Once you delete your account, all your data will be deleted.",
-      "BUTTON_TEXT": "Delete Your Account",
+      "TITLE": "Usuń konto",
+      "NOTE": "Po usunięciu konta wszystkie Twoje dane zostaną usunięte.",
+      "BUTTON_TEXT": "Usuń konto",
       "CONFIRM": {
-        "TITLE": "Delete Account",
-        "MESSAGE": "Deleting your Account is irreversible. Enter your account name below to confirm you want to permanently delete it.",
+        "TITLE": "Usuń konto",
+        "MESSAGE": "Usunięcie konta jest nieodwracalne. Wpisz poniżej nazwę konta, aby potwierdzić, że chcesz je trwale usunąć.",
         "BUTTON_TEXT": "Usuń",
         "DISMISS": "Anuluj",
         "PLACE_HOLDER": "Proszę wpisać {accountName}, aby potwierdzić"
       },
-      "SUCCESS": "Account marked for deletion",
-      "FAILURE": "Could not delete account, try again!",
+      "SUCCESS": "Konto oznaczone do usunięcia",
+      "FAILURE": "Nie udało się usunąć konta, spróbuj ponownie!",
       "SCHEDULED_DELETION": {
-        "TITLE": "Account Scheduled for Deletion",
-        "MESSAGE_MANUAL": "This account is scheduled for deletion on {deletionDate}. This was requested by an administrator. You can cancel the deletion before this date.",
-        "MESSAGE_INACTIVITY": "This account is scheduled for deletion on {deletionDate} due to account inactivity. You can cancel the deletion before this date.",
-        "CLEAR_BUTTON": "Cancel Scheduled Deletion"
+        "TITLE": "Konto zaplanowane do usunięcia",
+        "MESSAGE_MANUAL": "To konto jest zaplanowane do usunięcia w dniu {deletionDate}. Zażądał tego administrator. Możesz anulować usunięcie przed tą datą.",
+        "MESSAGE_INACTIVITY": "To konto jest zaplanowane do usunięcia w dniu {deletionDate} z powodu braku aktywności. Możesz anulować usunięcie przed tą datą.",
+        "CLEAR_BUTTON": "Anuluj zaplanowane usunięcie"
       }
     },
     "FORM": {
@@ -45,32 +45,32 @@
         "NOTE": "To ID jest wymagane, jeśli tworzysz integrację opartą na API"
       },
       "AUTO_RESOLVE": {
-        "TITLE": "Auto-resolve conversations",
-        "NOTE": "This configuration would allow you to automatically resolve the conversation after a certain period of inactivity.",
+        "TITLE": "Automatyczne rozwiązywanie rozmów",
+        "NOTE": "Ta konfiguracja pozwala automatycznie rozwiązać rozmowę po określonym czasie braku aktywności.",
         "DURATION": {
-          "LABEL": "Inactivity duration",
-          "HELP": "Time period of inactivity after which conversation is auto-resolved",
+          "LABEL": "Czas braku aktywności",
+          "HELP": "Czas braku aktywności, po którym rozmowa jest automatycznie rozwiązywana",
           "PLACEHOLDER": "30",
-          "ERROR": "Auto resolve duration should be between 10 minutes and 999 days",
+          "ERROR": "Czas automatycznego rozwiązywania powinien wynosić od 10 minut do 999 dni",
           "API": {
-            "SUCCESS": "Auto resolve settings updated successfully",
-            "ERROR": "Failed to update auto resolve settings"
+            "SUCCESS": "Ustawienia automatycznego rozwiązywania zaktualizowane pomyślnie",
+            "ERROR": "Nie udało się zaktualizować ustawień automatycznego rozwiązywania"
           }
         },
         "MESSAGE": {
-          "LABEL": "Custom auto-resolution message",
-          "PLACEHOLDER": "Conversation was marked resolved by system due to 15 days of inactivity",
-          "HELP": "Message sent to the customer after conversation is auto-resolved"
+          "LABEL": "Niestandardowa wiadomość automatycznego rozwiązania",
+          "PLACEHOLDER": "Rozmowa została oznaczona jako rozwiązana przez system z powodu 15 dni braku aktywności",
+          "HELP": "Wiadomość wysyłana do klienta po automatycznym rozwiązaniu rozmowy"
         },
         "PREFERENCES": "Preferencje",
         "LABEL": {
-          "LABEL": "Add label after auto-resolution",
-          "PLACEHOLDER": "Select a label"
+          "LABEL": "Dodaj etykietę po automatycznym rozwiązaniu",
+          "PLACEHOLDER": "Wybierz etykietę"
         },
         "IGNORE_WAITING": {
-          "LABEL": "Skip conversations waiting for agent’s reply"
+          "LABEL": "Pomiń rozmowy oczekujące na odpowiedź agenta"
         },
-        "UPDATE_BUTTON": "Save Changes"
+        "UPDATE_BUTTON": "Zapisz zmiany"
       },
       "NAME": {
         "LABEL": "Nazwa konta",
@@ -93,30 +93,30 @@
         "ERROR": ""
       },
       "AUTO_RESOLVE_IGNORE_WAITING": {
-        "LABEL": "Exclude unattended conversations",
-        "HELP": "When enabled, the system will skip resolving conversations that are still waiting for an agent's reply."
+        "LABEL": "Wyklucz nieobsłużone rozmowy",
+        "HELP": "Po włączeniu system pominie rozwiązywanie rozmów, które wciąż czekają na odpowiedź agenta."
       },
       "AUDIO_TRANSCRIPTION": {
-        "TITLE": "Transcribe Audio Messages",
-        "NOTE": "Automatically transcribe audio messages in conversations. Generate a text transcript whenever an audio message is sent or received, and display it alongside the message.",
+        "TITLE": "Transkrybuj wiadomości głosowe",
+        "NOTE": "Automatycznie transkrybuj wiadomości głosowe w rozmowach. Generuj transkrypcję tekstową przy każdej wysłanej lub odebranej wiadomości głosowej i wyświetlaj ją obok wiadomości.",
         "API": {
-          "SUCCESS": "Audio transcription setting updated successfully",
-          "ERROR": "Failed to update audio transcription setting"
+          "SUCCESS": "Ustawienie transkrypcji audio zaktualizowane pomyślnie",
+          "ERROR": "Nie udało się zaktualizować ustawienia transkrypcji audio"
         }
       },
       "AUTO_RESOLVE_DURATION": {
-        "LABEL": "Inactivity duration for resolution",
-        "HELP": "Duration after a conversation should auto resolve if there is no activity",
+        "LABEL": "Czas braku aktywności do rozwiązania",
+        "HELP": "Czas, po którym rozmowa powinna automatycznie się rozwiązać, jeśli nie ma aktywności",
         "PLACEHOLDER": "30",
-        "ERROR": "Auto resolve duration should be between 10 minutes and 999 days",
+        "ERROR": "Czas automatycznego rozwiązywania powinien wynosić od 10 minut do 999 dni",
         "API": {
-          "SUCCESS": "Auto resolve settings updated successfully",
-          "ERROR": "Failed to update auto resolve settings"
+          "SUCCESS": "Ustawienia automatycznego rozwiązywania zaktualizowane pomyślnie",
+          "ERROR": "Nie udało się zaktualizować ustawień automatycznego rozwiązywania"
         },
         "UPDATE_BUTTON": "Aktualizuj",
-        "MESSAGE_LABEL": "Custom resolution message",
-        "MESSAGE_PLACEHOLDER": "Conversation was marked resolved by system due to 15 days of inactivity",
-        "MESSAGE_HELP": "This message is sent to the customer when a conversation is automatically resolved by the system due to inactivity."
+        "MESSAGE_LABEL": "Niestandardowa wiadomość o rozwiązaniu",
+        "MESSAGE_PLACEHOLDER": "Rozmowa została oznaczona jako rozwiązana przez system z powodu 15 dni braku aktywności",
+        "MESSAGE_HELP": "Ta wiadomość jest wysyłana do klienta, gdy rozmowa zostanie automatycznie rozwiązana przez system z powodu braku aktywności."
       },
       "FEATURES": {
         "INBOUND_EMAIL_ENABLED": "Kontynuacja rozmów za pomocą wiadomości e-mail jest włączona dla Twojego konta.",
@@ -126,7 +126,7 @@
     "UPDATE_CHATWOOT": "Dostępna jest aktualizacja do wersji {latestChatwootVersion} Chatwoot. Proszę zaktualizować swoją instancję.",
     "LEARN_MORE": "Dowiedz się więcej",
     "PAYMENT_PENDING": "Twoja płatność jest w toku. Zaktualizuj informacje o płatności, aby kontynuować korzystanie z Chatwoot.",
-    "UPGRADE": "Upgrade to continue using Chatwoot",
+    "UPGRADE": "Uaktualnij, aby nadal korzystać z Chatwoot",
     "LIMITS_UPGRADE": "Twoje konto przekroczyło limit użytkowania. Zaktualizuj swój plan, aby kontynuować korzystanie z Chatwoot.",
     "OPEN_BILLING": "Otwórz fakturę"
   },
@@ -134,7 +134,7 @@
     "MULTISELECT": {
       "ENTER_TO_SELECT": "Naciśnij Enter, aby wybrać",
       "ENTER_TO_REMOVE": "Naciśnij Enter, aby usunąć",
-      "NO_OPTIONS": "List is empty",
+      "NO_OPTIONS": "Lista jest pusta",
       "SELECT_ONE": "Wybierz jeden",
       "SELECT": "Wybierz"
     }
@@ -165,16 +165,16 @@
       "assigned_conversation_new_message": "Nowa wiadomość",
       "participating_conversation_new_message": "Nowa wiadomość",
       "conversation_mention": "Wzmianka",
-      "sla_missed_first_response": "SLA Missed",
-      "sla_missed_next_response": "SLA Missed",
-      "sla_missed_resolution": "SLA Missed"
+      "sla_missed_first_response": "Przekroczono SLA",
+      "sla_missed_next_response": "Przekroczono SLA",
+      "sla_missed_resolution": "Przekroczono SLA"
     }
   },
   "NETWORK": {
     "NOTIFICATION": {
       "OFFLINE": "Niedostępny",
-      "RECONNECTING": "Reconnecting...",
-      "RECONNECT_SUCCESS": "Reconnected"
+      "RECONNECTING": "Ponowne łączenie...",
+      "RECONNECT_SUCCESS": "Połączono ponownie"
     },
     "BUTTON": {
       "REFRESH": "Odśwież"
@@ -182,12 +182,12 @@
   },
   "COMMAND_BAR": {
     "SEARCH_PLACEHOLDER": "Szukaj lub przejdź do",
-    "SNOOZE_PLACEHOLDER": "Type a time e.g. tomorrow, 2 hours, next friday, jan 15...",
+    "SNOOZE_PLACEHOLDER": "Wpisz czas, np. jutro, 2 godziny, następny piątek, 15 sty...",
     "SECTIONS": {
       "GENERAL": "Ogólne",
       "REPORTS": "Raporty",
       "CONVERSATION": "Rozmowa",
-      "BULK_ACTIONS": "Bulk Actions",
+      "BULK_ACTIONS": "Akcje masowe",
       "CHANGE_ASSIGNEE": "Zmień przypisanego",
       "CHANGE_PRIORITY": "Zmień priorytet",
       "CHANGE_TEAM": "Zmień zespół",
@@ -195,9 +195,9 @@
       "ADD_LABEL": "Dodaj etykietę do rozmowy",
       "REMOVE_LABEL": "Usuń etykietę z rozmowy",
       "SETTINGS": "Ustawienia",
-      "AI_ASSIST": "AI Assist",
-      "APPEARANCE": "Appearance",
-      "SNOOZE_NOTIFICATION": "Snooze Notification"
+      "AI_ASSIST": "Asystent AI",
+      "APPEARANCE": "Wygląd",
+      "SNOOZE_NOTIFICATION": "Uśpij powiadomienie"
     },
     "COMMANDS": {
       "GO_TO_CONVERSATION_DASHBOARD": "Przejdź do pulpitu rozmów",
@@ -219,7 +219,7 @@
       "GO_TO_NOTIFICATIONS": "Przejdź do powiadomień",
       "ADD_LABELS_TO_CONVERSATION": "Dodaj etykietę do rozmowy",
       "ASSIGN_AN_AGENT": "Przypisz agenta",
-      "AI_ASSIST": "AI Assist",
+      "AI_ASSIST": "Asystent AI",
       "ASSIGN_PRIORITY": "Przypisz priorytet",
       "ASSIGN_A_TEAM": "Przypisz zespół",
       "MUTE_CONVERSATION": "Wycisz rozmowę",
@@ -235,18 +235,18 @@
       "UNTIL_NEXT_MONTH": "Do następnego miesiąca",
       "AN_HOUR_FROM_NOW": "Do godziny od teraz",
       "UNTIL_CUSTOM_TIME": "Niestandardowe...",
-      "CHANGE_APPEARANCE": "Change Appearance",
-      "LIGHT_MODE": "Light",
-      "DARK_MODE": "Dark",
-      "SYSTEM_MODE": "System",
-      "SNOOZE_NOTIFICATION": "Snooze Notification"
+      "CHANGE_APPEARANCE": "Zmień wygląd",
+      "LIGHT_MODE": "Jasny",
+      "DARK_MODE": "Ciemny",
+      "SYSTEM_MODE": "Systemowy",
+      "SNOOZE_NOTIFICATION": "Uśpij powiadomienie"
     }
   },
   "DASHBOARD_APPS": {
     "LOADING_MESSAGE": "Ładowanie aplikacji pulpitu..."
   },
   "COMMON": {
-    "OR": "Or",
+    "OR": "Lub",
     "CLICK_HERE": "kliknij tutaj"
   }
 }
