@@ -12,11 +12,11 @@
     "NO_INBOX_2": " aby rozpocząć",
     "NO_INBOX_AGENT": "Uh Oh! Wygląda na to, że nie jesteś częścią żadnej skrzynki odbiorczej. Skontaktuj się z administratorem",
     "SEARCH_MESSAGES": "Szukaj wiadomości w konwersacjach",
-    "VIEW_ORIGINAL": "View original",
-    "VIEW_TRANSLATED": "View translated",
+    "VIEW_ORIGINAL": "Pokaż oryginał",
+    "VIEW_TRANSLATED": "Pokaż tłumaczenie",
     "EMPTY_STATE": {
-      "CMD_BAR": "to open command menu",
-      "KEYBOARD_SHORTCUTS": "to view keyboard shortcuts"
+      "CMD_BAR": "aby otworzyć menu poleceń",
+      "KEYBOARD_SHORTCUTS": "aby zobaczyć skróty klawiszowe"
     },
     "SEARCH": {
       "TITLE": "Szukaj wiadomości",
@@ -33,69 +33,78 @@
     "CANNOT_REPLY": "Nie możesz odpowiedzieć z powodu",
     "24_HOURS_WINDOW": "Ograniczenie 24-godzinnego okna wiadomości",
     "48_HOURS_WINDOW": "ograniczenia 48-godzinnego okna wiadomości",
-    "API_HOURS_WINDOW": "You can only reply to this conversation within {hours} hours",
+    "API_HOURS_WINDOW": "Na tę rozmowę możesz odpowiedzieć tylko w ciągu {hours} godzin",
     "NOT_ASSIGNED_TO_YOU": "Ta konwersacja nie jest Ci przypisana. Czy chcesz przypisać tę konwersację do siebie?",
     "ASSIGN_TO_ME": "Przypisz do mnie",
-    "BOT_HANDOFF_MESSAGE": "You are responding to a conversation which is currently handled by an assistant or a bot.",
-    "BOT_HANDOFF_ACTION": "Mark open and assign to you",
-    "BOT_HANDOFF_REOPEN_ACTION": "Mark conversation open",
-    "BOT_HANDOFF_SUCCESS": "Conversation has been handed over to you",
-    "BOT_HANDOFF_ERROR": "Failed to take over the conversation. Please try again.",
+    "BOT_HANDOFF_MESSAGE": "Odpowiadasz na rozmowę, którą obecnie obsługuje asystent lub bot.",
+    "BOT_HANDOFF_ACTION": "Oznacz jako otwartą i przypisz do siebie",
+    "BOT_HANDOFF_REOPEN_ACTION": "Oznacz rozmowę jako otwartą",
+    "BOT_HANDOFF_SUCCESS": "Rozmowa została przekazana Tobie",
+    "BOT_HANDOFF_ERROR": "Nie udało się przejąć rozmowy. Spróbuj ponownie.",
     "TWILIO_WHATSAPP_CAN_REPLY": "Możesz odpowiedzieć na tę rozmowę tylko za pomocą szablonu wiadomości, ponieważ",
     "TWILIO_WHATSAPP_24_HOURS_WINDOW": "Ograniczenie 24-godzinnego okna wiadomości",
-    "OLD_INSTAGRAM_INBOX_REPLY_BANNER": "This Instagram account was migrated to the new Instagram channel inbox. All new messages will show up there. You won’t be able to send messages from this conversation anymore.",
+    "OLD_INSTAGRAM_INBOX_REPLY_BANNER": "To konto Instagram zostało przeniesione do nowej skrzynki kanału Instagram. Wszystkie nowe wiadomości pojawią się tam. Z tej rozmowy nie możesz już wysyłać wiadomości.",
     "REPLYING_TO": "Osoba, której odpowiadasz to:",
     "REMOVE_SELECTION": "Usuń zaznaczenie",
     "DOWNLOAD": "Pobierz",
     "UNKNOWN_FILE_TYPE": "Nieznany plik",
-    "SAVE_CONTACT": "Save Contact",
-    "NO_CONTENT": "No content to display",
+    "SAVE_CONTACT": "Zapisz kontakt",
+    "NO_CONTENT": "Brak treści do wyświetlenia",
     "SHARED_ATTACHMENT": {
-      "CONTACT": "{sender} has shared a contact",
-      "LOCATION": "{sender} has shared a location",
-      "FILE": "{sender} has shared a file",
+      "CONTACT": "{sender} udostępnił(a) kontakt",
+      "LOCATION": "{sender} udostępnił(a) lokalizację",
+      "FILE": "{sender} udostępnił(a) plik",
       "MEETING": "{sender} rozpoczął spotkanie"
     },
     "UPLOADING_ATTACHMENTS": "Przesyłanie załączników...",
     "REPLIED_TO_STORY": "Odpowiedziałeś na swoją historię",
     "UNSUPPORTED_MESSAGE": "This message is unsupported. You can view this message on the Facebook / Instagram app.",
-    "UNSUPPORTED_MESSAGE_FACEBOOK": "This message is unsupported. You can view this message on the Facebook Messenger app.",
-    "UNSUPPORTED_MESSAGE_INSTAGRAM": "This message is unsupported. You can view this message on the Instagram app.",
-    "UNSUPPORTED_MESSAGE_TIKTOK": "This message is unsupported. You can view this message on the TikTok app.",
+    "UNSUPPORTED_MESSAGE_FACEBOOK": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji Facebook Messenger.",
+    "UNSUPPORTED_MESSAGE_INSTAGRAM": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji Instagram.",
+    "UNSUPPORTED_MESSAGE_TIKTOK": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji TikTok.",
     "SUCCESS_DELETE_MESSAGE": "Wiadomość usunięta pomyślnie",
     "FAIL_DELETE_MESSSAGE": "Nie można usunąć wiadomości! Spróbuj ponownie",
     "NO_RESPONSE": "Brak odpowiedzi",
-    "RESPONSE": "Response",
+    "RESPONSE": "Odpowiedź",
     "RATING_TITLE": "Ocena",
     "FEEDBACK_TITLE": "Opinia",
-    "REPLY_MESSAGE_NOT_FOUND": "Message not available",
+    "REPLY_MESSAGE_NOT_FOUND": "Wiadomość niedostępna",
     "CARD": {
       "SHOW_LABELS": "Pokaż etykiety",
       "HIDE_LABELS": "Ukryj etykiety",
-      "LABELS_COUNT": "{count} labels"
+      "LABELS_COUNT": "{count} etykiet"
     },
     "VOICE_CALL": {
-      "INCOMING_CALL": "Incoming call",
-      "OUTGOING_CALL": "Outgoing call",
-      "CALL_IN_PROGRESS": "Call in progress",
-      "NO_ANSWER": "No answer",
-      "MISSED_CALL": "Missed call",
-      "CALL_ENDED": "Call ended",
-      "NOT_ANSWERED_YET": "Not answered yet",
-      "THEY_ANSWERED": "They answered",
-      "YOU_ANSWERED": "You answered",
-      "AGENT_ANSWERED": "{agentName} answered",
-      "JOIN_CALL": "Join call"
+      "INCOMING_CALL": "Połączenie przychodzące",
+      "OUTGOING_CALL": "Połączenie wychodzące",
+      "CALL_IN_PROGRESS": "Trwa połączenie",
+      "NO_ANSWER": "Brak odpowiedzi",
+      "MISSED_CALL": "Nieodebrane połączenie",
+      "CALL_ENDED": "Połączenie zakończone",
+      "NOT_ANSWERED_YET": "Jeszcze nieodebrane",
+      "THEY_ANSWERED": "Odebrali",
+      "YOU_ANSWERED": "Odebrałeś(-aś)",
+      "AGENT_ANSWERED": "{agentName} odebrał(a)",
+      "JOIN_CALL": "Dołącz do połączenia",
+      "NO_ANSWER_OUTBOUND_LABEL": "Brak odpowiedzi",
+      "NO_ANSWER_OUTBOUND_SUBTEXT": "Kontakt nie odebrał",
+      "MISSED_CALL_INBOUND_SUBTEXT": "Żaden agent nie odebrał",
+      "MISSED_CALL_DECLINED_BY": "Odrzucone przez {agentName}",
+      "HANDLED_BY": "Obsłużone przez {agentName}",
+      "CALLING": "Dzwonię…",
+      "CALL_BACK": "Oddzwoń",
+      "TRANSCRIPT_SHOW_MORE": "Pokaż więcej",
+      "TRANSCRIPT_SHOW_LESS": "Pokaż mniej"
     },
     "HEADER": {
       "RESOLVE_ACTION": "Rozwiąż",
       "REOPEN_ACTION": "Otwórz ponownie",
       "OPEN_ACTION": "Otwórz",
-      "MORE_ACTIONS": "More actions",
+      "MORE_ACTIONS": "Więcej akcji",
       "OPEN": "Więcej",
       "CLOSE": "Zamknij",
       "DETAILS": "szczegóły",
-      "COPY_ID_SUCCESS": "Conversation ID copied to clipboard",
+      "COPY_ID_SUCCESS": "ID rozmowy skopiowane do schowka",
       "SNOOZED_UNTIL": "Uśpione do",
       "SNOOZED_UNTIL_TOMORROW": "Uśpij do jutra",
       "SNOOZED_UNTIL_NEXT_WEEK": "Uśpione do następnego tygodnia",
@@ -104,9 +113,15 @@
         "FRT": "FRT {status}",
         "NRT": "NRT {status}",
         "RT": "RT {status}",
-        "MISSED": "missed",
-        "DUE": "due"
-      }
+        "MISSED": "przekroczony",
+        "DUE": "do realizacji"
+      },
+      "WHATSAPP_CALL": "Rozpocznij połączenie WhatsApp",
+      "WHATSAPP_CALL_FAILED": "Nie udało się rozpocząć połączenia WhatsApp.",
+      "VOICE_CALL": "Rozpocznij połączenie",
+      "VOICE_CALL_FAILED": "Nie udało się rozpocząć połączenia.",
+      "WHATSAPP_CALL_PERMISSION_REQUESTED": "Wysłano do kontaktu prośbę o zgodę na połączenie. Spróbuj ponownie, gdy ją zaakceptuje.",
+      "WHATSAPP_CALL_PERMISSION_PENDING": "Prośba o zgodę na połączenie została już niedawno wysłana. Spróbuj ponownie, gdy kontakt ją zaakceptuje."
     },
     "RESOLVE_DROPDOWN": {
       "MARK_PENDING": "Oznacz jako oczekujące",
@@ -145,15 +160,15 @@
       }
     },
     "DELETE_CONVERSATION": {
-      "TITLE": "Delete conversation #{conversationId}",
-      "DESCRIPTION": "Are you sure you want to delete this conversation?",
+      "TITLE": "Usuń rozmowę #{conversationId}",
+      "DESCRIPTION": "Czy na pewno chcesz usunąć tę rozmowę?",
       "CONFIRM": "Usuń"
     },
     "CARD_CONTEXT_MENU": {
       "PENDING": "Oznacz jako oczekujące",
       "RESOLVED": "Oznacz jako rozwiązane",
       "MARK_AS_UNREAD": "Oznacz jako nieprzeczytane",
-      "MARK_AS_READ": "Mark as read",
+      "MARK_AS_READ": "Oznacz jako przeczytane",
       "REOPEN": "Otwórz ponownie",
       "SNOOZE": {
         "TITLE": "Uśpij",
@@ -165,22 +180,22 @@
       "ASSIGN_LABEL": "Przypisz etykietę",
       "AGENTS_LOADING": "Ładowanie agentów...",
       "ASSIGN_TEAM": "Przypisz zespół",
-      "DELETE": "Delete conversation",
-      "OPEN_IN_NEW_TAB": "Open in new tab",
-      "COPY_LINK": "Copy conversation link",
-      "COPY_LINK_SUCCESS": "Conversation link copied to clipboard",
+      "DELETE": "Usuń rozmowę",
+      "OPEN_IN_NEW_TAB": "Otwórz w nowej karcie",
+      "COPY_LINK": "Kopiuj link do rozmowy",
+      "COPY_LINK_SUCCESS": "Link do rozmowy skopiowany do schowka",
       "API": {
         "AGENT_ASSIGNMENT": {
           "SUCCESFUL": "Konwersacja o identyfikatorze {conversationId} przypisana do \"{agentName}\"",
           "FAILED": "Nie można przypisać agenta. Spróbuj ponownie."
         },
         "LABEL_ASSIGNMENT": {
-          "SUCCESFUL": "Assigned label #{labelName} to conversation id {conversationId}",
+          "SUCCESFUL": "Przypisano etykietę #{labelName} do rozmowy o id {conversationId}",
           "FAILED": "Nie można przypisać etykiety. Spróbuj ponownie."
         },
         "LABEL_REMOVAL": {
-          "SUCCESFUL": "Removed label #{labelName} from conversation id {conversationId}",
-          "FAILED": "Couldn't remove label. Please try again."
+          "SUCCESFUL": "Usunięto etykietę #{labelName} z rozmowy o id {conversationId}",
+          "FAILED": "Nie udało się usunąć etykiety. Spróbuj ponownie."
         },
         "TEAM_ASSIGNMENT": {
           "SUCCESFUL": "Przypisano zespół \"{team}\" do konwersacji o identyfikatorze {conversationId}",
@@ -194,9 +209,9 @@
       "DISABLE_SIGN_TOOLTIP": "Wyłącz podpis",
       "MSG_INPUT": "Shift + enter dla nowej linii. Zacznij od '/' aby wybrać Gotową odpowiedź.",
       "PRIVATE_MSG_INPUT": "Shift + enter dla nowej linii. Będzie widoczne tylko dla agentów",
-      "MESSAGING_RESTRICTED": "You cannot reply to this conversation",
-      "MESSAGING_RESTRICTED_WHATSAPP": "You can only reply using a template message due to 24-hour message window restriction",
-      "MESSAGING_RESTRICTED_API": "You can only reply using a template message due to message window restriction",
+      "MESSAGING_RESTRICTED": "Nie możesz odpowiedzieć na tę rozmowę",
+      "MESSAGING_RESTRICTED_WHATSAPP": "Z powodu ograniczenia okna 24 godzin możesz odpowiedzieć tylko za pomocą szablonu wiadomości",
+      "MESSAGING_RESTRICTED_API": "Z powodu ograniczenia okna wiadomości możesz odpowiedzieć tylko za pomocą szablonu wiadomości",
       "MESSAGE_SIGNATURE_NOT_CONFIGURED": "Podpis wiadomości nie jest skonfigurowany, należy go skonfigurować w ustawieniach profilu.",
       "COPILOT_MSG_INPUT": "Podaj copilota dodatkowe wskazówki lub zapytaj o cokolwiek... Naciśnij Enter, aby wysłać odpowiedź uzupełniającą",
       "CLICK_HERE": "Kliknij tutaj, aby zaktualizować",
@@ -208,8 +223,8 @@
       "SEND": "Wyślij",
       "CREATE": "Dodaj notatkę",
       "INSERT_READ_MORE": "Czytaj więcej",
-      "DISMISS_REPLY": "Dismiss reply",
-      "REPLYING_TO": "Replying to:",
+      "DISMISS_REPLY": "Odrzuć odpowiedź",
+      "REPLYING_TO": "Odpowiadasz na:",
       "TIP_EMOJI_ICON": "Pokaż selektor emotikonek",
       "TIP_ATTACH_ICON": "Dołącz pliki",
       "TIP_AUDIORECORDER_ICON": "Nagrywaj audio",
@@ -242,11 +257,11 @@
         }
       },
       "QUOTED_REPLY": {
-        "ENABLE_TOOLTIP": "Include quoted email thread",
-        "DISABLE_TOOLTIP": "Don't include quoted email thread",
-        "REMOVE_PREVIEW": "Remove quoted email thread",
-        "COLLAPSE": "Collapse preview",
-        "EXPAND": "Expand preview"
+        "ENABLE_TOOLTIP": "Dołącz cytowany wątek e-mail",
+        "DISABLE_TOOLTIP": "Nie dołączaj cytowanego wątku e-mail",
+        "REMOVE_PREVIEW": "Usuń cytowany wątek e-mail",
+        "COLLAPSE": "Zwiń podgląd",
+        "EXPAND": "Rozwiń podgląd"
       }
     },
     "VISIBLE_TO_AGENTS": "Prywatna uwaga: widoczne tylko dla Ciebie i Twojego zespołu",
@@ -257,15 +272,15 @@
     "ASSIGN_LABEL_SUCCESFUL": "Etykieta przypisana pomyślnie",
     "ASSIGN_LABEL_FAILED": "Nie udało się przypisać etykiety",
     "CHANGE_TEAM": "Zmieniono przypisany zespół konwersacji",
-    "SUCCESS_DELETE_CONVERSATION": "Conversation deleted successfully",
-    "FAIL_DELETE_CONVERSATION": "Couldn't delete conversation! Try again",
+    "SUCCESS_DELETE_CONVERSATION": "Rozmowa usunięta pomyślnie",
+    "FAIL_DELETE_CONVERSATION": "Nie udało się usunąć rozmowy! Spróbuj ponownie",
     "FILE_SIZE_LIMIT": "Plik przekracza limit rozmiaru załącznika {MAXIMUM_SUPPORTED_FILE_UPLOAD_SIZE} MB",
-    "FILE_TYPE_NOT_SUPPORTED": "This {fileName} file type is not supported in this conversation",
+    "FILE_TYPE_NOT_SUPPORTED": "Ten typ pliku {fileName} nie jest obsługiwany w tej rozmowie",
     "MESSAGE_ERROR": "Nie można wysłać tej wiadomości, spróbuj ponownie później",
     "SENT_BY": "Wysłane przez:",
     "BOT": "Bot",
-    "NATIVE_APP": "Native app",
-    "NATIVE_APP_ADVISORY": "This message was sent from the native app. Reply from Chatwoot to maintain the message window.",
+    "NATIVE_APP": "Aplikacja natywna",
+    "NATIVE_APP_ADVISORY": "Ta wiadomość została wysłana z aplikacji natywnej. Odpowiedz z Chatwoot, aby utrzymać okno wiadomości.",
     "SEND_FAILED": "Nie można wysłać wiadomości! Spróbuj ponownie",
     "TRY_AGAIN": "spróbuj ponownie",
     "ASSIGNMENT": {
@@ -275,7 +290,7 @@
     },
     "CONTEXT_MENU": {
       "COPY": "Kopiuj",
-      "REPLY_TO": "Reply to this message",
+      "REPLY_TO": "Odpowiedz na tę wiadomość",
       "DELETE": "Usuń",
       "CREATE_A_CANNED_RESPONSE": "Dodaj do gotowych odpowiedzi",
       "TRANSLATE": "Przetłumacz",
@@ -293,15 +308,21 @@
       "COPILOT": "Copilot"
     },
     "VOICE_WIDGET": {
-      "INCOMING_CALL": "Incoming call",
-      "OUTGOING_CALL": "Outgoing call",
-      "CALL_IN_PROGRESS": "Call in progress",
-      "NOT_ANSWERED_YET": "Not answered yet",
-      "HANDLED_IN_ANOTHER_TAB": "Being handled in another tab",
-      "REJECT_CALL": "Reject",
-      "JOIN_CALL": "Join call",
-      "END_CALL": "End call"
-    }
+      "INCOMING_CALL": "Połączenie przychodzące",
+      "OUTGOING_CALL": "Połączenie wychodzące",
+      "CALL_IN_PROGRESS": "Trwa połączenie",
+      "NOT_ANSWERED_YET": "Jeszcze nieodebrane",
+      "HANDLED_IN_ANOTHER_TAB": "Obsługiwane w innej karcie",
+      "REJECT_CALL": "Odrzuć",
+      "JOIN_CALL": "Dołącz do połączenia",
+      "END_CALL": "Zakończ połączenie",
+      "DISMISS_CALL": "Zignoruj",
+      "MUTE": "Wycisz mikrofon",
+      "UNMUTE": "Włącz mikrofon",
+      "VIEW_CHAT_HISTORY": "Zobacz historię czatu",
+      "GO_TO_CONVERSATION": "Przejdź do wątku rozmowy"
+    },
+    "UNSUPPORTED_MESSAGE_WHATSAPP": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji WhatsApp."
   },
   "EMAIL_TRANSCRIPT": {
     "TITLE": "Wyślij transkrypt wiadomości",
@@ -310,7 +331,7 @@
     "CANCEL": "Anuluj",
     "SEND_EMAIL_SUCCESS": "Transkrypt rozmowy został pomyślnie wysłany",
     "SEND_EMAIL_ERROR": "Wystąpił błąd, spróbuj ponownie",
-    "SEND_EMAIL_PAYMENT_REQUIRED": "Email transcript is not available on your current plan. Please upgrade to use this feature.",
+    "SEND_EMAIL_PAYMENT_REQUIRED": "Transkrypcja e-mail nie jest dostępna w Twoim obecnym planie. Uaktualnij plan, aby korzystać z tej funkcji.",
     "FORM": {
       "SEND_TO_CONTACT": "Wyślij transkrypt do klienta",
       "SEND_TO_AGENT": "Wyślij transkrypt do przypisanego agenta",
@@ -324,9 +345,9 @@
   "ONBOARDING": {
     "TITLE": "Cześć 👋, Witamy w {installationName}!",
     "DESCRIPTION": "Dziękujemy za rejestrację. Chcemy, abyś jak najlepiej skorzystał z {installationName}. Oto kilka rzeczy, które możesz spróbować, aby zapewnić sobie jak najlepsze doświadczenie z {installationName}.",
-    "GREETING_MORNING": "👋 Good morning, {name}. Welcome to {installationName}.",
-    "GREETING_AFTERNOON": "👋 Good afternoon, {name}. Welcome to {installationName}.",
-    "GREETING_EVENING": "👋 Good evening, {name}. Welcome to {installationName}.",
+    "GREETING_MORNING": "👋 Dzień dobry, {name}. Witaj w {installationName}.",
+    "GREETING_AFTERNOON": "👋 Dzień dobry, {name}. Witaj w {installationName}.",
+    "GREETING_EVENING": "👋 Dobry wieczór, {name}. Witaj w {installationName}.",
     "READ_LATEST_UPDATES": "Przeczytaj najnowsze aktualizacje",
     "ALL_CONVERSATION": {
       "TITLE": "Wszystkie Twoje konwersacje w jednym miejscu",
@@ -344,9 +365,9 @@
       "NEW_LINK": "Kliknij tutaj, aby utworzyć nową etykietę"
     },
     "CANNED_RESPONSES": {
-      "TITLE": "Create canned responses",
-      "DESCRIPTION": "Pre-written quick reply templates help you quickly respond to a conversation. Agents can type the '/' character followed by the shortcode to insert a response.",
-      "NEW_LINK": "Click here to create a canned response"
+      "TITLE": "Utwórz szablony odpowiedzi",
+      "DESCRIPTION": "Gotowe szablony szybkiej odpowiedzi pomagają błyskawicznie odpowiadać na rozmowy. Agenci mogą wpisać znak „/” i kod skrótu, aby wstawić odpowiedź.",
+      "NEW_LINK": "Kliknij tutaj, aby utworzyć szablon odpowiedzi"
     }
   },
   "CONVERSATION_SIDEBAR": {
@@ -361,42 +382,42 @@
       "CONVERSATION_ACTIONS": "Akcje konwersacji",
       "CONVERSATION_LABELS": "Etykiety konwersacji",
       "CONVERSATION_INFO": "Informacje o konwersacji",
-      "CONTACT_NOTES": "Contact Notes",
+      "CONTACT_NOTES": "Notatki kontaktu",
       "CONTACT_ATTRIBUTES": "Atrybuty kontaktu",
       "PREVIOUS_CONVERSATION": "Poprzednie konwersacje",
       "MACROS": "Makra",
-      "LINEAR_ISSUES": "Linked Linear Issues",
-      "SHOPIFY_ORDERS": "Shopify Orders",
-      "SHARED_FILES": "Attachments"
+      "LINEAR_ISSUES": "Powiązane zgłoszenia Linear",
+      "SHOPIFY_ORDERS": "Zamówienia Shopify",
+      "SHARED_FILES": "Załączniki"
     },
     "SHARED_FILES": {
-      "EMPTY": "No attachments yet",
-      "DOWNLOAD": "Download file",
-      "DOWNLOAD_ERROR": "Could not download the file. Please try again.",
-      "MEDIA_HEADING": "Media",
-      "FILES_HEADING": "Files",
-      "VIEW_ALL": "View all",
-      "SHOW_LESS": "Show less",
+      "EMPTY": "Brak załączników",
+      "DOWNLOAD": "Pobierz plik",
+      "DOWNLOAD_ERROR": "Nie udało się pobrać pliku. Spróbuj ponownie.",
+      "MEDIA_HEADING": "Multimedia",
+      "FILES_HEADING": "Pliki",
+      "VIEW_ALL": "Zobacz wszystkie",
+      "SHOW_LESS": "Pokaż mniej",
       "MORE_COUNT": "+{count}",
-      "UNTITLED_FILE": "Untitled file"
+      "UNTITLED_FILE": "Plik bez nazwy"
     },
     "SHOPIFY": {
-      "ORDER_ID": "Order #{id}",
-      "ERROR": "Error loading orders",
-      "NO_SHOPIFY_ORDERS": "No orders found",
+      "ORDER_ID": "Zamówienie #{id}",
+      "ERROR": "Błąd ładowania zamówień",
+      "NO_SHOPIFY_ORDERS": "Nie znaleziono zamówień",
       "FINANCIAL_STATUS": {
         "PENDING": "Oczekujące",
-        "AUTHORIZED": "Authorized",
-        "PARTIALLY_PAID": "Partially Paid",
-        "PAID": "Paid",
-        "PARTIALLY_REFUNDED": "Partially Refunded",
-        "REFUNDED": "Refunded",
-        "VOIDED": "Voided"
+        "AUTHORIZED": "Autoryzowane",
+        "PARTIALLY_PAID": "Częściowo opłacone",
+        "PAID": "Opłacone",
+        "PARTIALLY_REFUNDED": "Częściowo zwrócone",
+        "REFUNDED": "Zwrócone",
+        "VOIDED": "Anulowane"
       },
       "FULFILLMENT_STATUS": {
-        "FULFILLED": "Fulfilled",
-        "PARTIALLY_FULFILLED": "Partially Fulfilled",
-        "UNFULFILLED": "Unfulfilled"
+        "FULFILLED": "Zrealizowane",
+        "PARTIALLY_FULFILLED": "Częściowo zrealizowane",
+        "UNFULFILLED": "Niezrealizowane"
       }
     }
   },
@@ -428,7 +449,7 @@
     "BCC": "Bcc",
     "CC": "Cc",
     "SUBJECT": "Temat",
-    "EXPAND": "Expand email"
+    "EXPAND": "Rozwiń e-mail"
   },
   "CONVERSATION_PARTICIPANTS": {
     "SIDEBAR_MENU_TITLE": "Uczestniczący",
@@ -455,14 +476,14 @@
     "NO_TRANSLATIONS_AVAILABLE": "Brak dostępnych tłumaczeń dla tej treści"
   },
   "TYPING": {
-    "ONE": "{user} is typing",
-    "TWO": "{user} and {secondUser} are typing",
-    "MULTIPLE": "{user} and {count} others are typing"
+    "ONE": "{user} pisze",
+    "TWO": "{user} i {secondUser} piszą",
+    "MULTIPLE": "{user} i {count} innych pisze"
   },
   "COPILOT": {
-    "TRY_THESE_PROMPTS": "Try these prompts"
+    "TRY_THESE_PROMPTS": "Wypróbuj te podpowiedzi"
   },
   "GALLERY_VIEW": {
-    "ERROR_DOWNLOADING": "Unable to download attachment. Please try again"
+    "ERROR_DOWNLOADING": "Nie można pobrać załącznika. Spróbuj ponownie"
   }
 }
