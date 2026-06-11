@@ -37,9 +37,8 @@ const emit = defineEmits([
 const lastMessageInChat = computed(() => getLastMessage(props.chat));
 const showLabelsSection = computed(() => props.chat.labels?.length > 0);
 
-// KLIMABAZAR F6: kolor tla / lewy pasek / badge wg stanu obslugi
-const { handlingState, toneClass: handlingToneClass } =
-  useConversationHandlingState(() => props.chat);
+// KLIMABAZAR F6: stan obslugi -> lewy pasek + chip (wariant C, bez pelnego tla)
+const { handlingState } = useConversationHandlingState(() => props.chat);
 
 const voiceCallData = computed(() => {
   const last = lastMessageInChat.value;
@@ -77,28 +76,19 @@ const selectedModel = computed({
     class="conversation relative cursor-pointer group grid gap-4 items-center px-3 h-12 border-b border-n-slate-3 hover:border-n-surface-1 hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
     :class="[
       {
-        'active animate-card-select ring-2 ring-inset ring-n-brand':
-          isActiveChat,
-        'selected ring-1 ring-inset ring-n-slate-7': selected,
+        'active animate-card-select bg-n-alpha-2': isActiveChat,
+        'selected bg-n-alpha-2': selected,
         'hover:bg-n-alpha-1': !isActiveChat && !selected,
         'grid-cols-[minmax(0,2fr)_minmax(0,1fr)]': showLabelsSection,
         'grid-cols-[minmax(0,2fr)_max-content]': !showLabelsSection,
       },
-      handlingState.border,
-      handlingToneClass,
+      isActiveChat ? 'border-l-2 border-l-n-brand' : handlingState.border,
     ]"
     @click="$emit('click', $event)"
     @contextmenu="$emit('contextmenu', $event)"
   >
     <!-- LEFT SECTION -->
     <div class="flex items-center gap-2 min-w-0 flex-1">
-      <!-- KLIMABAZAR F6: pionowy chip stanu obslugi (przy lewej krawedzi) -->
-      <span
-        class="self-stretch flex-shrink-0 flex items-center justify-center my-1 px-0.5 text-[9px] font-medium leading-none rounded [writing-mode:vertical-rl] rotate-180"
-        :class="handlingState.badge"
-      >
-        {{ $t(handlingState.labelKey) }}
-      </span>
       <div class="flex items-center justify-center flex-shrink-0" @click.stop>
         <Checkbox v-model="selectedModel" />
       </div>
@@ -184,6 +174,13 @@ const selectedModel = computed({
 
     <!-- RIGHT SECTION -->
     <div class="flex items-center justify-end gap-1.5 flex-shrink-0">
+      <!-- KLIMABAZAR F6: chip stanu (prawa strona) -->
+      <span
+        class="inline-flex items-center px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 whitespace-nowrap flex-shrink-0"
+        :class="handlingState.badge"
+      >
+        {{ $t(handlingState.labelKey) }}
+      </span>
       <div v-if="showLabelsSection" class="min-w-0 w-full">
         <CardLabels
           :labels="chat.labels"

@@ -65,9 +65,8 @@ const showLabelsSection = computed(() => {
   return props.chat.labels?.length > 0 || hasSlaPolicyId.value;
 });
 
-// KLIMABAZAR F6: kolorowanie wiersza + badge wg stanu obslugi (logika w composable)
-const { handlingState, toneClass: handlingToneClass } =
-  useConversationHandlingState(() => props.chat);
+// KLIMABAZAR F6: stan obslugi -> lewy pasek + chip (wariant C, bez pelnego tla)
+const { handlingState } = useConversationHandlingState(() => props.chat);
 
 const messagePreviewClass = computed(() => {
   return [
@@ -108,28 +107,19 @@ watch(
 
 <template>
   <div
-    class="relative flex items-start flex-grow-0 flex-shrink-0 w-auto max-w-full py-0 cursor-pointer conversation border-b border-n-slate-3 hover:border-n-surface-1 hover:bg-n-alpha-1 dark:hover:bg-n-alpha-3 group hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
+    class="relative flex items-start flex-grow-0 flex-shrink-0 w-auto max-w-full py-0 cursor-pointer conversation border-b border-n-slate-3 hover:border-n-surface-1 hover:bg-n-alpha-1 group hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
     :class="[
       {
-        'active animate-card-select ring-2 ring-inset ring-n-brand':
-          isActiveChat,
-        'selected ring-1 ring-inset ring-n-slate-7': selected,
+        'active animate-card-select bg-n-alpha-2': isActiveChat,
+        'selected bg-n-alpha-2': selected,
         'px-0': compact,
         'px-3': !compact,
       },
-      handlingState.border,
-      handlingToneClass,
+      isActiveChat ? 'border-l-2 border-l-n-brand' : handlingState.border,
     ]"
     @click="$emit('click', $event)"
     @contextmenu="$emit('contextmenu', $event)"
   >
-    <!-- KLIMABAZAR F6: pionowy chip stanu obslugi (miedzy lewa krawedzia a awatarem) -->
-    <span
-      class="self-stretch flex-shrink-0 flex items-center justify-center my-2 px-0.5 text-[10px] font-medium leading-none rounded [writing-mode:vertical-rl] rotate-180"
-      :class="handlingState.badge"
-    >
-      {{ $t(handlingState.labelKey) }}
-    </span>
     <div
       class="relative"
       @mouseenter="onThumbnailHover"
@@ -221,9 +211,16 @@ watch(
         </span>
       </p>
       <div
-        class="absolute flex flex-col ltr:right-3 rtl:left-3"
-        :class="showMetaSection ? 'top-8' : 'top-4'"
+        class="absolute flex flex-col items-end gap-1 ltr:right-3 rtl:left-3"
+        :class="showMetaSection ? 'top-3' : 'top-2'"
       >
+        <!-- KLIMABAZAR F6: chip stanu w prawym gornym rogu (linia agenta) -->
+        <span
+          class="inline-flex items-center px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 whitespace-nowrap"
+          :class="handlingState.badge"
+        >
+          {{ $t(handlingState.labelKey) }}
+        </span>
         <span class="ml-auto font-normal leading-4 text-xxs">
           <TimeAgo
             :last-activity-timestamp="chat.timestamp"
