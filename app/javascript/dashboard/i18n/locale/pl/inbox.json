@@ -1,94 +1,94 @@
 {
   "INBOX": {
     "LIST": {
-      "TITLE": "My Inbox",
-      "DISPLAY_DROPDOWN": "Display",
-      "LOADING": "Fetching notifications",
-      "404": "There are no active notifications in this group.",
-      "NO_NOTIFICATIONS": "No notifications",
-      "NOTE": "Notifications from all subscribed inboxes",
-      "NO_MESSAGES_AVAILABLE": "Oops! Not able to fetch messages",
+      "TITLE": "Moja skrzynka",
+      "DISPLAY_DROPDOWN": "Wyświetlanie",
+      "LOADING": "Pobieranie powiadomień",
+      "404": "Brak aktywnych powiadomień w tej grupie.",
+      "NO_NOTIFICATIONS": "Brak powiadomień",
+      "NOTE": "Powiadomienia ze wszystkich subskrybowanych skrzynek",
+      "NO_MESSAGES_AVAILABLE": "Ups! Nie udało się pobrać wiadomości",
       "SNOOZED_UNTIL": "Uśpione do",
       "SNOOZED_UNTIL_TOMORROW": "Uśpij do jutra",
       "SNOOZED_UNTIL_NEXT_WEEK": "Uśpione do następnego tygodnia"
     },
     "ACTION_HEADER": {
-      "SNOOZE": "Snooze notification",
-      "DELETE": "Delete notification",
+      "SNOOZE": "Uśpij powiadomienie",
+      "DELETE": "Usuń powiadomienie",
       "BACK": "Powrót"
     },
     "TYPES": {
-      "CONVERSATION_MENTION": "You have been mentioned in a conversation",
-      "CONVERSATION_CREATION": "New conversation created",
-      "CONVERSATION_ASSIGNMENT": "A conversation has been assigned to you",
-      "ASSIGNED_CONVERSATION_NEW_MESSAGE": "New message in an assigned conversation",
-      "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "New message in a conversation you are participating in",
-      "SLA_MISSED_FIRST_RESPONSE": "SLA target first response missed for conversation",
-      "SLA_MISSED_NEXT_RESPONSE": "SLA target next response missed for conversation",
-      "SLA_MISSED_RESOLUTION": "SLA target resolution missed for conversation"
+      "CONVERSATION_MENTION": "Wspomniano Cię w rozmowie",
+      "CONVERSATION_CREATION": "Utworzono nową rozmowę",
+      "CONVERSATION_ASSIGNMENT": "Przypisano Ci rozmowę",
+      "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Nowa wiadomość w przypisanej rozmowie",
+      "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Nowa wiadomość w rozmowie, w której uczestniczysz",
+      "SLA_MISSED_FIRST_RESPONSE": "Przekroczono cel SLA pierwszej odpowiedzi dla rozmowy",
+      "SLA_MISSED_NEXT_RESPONSE": "Przekroczono cel SLA kolejnej odpowiedzi dla rozmowy",
+      "SLA_MISSED_RESOLUTION": "Przekroczono cel SLA rozwiązania dla rozmowy"
     },
     "TYPES_NEXT": {
-      "CONVERSATION_MENTION": "Mentioned",
-      "CONVERSATION_ASSIGNMENT": "Assigned to you",
-      "CONVERSATION_CREATION": "New Conversation",
-      "SLA_MISSED_FIRST_RESPONSE": "SLA breach",
-      "SLA_MISSED_NEXT_RESPONSE": "SLA breach",
-      "SLA_MISSED_RESOLUTION": "SLA breach",
+      "CONVERSATION_MENTION": "Wspomniano",
+      "CONVERSATION_ASSIGNMENT": "Przypisano Tobie",
+      "CONVERSATION_CREATION": "Nowa rozmowa",
+      "SLA_MISSED_FIRST_RESPONSE": "Naruszenie SLA",
+      "SLA_MISSED_NEXT_RESPONSE": "Naruszenie SLA",
+      "SLA_MISSED_RESOLUTION": "Naruszenie SLA",
       "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Nowa wiadomość",
       "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Nowa wiadomość",
-      "SNOOZED_UNTIL": "Snoozed for {time}",
-      "SNOOZED_ENDS": "Snooze ended"
+      "SNOOZED_UNTIL": "Uśpione na {time}",
+      "SNOOZED_ENDS": "Uśpienie zakończone"
     },
     "NO_CONTENT": "Brak treści",
     "MENU_ITEM": {
-      "MARK_AS_READ": "Mark as read",
+      "MARK_AS_READ": "Oznacz jako przeczytane",
       "MARK_AS_UNREAD": "Oznacz jako nieprzeczytane",
       "SNOOZE": "Uśpij",
       "DELETE": "Usuń",
       "MARK_ALL_READ": "Oznacz wszystko jako przeczytane",
-      "DELETE_ALL": "Delete all",
-      "DELETE_ALL_READ": "Delete all read"
+      "DELETE_ALL": "Usuń wszystkie",
+      "DELETE_ALL_READ": "Usuń wszystkie przeczytane"
     },
     "DISPLAY_MENU": {
-      "SORT": "Sort",
-      "DISPLAY": "Display :",
+      "SORT": "Sortuj",
+      "DISPLAY": "Wyświetlanie :",
       "SORT_OPTIONS": {
-        "NEWEST": "Newest",
-        "OLDEST": "Oldest",
+        "NEWEST": "Najnowsze",
+        "OLDEST": "Najstarsze",
         "PRIORITY": "Priorytet"
       },
       "DISPLAY_OPTIONS": {
         "SNOOZED": "Uśpij",
         "READ": "Przeczytane",
         "LABELS": "Etykiety",
-        "CONVERSATION_ID": "Conversation ID"
+        "CONVERSATION_ID": "ID rozmowy"
       }
     },
     "ALERTS": {
-      "MARK_AS_READ": "Notification marked as read",
-      "MARK_AS_UNREAD": "Notification marked as unread",
-      "SNOOZE": "Notification snoozed",
-      "DELETE": "Notification deleted",
-      "MARK_ALL_READ": "All notifications marked as read",
-      "DELETE_ALL": "All notifications deleted",
-      "DELETE_ALL_READ": "All read notifications deleted"
+      "MARK_AS_READ": "Powiadomienie oznaczone jako przeczytane",
+      "MARK_AS_UNREAD": "Powiadomienie oznaczone jako nieprzeczytane",
+      "SNOOZE": "Powiadomienie uśpione",
+      "DELETE": "Powiadomienie usunięte",
+      "MARK_ALL_READ": "Wszystkie powiadomienia oznaczone jako przeczytane",
+      "DELETE_ALL": "Wszystkie powiadomienia usunięte",
+      "DELETE_ALL_READ": "Wszystkie przeczytane powiadomienia usunięte"
     },
     "REAUTHORIZE": {
-      "TITLE": "Reauthorization Required",
-      "DESCRIPTION": "Your WhatsApp connection has expired. Please reconnect to continue receiving and sending messages.",
-      "BUTTON_TEXT": "Reconnect WhatsApp",
-      "LOADING_FACEBOOK": "Loading Facebook SDK...",
-      "SUCCESS": "WhatsApp reconnected successfully",
-      "ERROR": "Failed to reconnect WhatsApp. Please try again.",
-      "WHATSAPP_APP_ID_MISSING": "WhatsApp App ID is not configured. Please contact your administrator.",
-      "WHATSAPP_CONFIG_ID_MISSING": "WhatsApp Configuration ID is not configured. Please contact your administrator.",
-      "CONFIGURATION_ERROR": "Configuration error occurred during reauthorization.",
-      "FACEBOOK_LOAD_ERROR": "Failed to load Facebook SDK. Please try again.",
+      "TITLE": "Wymagana ponowna autoryzacja",
+      "DESCRIPTION": "Twoje połączenie WhatsApp wygasło. Połącz ponownie, aby nadal odbierać i wysyłać wiadomości.",
+      "BUTTON_TEXT": "Połącz ponownie WhatsApp",
+      "LOADING_FACEBOOK": "Ładowanie Facebook SDK...",
+      "SUCCESS": "WhatsApp połączony ponownie pomyślnie",
+      "ERROR": "Nie udało się ponownie połączyć WhatsApp. Spróbuj ponownie.",
+      "WHATSAPP_APP_ID_MISSING": "Nie skonfigurowano App ID WhatsApp. Skontaktuj się z administratorem.",
+      "WHATSAPP_CONFIG_ID_MISSING": "Nie skonfigurowano Configuration ID WhatsApp. Skontaktuj się z administratorem.",
+      "CONFIGURATION_ERROR": "Wystąpił błąd konfiguracji podczas ponownej autoryzacji.",
+      "FACEBOOK_LOAD_ERROR": "Nie udało się załadować Facebook SDK. Spróbuj ponownie.",
       "TROUBLESHOOTING": {
-        "TITLE": "Troubleshooting",
-        "POPUP_BLOCKED": "Ensure pop-ups are allowed for this site",
-        "COOKIES": "Third-party cookies must be enabled",
-        "ADMIN_ACCESS": "You need admin access to the WhatsApp Business Account"
+        "TITLE": "Rozwiązywanie problemów",
+        "POPUP_BLOCKED": "Upewnij się, że wyskakujące okienka są dozwolone dla tej strony",
+        "COOKIES": "Pliki cookie innych firm muszą być włączone",
+        "ADMIN_ACCESS": "Potrzebujesz dostępu administratora do konta WhatsApp Business"
       }
     }
   }

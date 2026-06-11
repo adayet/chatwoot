@@ -1,68 +1,68 @@
 {
   "SEARCH": {
     "TABS": {
-      "ALL": "All results",
+      "ALL": "Wszystkie wyniki",
       "CONTACTS": "Kontakty",
       "CONVERSATIONS": "Rozmowy",
       "MESSAGES": "Wiadomości",
-      "ARTICLES": "Articles"
+      "ARTICLES": "Artykuły"
     },
     "SECTION": {
       "CONTACTS": "Kontakty",
       "CONVERSATIONS": "Rozmowy",
       "MESSAGES": "Wiadomości",
-      "ARTICLES": "Articles"
+      "ARTICLES": "Artykuły"
     },
-    "VIEW_MORE": "View more",
-    "LOAD_MORE": "Load more",
+    "VIEW_MORE": "Zobacz więcej",
+    "LOAD_MORE": "Wczytaj więcej",
     "SEARCHING_DATA": "Wyszukiwanie",
-    "LOADING_DATA": "Loading",
+    "LOADING_DATA": "Ładowanie",
     "EMPTY_STATE": "Nie znaleziono {item} dla zapytania '{query}'",
     "EMPTY_STATE_FULL": "Nie znaleziono wyników dla zapytania '{query}'",
     "PLACEHOLDER_KEYBINDING": "/aby skupić się",
     "INPUT_PLACEHOLDER": "Wpisz co najmniej 3 znaki, aby wyszukać",
-    "RECENT_SEARCHES": "Recent searches",
-    "CLEAR_ALL": "Clear all",
-    "MOST_RECENT": "Most recent",
+    "RECENT_SEARCHES": "Ostatnie wyszukiwania",
+    "CLEAR_ALL": "Wyczyść wszystko",
+    "MOST_RECENT": "Najnowsze",
     "EMPTY_STATE_DEFAULT": "Wyszukaj według identyfikatora rozmowy, adresu e-mail, numeru telefonu lub treści wiadomości, aby uzyskać lepsze wyniki wyszukiwania.",
     "BOT_LABEL": "Bot",
     "READ_MORE": "Czytaj więcej",
-    "READ_LESS": "Read less",
+    "READ_LESS": "Zwiń",
     "WROTE": "napisał/a:",
     "FROM": "Od",
     "EMAIL": "E-mail",
     "EMAIL_SUBJECT": "Temat",
-    "PRIVATE": "Private note",
-    "TRANSCRIPT": "Transcript",
-    "CREATED_AT": "created {time}",
-    "UPDATED_AT": "updated {time}",
+    "PRIVATE": "Notatka prywatna",
+    "TRANSCRIPT": "Transkrypcja",
+    "CREATED_AT": "utworzono {time}",
+    "UPDATED_AT": "zaktualizowano {time}",
     "SORT_BY": {
-      "RELEVANCE": "Relevance"
+      "RELEVANCE": "Trafność"
     },
     "DATE_RANGE": {
       "LAST_7_DAYS": "Ostatnie 7 dni",
       "LAST_30_DAYS": "Ostatnie 30 dni",
       "LAST_60_DAYS": "Ostatnie 60 dni",
       "LAST_90_DAYS": "Ostatnie 90 dni",
-      "CUSTOM_RANGE": "Custom range:",
-      "CREATED_BETWEEN": "Created between",
-      "AND": "and",
+      "CUSTOM_RANGE": "Zakres niestandardowy:",
+      "CREATED_BETWEEN": "Utworzono pomiędzy",
+      "AND": "i",
       "APPLY": "Zastosuj",
-      "BEFORE_DATE": "Before {date}",
-      "AFTER_DATE": "After {date}",
-      "TIME_RANGE": "Filter by time",
-      "CLEAR_FILTER": "Clear filter"
+      "BEFORE_DATE": "Przed {date}",
+      "AFTER_DATE": "Po {date}",
+      "TIME_RANGE": "Filtruj wg czasu",
+      "CLEAR_FILTER": "Wyczyść filtr"
     },
     "FILTERS": {
-      "FILTER_MESSAGE": "Filter messages by:",
+      "FILTER_MESSAGE": "Filtruj wiadomości wg:",
       "FROM": "Nadawca",
       "IN": "Skrzynka odbiorcza",
       "AGENTS": "Agenci",
       "CONTACTS": "Kontakty",
       "INBOXES": "Zarządzanie skrzynkami",
       "NO_AGENTS": "Nie znaleziono agentów",
-      "NO_CONTACTS": "Start by searching to see results",
-      "NO_INBOXES": "No inboxes found"
+      "NO_CONTACTS": "Zacznij od wyszukiwania, aby zobaczyć wyniki",
+      "NO_INBOXES": "Nie znaleziono skrzynek"
     }
   }
 }

@@ -1,14 +1,14 @@
 {
   "MACROS": {
     "HEADER": "Makra",
-    "DESCRIPTION": "A macro is a set of saved actions that help customer service agents easily complete tasks. The agents can define a set of actions like tagging a conversation with a label, sending an email transcript, updating a custom attribute, etc., and they can run these actions in a single click.",
-    "LEARN_MORE": "Learn more about macros",
-    "COUNT": "{n} macro | {n} macros",
+    "DESCRIPTION": "Makro to zestaw zapisanych akcji, które pomagają agentom obsługi klienta łatwo wykonywać zadania. Agenci mogą zdefiniować zestaw akcji, takich jak oznaczenie rozmowy etykietą, wysłanie transkrypcji e-mail, aktualizacja atrybutu niestandardowego itp., i uruchomić te akcje jednym kliknięciem.",
+    "LEARN_MORE": "Dowiedz się więcej o makrach",
+    "COUNT": "{n} makro | {n} makra | {n} makr",
     "HEADER_BTN_TXT": "Dodaj nowe makro",
     "HEADER_BTN_TXT_SAVE": "Zapisz makro",
     "LOADING": "Pobieranie makr",
-    "SEARCH_PLACEHOLDER": "Search macros...",
-    "NO_RESULTS": "No macros found matching your search",
+    "SEARCH_PLACEHOLDER": "Szukaj makr...",
+    "NO_RESULTS": "Brak makr pasujących do wyszukiwania",
     "ERROR": "Wystąpił błąd. Spróbuj ponownie",
     "ORDER_INFO": "Makra będą uruchamiane w kolejności, w jakiej dodajesz czynności. Możesz zmieniać ich kolejność, przeciągając je za uchwyt obok każdego węzła.",
     "ADD": {
@@ -50,7 +50,7 @@
       }
     },
     "VIEW": {
-      "TOOLTIP": "View macro"
+      "TOOLTIP": "Zobacz makro"
     },
     "EDIT": {
       "TOOLTIP": "Edytuj makro",
@@ -70,8 +70,8 @@
         "GLOBAL": {
           "LABEL": "Publiczne",
           "DESCRIPTION": "To makro jest publicznie dostępne dla wszystkich agentów na tym koncie.",
-          "CREATE_DISABLED_DESCRIPTION": "Only administrators can create public macros.",
-          "EDIT_DISABLED_DESCRIPTION": "Only administrators can edit public macros."
+          "CREATE_DISABLED_DESCRIPTION": "Tylko administratorzy mogą tworzyć publiczne makra.",
+          "EDIT_DISABLED_DESCRIPTION": "Tylko administratorzy mogą edytować publiczne makra."
         },
         "PERSONAL": {
           "LABEL": "Prywatne",
@@ -85,30 +85,30 @@
       "EXECUTED_SUCCESSFULLY": "Makro pomyślnie wykonane"
     },
     "ERRORS": {
-      "ATTRIBUTE_KEY_REQUIRED": "Attribute key is required",
-      "FILTER_OPERATOR_REQUIRED": "Filter operator is required",
+      "ATTRIBUTE_KEY_REQUIRED": "Klucz atrybutu jest wymagany",
+      "FILTER_OPERATOR_REQUIRED": "Operator filtra jest wymagany",
       "VALUE_REQUIRED": "Wartość jest wymagana",
-      "VALUE_MUST_BE_BETWEEN_1_AND_998": "Value must be between 1 and 998",
-      "ACTION_PARAMETERS_REQUIRED": "Action parameters are required",
-      "ATLEAST_ONE_CONDITION_REQUIRED": "At least one condition is required",
-      "ATLEAST_ONE_ACTION_REQUIRED": "At least one action is required"
+      "VALUE_MUST_BE_BETWEEN_1_AND_998": "Wartość musi być z zakresu od 1 do 998",
+      "ACTION_PARAMETERS_REQUIRED": "Parametry akcji są wymagane",
+      "ATLEAST_ONE_CONDITION_REQUIRED": "Wymagany jest co najmniej jeden warunek",
+      "ATLEAST_ONE_ACTION_REQUIRED": "Wymagana jest co najmniej jedna akcja"
     },
     "ACTIONS": {
-      "ASSIGN_TEAM": "Assign a Team",
-      "ASSIGN_AGENT": "Assign an Agent",
-      "ADD_LABEL": "Add a Label",
-      "REMOVE_LABEL": "Remove a Label",
-      "REMOVE_ASSIGNED_AGENT": "Remove Assigned Agent",
-      "REMOVE_ASSIGNED_TEAM": "Remove Assigned Team",
-      "SEND_EMAIL_TRANSCRIPT": "Send an Email Transcript",
+      "ASSIGN_TEAM": "Przypisz zespół",
+      "ASSIGN_AGENT": "Przypisz agenta",
+      "ADD_LABEL": "Dodaj etykietę",
+      "REMOVE_LABEL": "Usuń etykietę",
+      "REMOVE_ASSIGNED_AGENT": "Usuń przypisanego agenta",
+      "REMOVE_ASSIGNED_TEAM": "Usuń przypisany zespół",
+      "SEND_EMAIL_TRANSCRIPT": "Wyślij transkrypcję e-mail",
       "MUTE_CONVERSATION": "Wycisz kontakt",
       "SNOOZE_CONVERSATION": "Zatrzymaj rozmowę",
       "RESOLVE_CONVERSATION": "Zamknij rozmowę",
-      "SEND_ATTACHMENT": "Send Attachment",
-      "SEND_MESSAGE": "Send a Message",
+      "SEND_ATTACHMENT": "Wyślij załącznik",
+      "SEND_MESSAGE": "Wyślij wiadomość",
       "CHANGE_PRIORITY": "Zmień priorytet",
-      "ADD_PRIVATE_NOTE": "Add a Private Note",
-      "SEND_WEBHOOK_EVENT": "Send Webhook Event"
+      "ADD_PRIVATE_NOTE": "Dodaj notatkę prywatną",
+      "SEND_WEBHOOK_EVENT": "Wyślij zdarzenie webhooka"
     },
     "PRIORITY_TYPES": {
       "NONE": "Brak",
