@@ -175,6 +175,7 @@ const selectedModel = computed({
         :voice-call-status="voiceCallData.status"
         :voice-call-direction="voiceCallData.direction"
         :unread-count="unreadCount"
+        :chat-messages-count="chat.chat_messages_count || 0"
         :show-expanded-preview="false"
       />
     </div>
@@ -203,7 +204,7 @@ const selectedModel = computed({
       <div class="flex-shrink-0 w-[4.375rem] text-end">
         <TimeAgo
           :conversation-id="chat.id"
-          :last-activity-timestamp="chat.timestamp"
+          :last-activity-timestamp="chat.last_chat_message_at || chat.timestamp"
           :created-at-timestamp="chat.created_at"
           class="font-440 !text-xs text-n-slate-11"
         />

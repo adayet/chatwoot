@@ -2,13 +2,15 @@
 import Icon from 'dashboard/components-next/icon/Icon.vue';
 import MessagePreview from './MessagePreview.vue';
 import VoiceCallStatus from './VoiceCallStatus.vue';
-import UnreadBadge from './UnreadBadge.vue';
+// KLIMABAZAR F8: licznik wiadomosci zamiast nieprzeczytanych
+import MessageCountBadge from './MessageCountBadge.vue';
 
 defineProps({
   lastMessage: { type: Object, default: null },
   voiceCallStatus: { type: String, default: '' },
   voiceCallDirection: { type: String, default: '' },
   unreadCount: { type: Number, default: 0 },
+  chatMessagesCount: { type: Number, default: 0 }, // KLIMABAZAR F8
   showExpandedPreview: { type: Boolean, default: false },
 });
 </script>
@@ -42,6 +44,9 @@ defineProps({
       {{ $t(`CHAT_LIST.NO_MESSAGES`) }}
     </span>
 
-    <UnreadBadge :count="unreadCount" :align-bottom="showExpandedPreview" />
+    <MessageCountBadge
+      :count="chatMessagesCount"
+      :align-bottom="showExpandedPreview"
+    />
   </div>
 </template>
