@@ -27,6 +27,8 @@ export default {
     WAITING_SINCE_ASC: 'waiting_since_asc',
     WAITING_SINCE_DESC: 'waiting_since_desc',
     PRIORITY_DESC_CREATED_AT_ASC: 'priority_desc_created_at_asc',
+    LAST_MESSAGE_AT_ASC: 'last_message_at_asc', // KLIMABAZAR F9
+    LAST_MESSAGE_AT_DESC: 'last_message_at_desc', // KLIMABAZAR F9
   },
   ARTICLE_STATUS_TYPES: {
     DRAFT: 0,

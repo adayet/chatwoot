@@ -117,6 +117,8 @@ const SORT_OPTIONS = {
   waiting_since_asc: ['sortOnWaitingSince', 'asc'],
   waiting_since_desc: ['sortOnWaitingSince', 'desc'],
   priority_desc_created_at_asc: ['sortOnPriorityCreatedAt', 'desc'],
+  last_message_at_asc: ['sortOnLastMessageAt', 'asc'], // KLIMABAZAR F9
+  last_message_at_desc: ['sortOnLastMessageAt', 'desc'], // KLIMABAZAR F9
 };
 const sortAscending = (valueA, valueB) => valueA - valueB;
 const sortDescending = (valueA, valueB) => valueB - valueA;
@@ -127,6 +129,14 @@ const getSortOrderFunction = sortOrder =>
 const sortConfig = {
   sortOnLastActivityAt: (a, b, sortDirection) =>
     getSortOrderFunction(sortDirection)(a.last_activity_at, b.last_activity_at),
+
+  // KLIMABAZAR F9: sort po ostatniej realnej wiadomosci (pole last_chat_message_at z F8); brak -> na dol
+  sortOnLastMessageAt: (a, b, sortDirection) => {
+    const av = a.last_chat_message_at || 0;
+    const bv = b.last_chat_message_at || 0;
+    if (!av || !bv) return (bv ? 1 : 0) - (av ? 1 : 0);
+    return getSortOrderFunction(sortDirection)(av, bv);
+  },
 
   sortOnCreatedAt: (a, b, sortDirection) =>
     getSortOrderFunction(sortDirection)(a.created_at, b.created_at),
@@ -163,6 +173,6 @@ const sortConfig = {
 
 export const sortComparator = (a, b, sortKey) => {
   const [sortMethod, sortDirection] =
-    SORT_OPTIONS[sortKey] || SORT_OPTIONS.last_activity_at_desc;
+    SORT_OPTIONS[sortKey] || SORT_OPTIONS.last_message_at_desc; // KLIMABAZAR F9
   return sortConfig[sortMethod](a, b, sortDirection);
 };

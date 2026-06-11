@@ -76,7 +76,8 @@ const resolveAttributesModalRef = ref(null);
 const activeAssigneeTab = ref(wootConstants.ASSIGNEE_TYPE.ALL);
 // KLIMABAZAR F6: domyslnie pokazuj wszystkie statusy (nie tylko otwarte)
 const activeStatus = ref(wootConstants.STATUS_TYPE.ALL);
-const activeSortBy = ref(wootConstants.SORT_BY_TYPE.LAST_ACTIVITY_AT_DESC);
+// KLIMABAZAR F9: domyslny sort listy = ostatnia realna wiadomosc
+const activeSortBy = ref(wootConstants.SORT_BY_TYPE.LAST_MESSAGE_AT_DESC);
 const showAdvancedFilters = ref(false);
 // chatsOnView is to store the chats that are currently visible on the screen,
 // which mirrors the conversationList.
@@ -398,7 +399,7 @@ function setFiltersFromUISettings() {
     orderBy
   )
     ? orderBy
-    : wootConstants.SORT_BY_TYPE.LAST_ACTIVITY_AT_DESC;
+    : wootConstants.SORT_BY_TYPE.LAST_MESSAGE_AT_DESC; // KLIMABAZAR F9
 }
 
 function emitConversationLoaded() {

@@ -34,7 +34,7 @@ const currentStatusFilter = computed(() => {
 
 const currentSortBy = computed(() => {
   return (
-    chatSortFilter.value || wootConstants.SORT_BY_TYPE.LAST_ACTIVITY_AT_DESC
+    chatSortFilter.value || wootConstants.SORT_BY_TYPE.LAST_MESSAGE_AT_DESC // KLIMABAZAR F9
   );
 });
 
@@ -62,6 +62,15 @@ const chatStatusOptions = computed(() => [
 ]);
 
 const chatSortOptions = computed(() => [
+  // KLIMABAZAR F9: nowy domyslny sort - po ostatniej realnej wiadomosci
+  {
+    label: t('CHAT_LIST.SORT_ORDER_ITEMS.last_message_at_desc.TEXT'),
+    value: 'last_message_at_desc',
+  },
+  {
+    label: t('CHAT_LIST.SORT_ORDER_ITEMS.last_message_at_asc.TEXT'),
+    value: 'last_message_at_asc',
+  },
   {
     label: t('CHAT_LIST.SORT_ORDER_ITEMS.last_activity_at_asc.TEXT'),
     value: 'last_activity_at_asc',
