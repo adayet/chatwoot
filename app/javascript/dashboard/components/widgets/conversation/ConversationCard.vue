@@ -66,11 +66,16 @@ const showLabelsSection = computed(() => {
 // KLIMABAZAR F6: stan obslugi -> lewy pasek + chip (wariant C, bez pelnego tla)
 const { handlingState } = useConversationHandlingState(() => props.chat);
 
+// KLIMABAZAR F8: badge liczby wiadomosci pokazujemy gdy w watku jest >1 wiadomosc
+const showMessageCount = computed(
+  () => (props.chat.chat_messages_count || 0) > 1
+);
+
 const messagePreviewClass = computed(() => {
   return [
     hasUnread.value ? 'font-medium text-n-slate-12' : 'text-n-slate-11',
-    !props.compact && hasUnread.value ? 'ltr:pr-4 rtl:pl-4' : '',
-    props.compact && hasUnread.value ? 'ltr:pr-6 rtl:pl-6' : '',
+    // KLIMABAZAR F8: zarezerwuj miejsce po prawej na badge liczby wiadomosci
+    showMessageCount.value ? 'ltr:pr-8 rtl:pl-8' : '',
   ];
 });
 
@@ -240,6 +245,7 @@ watch(
         </div>
         <span class="ml-auto font-normal leading-4 text-xxs">
           <TimeAgo
+            single-timestamp
             :last-activity-timestamp="
               chat.last_chat_message_at || chat.timestamp
             "
@@ -248,7 +254,7 @@ watch(
           />
         </span>
         <MessageCountBadge
-          v-if="(chat.chat_messages_count || 0) > 0"
+          v-if="showMessageCount"
           :count="chat.chat_messages_count"
           class="ltr:ml-auto rtl:mr-auto mt-1"
         />

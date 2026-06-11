@@ -28,6 +28,11 @@ export default {
       type: [String, Number],
       default: '',
     },
+    // KLIMABAZAR F8: pokaz tylko ostatnia aktywnosc (bez "utworzono • ...")
+    singleTimestamp: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -127,6 +132,7 @@ export default {
     }"
     class="ml-auto leading-4 text-xxs text-n-slate-10 hover:text-n-slate-11"
   >
-    <span>{{ `${createdAtTime} • ${lastActivityTime}` }}</span>
+    <span v-if="singleTimestamp">{{ lastActivityTime }}</span>
+    <span v-else>{{ `${createdAtTime} • ${lastActivityTime}` }}</span>
   </div>
 </template>

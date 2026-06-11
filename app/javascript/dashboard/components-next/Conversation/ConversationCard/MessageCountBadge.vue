@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <span
-    v-if="count > 0"
+    v-if="count > 1"
     class="bg-n-slate-3 rounded-full h-4 min-w-4 px-1 w-fit font-medium text-xxs leading-3 text-n-slate-12 inline-grid place-items-center flex-shrink-0"
     :class="{ 'mb-0.5': alignBottom }"
   >
