@@ -9,7 +9,7 @@ Zasada **sidecar-first**: co da się zrobić jako sidecar / feature-flag / custo
 |---|---|---|---|---|
 | **F1** | ✅ **ZROBIONE** — Kolejność zakładek „Rozmowy": Wszystkie → Moje → Nieprzypisane + domyślnie „Wszystkie" | Fork — front (Vue) | Niskie | `ChatList.vue` (`ASSIGNEE_TAB_ORDER`) |
 | **F2** | ✅ **ZROBIONE** — Agent (avatar + nazwa) przy statusie w prawym górnym rogu + podgląd 2 linijek | Fork — front (Vue) | Średnie (karta rozmowy) | `ConversationCard.vue`, `MessagePreview.vue` (prop `multiline`) |
-| **F3** | Ukrycie modułów: Captain, Kampanie, (ew. Raporty) | Najpierw feature-flagi/config; residuum → front | Niskie | **Spike:** co wyłączysz w Super Admin → Features, a co trzeba ukryć w nawigacji |
+| **F3** | ✅ **ZROBIONE** — Ukrycie modułów: Captain (front), Kampanie/Raporty (flaga konta) | Captain: fork `Sidebar.vue`; Kampanie/Raporty: flagi `campaigns`/`reports` (Super Admin → Features) | Niskie | Captain znika z nav; Kampanie po wyłączeniu flagi konta |
 | **F4** | Integracja **wFirma** (po NIP: faktury, suma sprzedaży, zaległości) | **Sidecar** (FastAPI) + NIP jako custom attribute (natywnie) + wyświetlanie (patrz F5) | Backend: zero forka | **Zależność: dostęp do API wFirma** (token). Największy item |
 | **F5** | BaseLinker + wFirma jako **natywne sekcje w prawym panelu Kontakt** (zamiast iframe Dashboard App) | Fork — front (Vue) | Średnie (panel kontaktu) | Wspólna infra dla BL i wFirma — budujemy raz. Dane dalej z sidecarów |
 | **F6** | ✅ **ZROBIONE** — Wątki „rozwiązane": nie znikają (domyślny filtr=Wszystkie), status na pasku+chip, wracają po odpowiedzi (reopen działa natywnie) | F6b front | — | Spec/plan: `F6-design.md`, `F6-plan.md`. Deploy po 16:00 (sha `8d0eade16`) |
@@ -18,8 +18,9 @@ Zasada **sidecar-first**: co da się zrobić jako sidecar / feature-flag / custo
 ## Postęp (2026-06-11)
 Zrobione (czeka na deploy po 16:00, obraz `c85f972cf`): ~~**F6**~~ ✅, ~~**F1**~~ ✅, ~~**F2**~~ ✅, ~~**F7**~~ ✅.
 
+Zrobione cd.: ~~**F3**~~ ✅ — Captain ukryty frontem (`Sidebar.vue`, `KLIMABAZAR_HIDDEN_SIDEBAR`); Kampanie/Raporty = flaga konta `campaigns`/`reports` (Super Admin → Features, bez forka).
+
 Zostało:
-- **F3** — ukrycie modułów (Captain, Kampanie, ew. Raporty)
 - **F4** — integracja wFirma (sidecar; zależy od dostępu do API wFirma)
 - **F5** — natywny panel Kontakt (BaseLinker + wFirma) zamiast iframe
 

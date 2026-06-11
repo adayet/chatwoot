@@ -788,6 +788,13 @@ const menuItems = computed(() => {
     },
   ];
 });
+
+// KLIMABAZAR F3: ukryj moduly z nawigacji, ktorych nie da sie wylaczyc flaga konta (Captain).
+// Kampanie/Raporty wylacza sie natywnie flagami konta (campaigns/reports), wiec nie ma ich tu.
+const KLIMABAZAR_HIDDEN_SIDEBAR = ['Captain'];
+const visibleMenuItems = computed(() =>
+  menuItems.value.filter(item => !KLIMABAZAR_HIDDEN_SIDEBAR.includes(item.name))
+);
 </script>
 
 <template>
@@ -895,7 +902,7 @@ const menuItems = computed(() => {
         :class="{ 'items-center': isEffectivelyCollapsed }"
       >
         <SidebarGroup
-          v-for="item in menuItems"
+          v-for="item in visibleMenuItems"
           :key="item.name"
           v-bind="item"
         />
