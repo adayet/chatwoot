@@ -13,7 +13,7 @@ Zasada **sidecar-first**: co da się zrobić jako sidecar / feature-flag / custo
 | **F4** | Integracja **wFirma** (po NIP: faktury, suma sprzedaży, zaległości) | **Sidecar** (FastAPI) + NIP jako custom attribute (natywnie) + wyświetlanie (patrz F5) | Backend: zero forka | **Zależność: dostęp do API wFirma** (token). Największy item |
 | **F5** | BaseLinker + wFirma jako **natywne sekcje w prawym panelu Kontakt** (zamiast iframe Dashboard App) | Fork — front (Vue) | Średnie (panel kontaktu) | Wspólna infra dla BL i wFirma — budujemy raz. Dane dalej z sidecarów |
 | **F6** | ✅ **ZROBIONE** — Wątki „rozwiązane": nie znikają (domyślny filtr=Wszystkie), status na pasku+chip, wracają po odpowiedzi (reopen działa natywnie) | F6b front | — | Spec/plan: `F6-design.md`, `F6-plan.md`. Deploy po 16:00 (sha `8d0eade16`) |
-| **F7** | ✅ **SPIKE DONE — bez forka** — Foldery/filtrowanie marketplace+spam | **Natywnie:** reguły automatyzacji (warunek `email` → `add_label`/`resolve`) + Custom Views | brak (konfiguracja konta) | `F7-spike.md` (klasyfikacja domen + instrukcja samodzielnej konfiguracji). Do zrobienia przez właściciela w UI |
+| **F7** | ✅ **ZROBIONE** — Foldery/filtrowanie marketplace+spam | **Natywnie** (właściciel): reguły automatyzacji `email`→`add_label` + foldery/widoki etykiet. **+ mały fork (Droga B):** domyślna lista wyklucza etykietę `spam` (znika z „Rozmowy", zostaje w `#spam`) | niska | `F7-spike.md`; fork w `ChatList.vue` (`HIDDEN_LABELS`) |
 
 ## Kolejność (wybór właściciela 2026-06-11)
 1. ~~**F6** — resolved behavior~~ ✅ ZROBIONE (deploy po 16:00)
