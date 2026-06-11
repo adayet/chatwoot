@@ -6,7 +6,7 @@
     "LIST": {
       "404": "W tej grupie nie ma aktywnych konwersacji."
     },
-    "FAILED_TO_SEND": "Failed to send",
+    "FAILED_TO_SEND": "Nie wysłano",
     "TAB_HEADING": "Rozmowy",
     "MENTION_HEADING": "Wzmianki",
     "UNATTENDED_HEADING": "Nieobsługiwane",
@@ -61,31 +61,31 @@
     },
     "SORT_ORDER_ITEMS": {
       "last_activity_at_asc": {
-        "TEXT": "Last activity: Oldest first"
+        "TEXT": "Ostatnia aktywność: od najstarszych"
       },
       "last_activity_at_desc": {
-        "TEXT": "Last activity: Newest first"
+        "TEXT": "Ostatnia aktywność: od najnowszych"
       },
       "created_at_desc": {
-        "TEXT": "Created at: Newest first"
+        "TEXT": "Utworzono: od najnowszych"
       },
       "created_at_asc": {
-        "TEXT": "Created at: Oldest first"
+        "TEXT": "Utworzono: od najstarszych"
       },
       "priority_desc": {
-        "TEXT": "Priority: Highest first"
+        "TEXT": "Priorytet: od najwyższego"
       },
       "priority_asc": {
-        "TEXT": "Priority: Lowest first"
+        "TEXT": "Priorytet: od najniższego"
       },
       "waiting_since_asc": {
-        "TEXT": "Pending Response: Longest first"
+        "TEXT": "Oczekujące na odpowiedź: od najdłużej"
       },
       "waiting_since_desc": {
-        "TEXT": "Pending Response: Shortest first"
+        "TEXT": "Oczekujące na odpowiedź: od najkrócej"
       },
       "priority_desc_created_at_asc": {
-        "TEXT": "Priority: Highest first, Created: Oldest first"
+        "TEXT": "Priorytet: od najwyższego, Utworzono: od najstarszych"
       }
     },
     "ATTACHMENTS": {
@@ -111,10 +111,10 @@
         "CONTENT": "udostępnił adres URL"
       },
       "contact": {
-        "CONTENT": "Shared contact"
+        "CONTENT": "Udostępniony kontakt"
       },
       "embed": {
-        "CONTENT": "Embedded content"
+        "CONTENT": "Osadzona treść"
       }
     },
     "CHAT_SORT_BY_FILTER": {
@@ -147,7 +147,7 @@
     "HIDE_QUOTED_TEXT": "Ukryj cytat",
     "SHOW_QUOTED_TEXT": "Pokaż cytat",
     "MESSAGE_READ": "Przeczytane",
-    "SENDING": "Sending",
+    "SENDING": "Wysyłanie",
     "UNREAD_COUNT_OVERFLOW": "9+"
   }
 }

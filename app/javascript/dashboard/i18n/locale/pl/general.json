@@ -1,16 +1,16 @@
 {
   "GENERAL": {
-    "SHOWING_RESULTS": "Showing {firstIndex}-{lastIndex} of {totalCount} items",
+    "SHOWING_RESULTS": "Wyświetlanie {firstIndex}-{lastIndex} z {totalCount} pozycji",
     "PHONE_INPUT": {
       "PLACEHOLDER": "Szukaj",
       "EMPTY_STATE": "Nie znaleziono rekordów"
     },
     "CLOSE": "Zamknij",
     "BETA": "Beta",
-    "BETA_DESCRIPTION": "This feature is in beta and may change as we improve it.",
-    "ACCEPT": "Accept",
-    "DISCARD": "Discard",
-    "PREFERRED": "Preferred"
+    "BETA_DESCRIPTION": "Ta funkcja jest w wersji beta i może się zmieniać w miarę ulepszania.",
+    "ACCEPT": "Akceptuj",
+    "DISCARD": "Odrzuć",
+    "PREFERRED": "Preferowany"
   },
   "CHOICE_TOGGLE": {
     "YES": "Tak",

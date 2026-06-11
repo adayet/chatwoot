@@ -3,7 +3,7 @@
     "TITLE": "Zaloguj się do Chatwoot",
     "EMAIL": {
       "LABEL": "E-mail",
-      "PLACEHOLDER": "example{'@'}companyname.com",
+      "PLACEHOLDER": "przyklad{'@'}firma.pl",
       "ERROR": "Wprowadź poprawny adres e-mail"
     },
     "PASSWORD": {
@@ -24,17 +24,17 @@
     "CREATE_NEW_ACCOUNT": "Utwórz nowe konto",
     "SUBMIT": "Zaloguj się",
     "SAML": {
-      "LABEL": "Login via SSO",
-      "TITLE": "Initiate Single Sign-on (SSO)",
-      "SUBTITLE": "Enter your work email to access your organization",
-      "BACK_TO_LOGIN": "Login via Password",
+      "LABEL": "Zaloguj się przez SSO",
+      "TITLE": "Rozpocznij logowanie jednokrotne (SSO)",
+      "SUBTITLE": "Podaj służbowy e-mail, aby uzyskać dostęp do organizacji",
+      "BACK_TO_LOGIN": "Zaloguj się hasłem",
       "WORK_EMAIL": {
-        "LABEL": "Work Email",
-        "PLACEHOLDER": "Enter your work email"
+        "LABEL": "Służbowy e-mail",
+        "PLACEHOLDER": "Podaj służbowy e-mail"
       },
-      "SUBMIT": "Continue with SSO",
+      "SUBMIT": "Kontynuuj z SSO",
       "API": {
-        "ERROR_MESSAGE": "SSO authentication failed. Please check your credentials and try again."
+        "ERROR_MESSAGE": "Uwierzytelnianie SSO nie powiodło się. Sprawdź dane logowania i spróbuj ponownie."
       }
     }
   }

@@ -4,14 +4,14 @@
     "CURRENT_PAGE_INFO": "{currentPage} of {totalPages} pages"
   },
   "COMBOBOX": {
-    "PLACEHOLDER": "Select an option...",
-    "EMPTY_SEARCH_RESULTS": "No items found for the search term `{searchTerm}`",
+    "PLACEHOLDER": "Wybierz opcję...",
+    "EMPTY_SEARCH_RESULTS": "Nie znaleziono pozycji dla frazy `{searchTerm}`",
     "EMPTY_STATE": "Brak wyników.",
-    "SEARCH_PLACEHOLDER": "Search...",
-    "MORE": "+{count} more"
+    "SEARCH_PLACEHOLDER": "Szukaj...",
+    "MORE": "+{count} więcej"
   },
   "DROPDOWN_MENU": {
-    "SEARCH_PLACEHOLDER": "Search...",
+    "SEARCH_PLACEHOLDER": "Szukaj...",
     "EMPTY_STATE": "Brak wyników.",
     "SEARCHING": "Wyszukiwanie..."
   },
@@ -22,47 +22,48 @@
     }
   },
   "PHONE_INPUT": {
-    "SEARCH_PLACEHOLDER": "Search country",
-    "ERROR": "Phone number should be empty or in E.164 format",
+    "SEARCH_PLACEHOLDER": "Szukaj kraju",
+    "ERROR": "Numer telefonu powinien być pusty lub w formacie E.164",
     "DIAL_CODE_ERROR": "Wybierz kod kraju z listy"
   },
   "THUMBNAIL": {
     "AUTHOR": {
-      "NOT_AVAILABLE": "Author is not available"
+      "NOT_AVAILABLE": "Autor niedostępny"
     }
   },
   "BREADCRUMB": {
-    "ARIA_LABEL": "Breadcrumb"
+    "ARIA_LABEL": "Ścieżka nawigacji"
   },
   "SWITCH": {
-    "TOGGLE": "Toggle switch"
+    "TOGGLE": "Przełącznik"
   },
   "LABEL": {
-    "TAG_BUTTON": "tag"
+    "TAG_BUTTON": "etykieta"
   },
   "FEATURE_SPOTLIGHT": {
     "LEARN_MORE": "Dowiedz się więcej",
-    "WATCH_VIDEO": "Watch video"
+    "WATCH_VIDEO": "Obejrzyj film"
   },
   "DURATION_INPUT": {
-    "MINUTES": "Minutes",
-    "HOURS": "Hours",
-    "DAYS": "Days",
-    "PLACEHOLDER": "Enter duration"
+    "MINUTES": "Minuty",
+    "HOURS": "Godziny",
+    "DAYS": "Dni",
+    "PLACEHOLDER": "Podaj czas trwania"
   },
   "CHANNEL_SELECTOR": {
-    "COMING_SOON": "Coming Soon!"
+    "COMING_SOON": "Wkrótce!"
   },
   "SLASH_COMMANDS": {
-    "HEADING_1": "Heading 1",
-    "HEADING_2": "Heading 2",
-    "HEADING_3": "Heading 3",
-    "BOLD": "Bold",
-    "ITALIC": "Italic",
-    "STRIKETHROUGH": "Strikethrough",
-    "CODE": "Code",
-    "BULLET_LIST": "Bullet List",
-    "ORDERED_LIST": "Ordered List",
-    "TABLE": "Table"
+    "HEADING_1": "Nagłówek 1",
+    "HEADING_2": "Nagłówek 2",
+    "HEADING_3": "Nagłówek 3",
+    "BOLD": "Pogrubienie",
+    "ITALIC": "Kursywa",
+    "STRIKETHROUGH": "Przekreślenie",
+    "CODE": "Kod",
+    "BULLET_LIST": "Lista punktowana",
+    "ORDERED_LIST": "Lista numerowana",
+    "TABLE": "Tabela",
+    "IMAGE": "Obraz"
   }
 }
