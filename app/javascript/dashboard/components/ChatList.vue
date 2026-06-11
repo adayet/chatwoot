@@ -316,7 +316,7 @@ function filterByAssigneeTab(conversations) {
 
 // KLIMABAZAR F7: etykiety ukrywane z domyslnej listy (rozmowy nadal dostepne w folderze po etykiecie,
 // w wyszukiwarce i filtrach). Reguly automatyzacji nadaja te etykiety po domenie nadawcy.
-const HIDDEN_LABELS = ['spam'];
+const HIDDEN_LABELS = ['spam', 'kurier', 'marketplace'];
 
 const conversationList = computed(() => {
   let localConversationList = [];
@@ -347,11 +347,13 @@ const conversationList = computed(() => {
     });
   }
 
-  // KLIMABAZAR F7: ukryj rozmowy z etykietami szumu na domyslnej liscie.
-  // Pomijamy gdy folder/filtr/widok-etykiety (props.label) - tam maja sie pokazac (retrievability).
+  // KLIMABAZAR F7: ukryj rozmowy z etykietami szumu na AGREGOWANEJ liscie "Rozmowy".
+  // Pomijamy gdy: folder/filtr, widok etykiety (props.label) LUB konkretny inbox (activeInbox) -
+  // tam maja sie pokazac (retrievability + np. marketplace widoczny w inboxie allegro@/erli@).
   if (
     !hasAppliedFiltersOrActiveFolders.value &&
     !props.label &&
+    !activeInbox.value &&
     HIDDEN_LABELS.length
   ) {
     localConversationList = localConversationList.filter(
