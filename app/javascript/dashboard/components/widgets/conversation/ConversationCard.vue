@@ -7,7 +7,8 @@ import InboxName from '../InboxName.vue';
 import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
 import CardPriorityIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPriorityIcon.vue';
-import UnreadBadge from 'dashboard/components-next/Conversation/ConversationCard/UnreadBadge.vue';
+// KLIMABAZAR F8: licznik wiadomosci zamiast nieprzeczytanych
+import MessageCountBadge from 'dashboard/components-next/Conversation/ConversationCard/MessageCountBadge.vue';
 import SLACardLabel from './components/SLACardLabel.vue';
 import VoiceCallStatus from './VoiceCallStatus.vue';
 import Checkbox from 'dashboard/components-next/checkbox/Checkbox.vue';
@@ -239,14 +240,16 @@ watch(
         </div>
         <span class="ml-auto font-normal leading-4 text-xxs">
           <TimeAgo
-            :last-activity-timestamp="chat.timestamp"
+            :last-activity-timestamp="
+              chat.last_chat_message_at || chat.timestamp
+            "
             :created-at-timestamp="chat.created_at"
             :conversation-id="chat.id"
           />
         </span>
-        <UnreadBadge
-          v-if="hasUnread"
-          :count="unreadCount"
+        <MessageCountBadge
+          v-if="(chat.chat_messages_count || 0) > 0"
+          :count="chat.chat_messages_count"
           class="ltr:ml-auto rtl:mr-auto mt-1"
         />
       </div>
