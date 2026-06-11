@@ -13,6 +13,8 @@ import VoiceCallStatus from './VoiceCallStatus.vue';
 import Checkbox from 'dashboard/components-next/checkbox/Checkbox.vue';
 // KLIMABAZAR F6
 import { useConversationHandlingState } from 'dashboard/composables/useConversationHandlingState';
+// KLIMABAZAR F2
+import { agentColorClass } from 'dashboard/helper/agentColor';
 
 const props = defineProps({
   chat: { type: Object, required: true },
@@ -171,10 +173,17 @@ watch(
         >
           <span
             v-if="showAssignee && assignee.name"
-            class="text-n-slate-11 text-xs font-medium leading-3 py-0.5 px-0 inline-flex items-center truncate"
+            class="text-xs font-medium leading-3 py-0.5 px-0 inline-flex items-center gap-1 truncate"
           >
-            <fluent-icon icon="person" size="12" class="text-n-slate-11" />
-            {{ assignee.name }}
+            <!-- KLIMABAZAR F2: avatar agenta zamiast ikony + kolorowa nazwa -->
+            <Avatar
+              :name="assignee.name"
+              :src="assignee.thumbnail"
+              :size="16"
+            />
+            <span class="truncate" :class="agentColorClass(assignee.id)">
+              {{ assignee.name }}
+            </span>
           </span>
           <CardPriorityIcon
             :priority="chat.priority"
@@ -199,7 +208,8 @@ watch(
         v-else-if="lastMessageInChat"
         key="message-preview"
         :message="lastMessageInChat"
-        class="my-0 mx-2 leading-6 h-6 flex-1 min-w-0 text-sm"
+        multiline
+        class="my-0 mx-2 leading-6 min-h-6 flex-1 min-w-0 text-sm"
         :class="messagePreviewClass"
       />
       <p

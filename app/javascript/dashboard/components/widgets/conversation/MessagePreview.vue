@@ -18,6 +18,11 @@ export default {
       type: String,
       default: '',
     },
+    // KLIMABAZAR F2: 2 linie podgladu (domyslnie 1 linia - bez wplywu na inne uzycia)
+    multiline: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup() {
     const { getPlainText } = useMessageFormatter();
@@ -61,7 +66,14 @@ export default {
 </script>
 
 <template>
-  <div class="overflow-hidden text-ellipsis whitespace-nowrap">
+  <div
+    class="overflow-hidden"
+    :class="
+      multiline
+        ? 'line-clamp-2 whitespace-normal'
+        : 'text-ellipsis whitespace-nowrap'
+    "
+  >
     <template v-if="showMessageType">
       <fluent-icon
         v-if="isMessagePrivate"
