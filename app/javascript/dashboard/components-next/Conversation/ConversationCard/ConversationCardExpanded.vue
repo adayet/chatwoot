@@ -76,13 +76,14 @@ const selectedModel = computed({
     class="conversation relative cursor-pointer group grid gap-4 items-center px-3 h-12 border-b border-n-slate-3 hover:border-n-surface-1 hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
     :class="[
       {
-        'active animate-card-select bg-n-alpha-1': isActiveChat,
-        'selected bg-n-alpha-1': selected,
-        'hover:bg-n-alpha-2': !isActiveChat && !selected,
+        'active animate-card-select bg-n-slate-2': isActiveChat,
+        'selected bg-n-slate-2': selected,
+        'hover:bg-n-slate-3': !isActiveChat && !selected,
         'grid-cols-[minmax(0,2fr)_minmax(0,1fr)]': showLabelsSection,
         'grid-cols-[minmax(0,2fr)_max-content]': !showLabelsSection,
       },
-      isActiveChat ? 'border-l-2 border-l-n-brand' : handlingState.border,
+      handlingState.border,
+      isActiveChat ? 'border-l-2 border-l-n-brand' : '',
     ]"
     @click="$emit('click', $event)"
     @contextmenu="$emit('contextmenu', $event)"

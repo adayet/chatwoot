@@ -3,7 +3,8 @@ import { computed } from 'vue';
 // KLIMABAZAR F6: stan obslugi rozmowy -> kolor tla / lewy pasek / badge na liscie.
 // Mapowanie tokenow n-* (radix, auto dark-mode). Uzywane przez ConversationCard (legacy,
 // waski ekran) oraz ConversationCardExpanded (components-next, desktop).
-// Wariant C: wiersz neutralny, status niesie TYLKO lewy pasek + chip (bez pelnego tla).
+// Wariant C: wiersz neutralny, status niesie TYLKO prawy pasek + chip (bez pelnego tla).
+// Lewa krawedz zarezerwowana dla wskaznika "aktywny" (niebieski pasek), zeby sie nie mieszaly.
 // Kolory: Nowy = bez koloru, W toku = zolty (amber), Oczekujace = "pomaranczowy" (ruby -
 // brak orange w palecie n-*; pending i tak nie wystepuje bez botow), Rozwiazane = zielony (teal),
 // Uspione = neutralny (slate).
@@ -15,22 +16,22 @@ export const HANDLING_STATES = {
   },
   inProgress: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.IN_PROGRESS',
-    border: 'border-l-2 border-l-n-amber-9',
+    border: 'border-r-2 border-r-n-amber-9',
     badge: 'bg-n-amber-3 text-n-amber-11',
   },
   resolved: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.RESOLVED',
-    border: 'border-l-2 border-l-n-teal-9',
+    border: 'border-r-2 border-r-n-teal-9',
     badge: 'bg-n-teal-3 text-n-teal-11',
   },
   snoozed: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.SNOOZED',
-    border: 'border-l-2 border-l-n-slate-8',
+    border: 'border-r-2 border-r-n-slate-8',
     badge: 'bg-n-slate-3 text-n-slate-11',
   },
   pending: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.PENDING',
-    border: 'border-l-2 border-l-n-ruby-9',
+    border: 'border-r-2 border-r-n-ruby-9',
     badge: 'bg-n-ruby-3 text-n-ruby-11',
   },
 };
