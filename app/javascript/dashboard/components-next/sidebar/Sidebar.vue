@@ -789,9 +789,11 @@ const menuItems = computed(() => {
   ];
 });
 
-// KLIMABAZAR F3: ukryj moduly z nawigacji, ktorych nie da sie wylaczyc flaga konta (Captain).
-// Kampanie/Raporty wylacza sie natywnie flagami konta (campaigns/reports), wiec nie ma ich tu.
-const KLIMABAZAR_HIDDEN_SIDEBAR = ['Captain'];
+// KLIMABAZAR F3: ukryj moduly z nawigacji, ktorych nie da sie wylaczyc flaga konta.
+// UWAGA: flagi konta reports/campaigns NIE bramkuja tych pozycji w tej wersji Chatwoota
+// (trasy *_index maja meta bez featureFlag + shouldShow domyslnie true na self-hosted),
+// dlatego Raporty i Kampanie ukrywamy tu, a nie flaga.
+const KLIMABAZAR_HIDDEN_SIDEBAR = ['Captain', 'Reports', 'Campaigns'];
 const visibleMenuItems = computed(() =>
   menuItems.value.filter(item => !KLIMABAZAR_HIDDEN_SIDEBAR.includes(item.name))
 );
