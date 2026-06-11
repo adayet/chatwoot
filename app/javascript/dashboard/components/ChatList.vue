@@ -72,7 +72,8 @@ const store = useStore();
 
 const resolveAttributesModalRef = ref(null);
 
-const activeAssigneeTab = ref(wootConstants.ASSIGNEE_TYPE.ME);
+// KLIMABAZAR F1: domyslnie aktywna zakladka "Wszystkie"
+const activeAssigneeTab = ref(wootConstants.ASSIGNEE_TYPE.ALL);
 // KLIMABAZAR F6: domyslnie pokazuj wszystkie statusy (nie tylko otwarte)
 const activeStatus = ref(wootConstants.STATUS_TYPE.ALL);
 const activeSortBy = ref(wootConstants.SORT_BY_TYPE.LAST_ACTIVITY_AT_DESC);
@@ -173,16 +174,23 @@ const userPermissions = computed(() => {
   return getUserPermissions(currentUser.value, currentAccountId.value);
 });
 
+// KLIMABAZAR F1: kolejnosc zakladek Wszystkie -> Moje -> Nieprzypisane
+const ASSIGNEE_TAB_ORDER = ['all', 'me', 'unassigned'];
 const assigneeTabItems = computed(() => {
   return filterItemsByPermission(
     ASSIGNEE_TYPE_TAB_PERMISSIONS,
     userPermissions.value,
     item => item.permissions
-  ).map(({ key, count: countKey }) => ({
-    key,
-    name: t(`CHAT_LIST.ASSIGNEE_TYPE_TABS.${key}`),
-    count: conversationStats.value[countKey] || 0,
-  }));
+  )
+    .map(({ key, count: countKey }) => ({
+      key,
+      name: t(`CHAT_LIST.ASSIGNEE_TYPE_TABS.${key}`),
+      count: conversationStats.value[countKey] || 0,
+    }))
+    .sort(
+      (a, b) =>
+        ASSIGNEE_TAB_ORDER.indexOf(a.key) - ASSIGNEE_TAB_ORDER.indexOf(b.key)
+    );
 });
 
 const showAssigneeInConversationCard = computed(() => {
