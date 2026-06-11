@@ -253,12 +253,13 @@ watch(
             :conversation-id="chat.id"
           />
         </span>
-        <MessageCountBadge
-          v-if="showMessageCount"
-          :count="chat.chat_messages_count"
-          class="ltr:ml-auto rtl:mr-auto mt-1"
-        />
       </div>
+      <!-- KLIMABAZAR F8: liczba wiadomosci w prawym dolnym rogu karty -->
+      <MessageCountBadge
+        v-if="showMessageCount"
+        :count="chat.chat_messages_count"
+        class="absolute bottom-3 ltr:right-3 rtl:left-3"
+      />
       <CardLabels
         v-if="showLabelsSection"
         :conversation-labels="chat.labels"
