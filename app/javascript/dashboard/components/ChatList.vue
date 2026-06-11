@@ -316,7 +316,7 @@ function filterByAssigneeTab(conversations) {
 
 // KLIMABAZAR F7: etykiety ukrywane z domyslnej listy (rozmowy nadal dostepne w folderze po etykiecie,
 // w wyszukiwarce i filtrach). Reguly automatyzacji nadaja te etykiety po domenie nadawcy.
-const HIDDEN_LABELS = ['spam', 'kurier', 'marketplace'];
+const HIDDEN_LABELS = ['spam', 'kurier', 'marketplace', 'powiadomienia'];
 
 const conversationList = computed(() => {
   let localConversationList = [];

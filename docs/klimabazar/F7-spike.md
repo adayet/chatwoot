@@ -69,5 +69,9 @@ Gotowe listy domen do wklejenia:
 ### Do zweryfikowania w UI (1 rzecz)
 - Czy warunek `Email` ma operator **„zawiera"** (do dopasowania po domenie). Jeśli tylko „równa się" — trzeba per pełny adres albo zgłoś, dobierzemy obejście.
 
+### Kategorie do ukrywania (HIDDEN_LABELS w ChatList.vue — Droga B)
+`spam`, `kurier`, `marketplace`, **`powiadomienia`** (bounce/niedoręczone z mailer-daemon, newslettery/analytics np. base.com, targi warsawexpo, promo dostawców, generyczne no-reply/powiadomienia@).
+**`finanse`** (proformy/przelewy/przypomnienia o płatności) — etykieta + folder „Finanse", ale **NIE ukrywać** (wymaga reakcji).
+
 ### Zalecenie
 Najpierw przetestować 1–2 reguły na **lokalnym devie** (lub na bezpiecznej kategorii typu „spam"), zanim włączysz na żywych inboxach — ryzyko mislabel realnego klienta.
