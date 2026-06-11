@@ -3,18 +3,21 @@ import { computed } from 'vue';
 // KLIMABAZAR F6: stan obslugi rozmowy -> kolor tla / lewy pasek / badge na liscie.
 // Mapowanie tokenow n-* (radix, auto dark-mode). Uzywane przez ConversationCard (legacy,
 // waski ekran) oraz ConversationCardExpanded (components-next, desktop).
+// Kolory wg intuicji wlasciciela: Nowy = bez koloru, W toku = zolty (amber),
+// Oczekujace = "pomaranczowy" (ruby - brak orange w palecie n-*; pending i tak nie wystepuje bez botow),
+// Rozwiazane = zielony (teal), Uspione = neutralny (slate).
 export const HANDLING_STATES = {
   new: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.NEW',
-    tone: 'bg-n-amber-2',
-    border: 'border-l-2 border-l-n-amber-9',
-    badge: 'bg-n-amber-3 text-n-amber-11',
+    tone: '',
+    border: '',
+    badge: 'bg-n-slate-3 text-n-slate-11',
   },
   inProgress: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.IN_PROGRESS',
-    tone: 'bg-n-blue-2',
-    border: 'border-l-2 border-l-n-blue-9',
-    badge: 'bg-n-blue-3 text-n-blue-11',
+    tone: 'bg-n-amber-2',
+    border: 'border-l-2 border-l-n-amber-9',
+    badge: 'bg-n-amber-3 text-n-amber-11',
   },
   resolved: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.RESOLVED',
@@ -30,17 +33,14 @@ export const HANDLING_STATES = {
   },
   pending: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.PENDING',
-    tone: 'bg-n-iris-2',
-    border: 'border-l-2 border-l-n-iris-9',
-    badge: 'bg-n-iris-3 text-n-iris-11',
+    tone: 'bg-n-ruby-2',
+    border: 'border-l-2 border-l-n-ruby-9',
+    badge: 'bg-n-ruby-3 text-n-ruby-11',
   },
 };
 
-// getChat / getIsActiveChat / getSelected: gettery (() => props.x), by zachowac reaktywnosc.
-export function useConversationHandlingState(
-  getChat,
-  { isActiveChat = () => false, selected = () => false } = {}
-) {
+// getChat: getter (() => props.chat), by zachowac reaktywnosc.
+export function useConversationHandlingState(getChat) {
   const stateKey = computed(() => {
     const chat = getChat() || {};
     if (chat.status === 'resolved') return 'resolved';
@@ -53,11 +53,8 @@ export function useConversationHandlingState(
   });
 
   const handlingState = computed(() => HANDLING_STATES[stateKey.value]);
-
-  // tlo tylko gdy wiersz nie jest aktywny/zaznaczony (zeby nie nadpisywac tych stanow)
-  const toneClass = computed(() =>
-    isActiveChat() || selected() ? '' : handlingState.value.tone
-  );
+  // tlo stosujemy zawsze (rowniez gdy wiersz aktywny) - active wskazujemy ringiem, nie szarym tlem
+  const toneClass = computed(() => handlingState.value.tone);
 
   return { handlingState, toneClass };
 }

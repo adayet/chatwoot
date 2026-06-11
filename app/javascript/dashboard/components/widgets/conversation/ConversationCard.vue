@@ -67,10 +67,7 @@ const showLabelsSection = computed(() => {
 
 // KLIMABAZAR F6: kolorowanie wiersza + badge wg stanu obslugi (logika w composable)
 const { handlingState, toneClass: handlingToneClass } =
-  useConversationHandlingState(() => props.chat, {
-    isActiveChat: () => props.isActiveChat,
-    selected: () => props.selected,
-  });
+  useConversationHandlingState(() => props.chat);
 
 const messagePreviewClass = computed(() => {
   return [
@@ -114,9 +111,9 @@ watch(
     class="relative flex items-start flex-grow-0 flex-shrink-0 w-auto max-w-full py-0 cursor-pointer conversation border-b border-n-slate-3 hover:border-n-surface-1 hover:bg-n-alpha-1 dark:hover:bg-n-alpha-3 group hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
     :class="[
       {
-        'active animate-card-select bg-n-background !border-n-surface-1':
+        'active animate-card-select ring-2 ring-inset ring-n-brand':
           isActiveChat,
-        'selected bg-n-slate-2 !border-n-surface-1': selected,
+        'selected ring-1 ring-inset ring-n-slate-7': selected,
         'px-0': compact,
         'px-3': !compact,
       },
@@ -126,6 +123,13 @@ watch(
     @click="$emit('click', $event)"
     @contextmenu="$emit('contextmenu', $event)"
   >
+    <!-- KLIMABAZAR F6: pionowy chip stanu obslugi (miedzy lewa krawedzia a awatarem) -->
+    <span
+      class="self-stretch flex-shrink-0 flex items-center justify-center my-2 px-0.5 text-[10px] font-medium leading-none rounded [writing-mode:vertical-rl] rotate-180"
+      :class="handlingState.badge"
+    >
+      {{ $t(handlingState.labelKey) }}
+    </span>
     <div
       class="relative"
       @mouseenter="onThumbnailHover"
@@ -187,13 +191,6 @@ watch(
       >
         {{ currentContact.name }}
       </h4>
-      <!-- KLIMABAZAR F6: badge stanu obslugi -->
-      <span
-        class="inline-flex items-center mx-2 mt-1 px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 w-fit"
-        :class="handlingState.badge"
-      >
-        {{ $t(handlingState.labelKey) }}
-      </span>
       <VoiceCallStatus
         v-if="voiceCallData.status"
         key="voice-status-row"
