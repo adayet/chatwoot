@@ -17,7 +17,9 @@ Każda edycja w źródłach oznaczona `KLIMABAZAR` (grep-owalne).
 |---|---|---|---|---|
 | `.github/workflows/build-image.yml` | nowy workflow build→GHCR | własny obraz bez kompilacji na prod | niska (plik własny) | run zielony, obraz w GHCR |
 | `vite.config.ts` | env-gated `server.allowedHosts` (flaga `VITE_ALLOW_ALL_HOSTS`) | lokalny dev w Dockerze (Vite 5.4 blokuje Host `vite` → 403 → blank screen); no-op bez flagi, prod bez dev-servera | niska (no-op domyślnie) | `curl localhost:3001/vite-dev/@vite/client` = 200, dashboard renderuje |
-| (zmiany źródeł F6 — dojdą po implementacji) | — | — | — | — |
+| `ChatList.vue` (l.~76, ~365), `store/.../conversations/index.js` (l.~15) | domyślny filtr listy `OPEN` → `ALL` | F6: rozwiązane nie znikają z widoku | średnia (linie mogą się przesunąć — grep `KLIMABAZAR F6`) | wejście na listę → filtr „Wszystkie" |
+| `ConversationCard.vue` | computed `handlingState` + tło/lewy-pasek/badge wg stanu (nowy/w toku/rozwiązane/uśpione/oczekujące) | F6: widać status i odróżnia nieobsłużone od obsługiwanych | średnia (struktura karty) | 5 stanów ma kolor+badge; aktywny/zaznaczony wiersz bez konfliktu |
+| `i18n/locale/{en,pl}/chatlist.json` | blok `CHAT_LIST.HANDLING_STATE` (5 etykiet) | F6: etykiety badge; `pl` bo instalacja PL-only | niska | badge po polsku w UI |
 
 ## Cykl wciągania upstreamu
 1. `git fetch upstream --tags`
