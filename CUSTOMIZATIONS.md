@@ -16,7 +16,8 @@ Każda edycja w źródłach oznaczona `KLIMABAZAR` (grep-owalne).
 | Plik | Zmiana | Po co | Kruchość przy upgrade | Jak zweryfikować |
 |---|---|---|---|---|
 | `.github/workflows/build-image.yml` | nowy workflow build→GHCR | własny obraz bez kompilacji na prod | niska (plik własny) | run zielony, obraz w GHCR |
-| (zmiany źródeł — dojdą w kolejnych planach) | — | — | — | — |
+| `vite.config.ts` | env-gated `server.allowedHosts` (flaga `VITE_ALLOW_ALL_HOSTS`) | lokalny dev w Dockerze (Vite 5.4 blokuje Host `vite` → 403 → blank screen); no-op bez flagi, prod bez dev-servera | niska (no-op domyślnie) | `curl localhost:3001/vite-dev/@vite/client` = 200, dashboard renderuje |
+| (zmiany źródeł F6 — dojdą po implementacji) | — | — | — | — |
 
 ## Cykl wciągania upstreamu
 1. `git fetch upstream --tags`

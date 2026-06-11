@@ -45,6 +45,11 @@ if (isLibraryMode) {
 
 export default defineConfig({
   plugins: plugins,
+  // KLIMABAZAR (tylko lokalny dev w Dockerze): proxy vite_ruby forwarduje Host kontenera
+  // (np. "vite"), który Vite 5.4 blokuje (allowedHosts → 403). Flaga w override luzuje to
+  // wyłącznie lokalnie; bez env to {} = zero wpływu na upstream/prod (prod nie odpala dev-servera).
+  server:
+    process.env.VITE_ALLOW_ALL_HOSTS === 'true' ? { allowedHosts: true } : {},
   css: {
     preprocessorOptions: {
       scss: {
