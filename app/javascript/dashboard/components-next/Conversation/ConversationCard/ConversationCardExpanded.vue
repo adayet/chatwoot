@@ -76,18 +76,24 @@ const selectedModel = computed({
     class="conversation relative cursor-pointer group grid gap-4 items-center px-3 h-12 border-b border-n-slate-3 hover:border-n-surface-1 hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
     :class="[
       {
-        'active animate-card-select bg-n-slate-2': isActiveChat,
-        'selected bg-n-slate-2': selected,
-        'hover:bg-n-slate-3': !isActiveChat && !selected,
+        'active animate-card-select bg-n-slate-3': isActiveChat,
+        'selected bg-n-slate-3': selected,
+        'hover:bg-n-slate-2': !isActiveChat && !selected,
         'grid-cols-[minmax(0,2fr)_minmax(0,1fr)]': showLabelsSection,
         'grid-cols-[minmax(0,2fr)_max-content]': !showLabelsSection,
       },
-      handlingState.border,
-      isActiveChat ? 'border-l-2 border-l-n-brand' : '',
+      isActiveChat ? 'border-l-2 !border-l-n-brand' : '',
     ]"
     @click="$emit('click', $event)"
     @contextmenu="$emit('contextmenu', $event)"
   >
+    <!-- KLIMABAZAR F6: pasek statusu (prawa krawedz) jako osobny element -->
+    <span
+      v-if="handlingState.bar"
+      class="absolute inset-y-0 ltr:right-0 rtl:left-0 w-0.5 z-[1]"
+      :class="handlingState.bar"
+      aria-hidden="true"
+    />
     <!-- LEFT SECTION -->
     <div class="flex items-center gap-2 min-w-0 flex-1">
       <div class="flex items-center justify-center flex-shrink-0" @click.stop>

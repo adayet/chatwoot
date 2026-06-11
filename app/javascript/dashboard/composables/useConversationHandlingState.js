@@ -1,37 +1,39 @@
 import { computed } from 'vue';
 
-// KLIMABAZAR F6: stan obslugi rozmowy -> kolor tla / lewy pasek / badge na liscie.
-// Mapowanie tokenow n-* (radix, auto dark-mode). Uzywane przez ConversationCard (legacy,
-// waski ekran) oraz ConversationCardExpanded (components-next, desktop).
+// KLIMABAZAR F6: stan obslugi rozmowy -> pasek statusu + chip na liscie.
+// Uzywane przez ConversationCard (legacy/domyslny) oraz ConversationCardExpanded (components-next).
 // Wariant C: wiersz neutralny, status niesie TYLKO prawy pasek + chip (bez pelnego tla).
+// Pasek to OSOBNY element absolutny (klasa `bar` = tlo), NIE CSS border - bo Chatwoot ma regule
+// [&>div:has(+ div .active)>*]:!border-n-surface-1, ktora z !important + wyzsza specyficznoscia
+// szarzy wszystkie krawedzie wiersza nad aktywnym (zlanie dzielnika) i zabijala pasek-border.
 // Lewa krawedz zarezerwowana dla wskaznika "aktywny" (niebieski pasek), zeby sie nie mieszaly.
-// Kolory: Nowy = bez koloru, W toku = zolty (amber), Oczekujace = "pomaranczowy" (ruby -
-// brak orange w palecie n-*; pending i tak nie wystepuje bez botow), Rozwiazane = zielony (teal),
+// Kolory: Nowy = bez koloru, W toku = zolty (amber), Oczekujace = "pomaranczowy" (ruby - brak
+// orange w palecie n-*; pending i tak nie wystepuje bez botow), Rozwiazane = zielony (teal),
 // Uspione = neutralny (slate).
 export const HANDLING_STATES = {
   new: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.NEW',
-    border: '',
+    bar: '',
     badge: 'bg-n-slate-3 text-n-slate-11',
   },
   inProgress: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.IN_PROGRESS',
-    border: 'border-r-2 border-r-n-amber-9',
+    bar: 'bg-n-amber-9',
     badge: 'bg-n-amber-3 text-n-amber-11',
   },
   resolved: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.RESOLVED',
-    border: 'border-r-2 border-r-n-teal-9',
+    bar: 'bg-n-teal-9',
     badge: 'bg-n-teal-3 text-n-teal-11',
   },
   snoozed: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.SNOOZED',
-    border: 'border-r-2 border-r-n-slate-8',
+    bar: 'bg-n-slate-8',
     badge: 'bg-n-slate-3 text-n-slate-11',
   },
   pending: {
     labelKey: 'CHAT_LIST.HANDLING_STATE.PENDING',
-    border: 'border-r-2 border-r-n-ruby-9',
+    bar: 'bg-n-ruby-9',
     badge: 'bg-n-ruby-3 text-n-ruby-11',
   },
 };

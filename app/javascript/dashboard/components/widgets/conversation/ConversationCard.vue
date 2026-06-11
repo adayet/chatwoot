@@ -107,20 +107,26 @@ watch(
 
 <template>
   <div
-    class="relative flex items-start flex-grow-0 flex-shrink-0 w-auto max-w-full py-0 cursor-pointer conversation border-b border-n-slate-3 hover:border-n-surface-1 hover:bg-n-slate-3 group hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
+    class="relative flex items-start flex-grow-0 flex-shrink-0 w-auto max-w-full py-0 cursor-pointer conversation border-b border-n-slate-3 hover:border-n-surface-1 hover:bg-n-slate-2 group hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
     :class="[
       {
-        'active animate-card-select bg-n-slate-2': isActiveChat,
-        'selected bg-n-slate-2': selected,
+        'active animate-card-select bg-n-slate-3': isActiveChat,
+        'selected bg-n-slate-3': selected,
         'px-0': compact,
         'px-3': !compact,
       },
-      handlingState.border,
-      isActiveChat ? 'border-l-2 border-l-n-brand' : '',
+      isActiveChat ? 'border-l-2 !border-l-n-brand' : '',
     ]"
     @click="$emit('click', $event)"
     @contextmenu="$emit('contextmenu', $event)"
   >
+    <!-- KLIMABAZAR F6: pasek statusu (prawa krawedz) jako osobny element, odporny na regule border-surface -->
+    <span
+      v-if="handlingState.bar"
+      class="absolute inset-y-0 ltr:right-0 rtl:left-0 w-0.5 z-[1]"
+      :class="handlingState.bar"
+      aria-hidden="true"
+    />
     <div
       class="relative"
       @mouseenter="onThumbnailHover"
