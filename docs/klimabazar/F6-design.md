@@ -26,7 +26,9 @@ Właściciel: „Jak oznacza się wątek jako rozwiązany, a klient ponownie odp
 - Dotyczy wszystkich inboxów (też allegro@/erli@). Listy marketplace będą dłuższe — świadomy wybór („nic nie znika"); użytkownik może zawęzić filtrem.
 
 ### Zmiana 2 — kolorowanie wiersza wg „stanu obsługi" + badge statusu
-Plik: `app/javascript/dashboard/components/widgets/conversation/ConversationCard.vue` (legacy — wciąż renderowany przez listę; `components-next/` dotyczy bąbelków wiadomości, nie karty listy).
+> **KOREKTA (po implementacji):** lista renderuje **DWIE** karty przez `ConversationItem.vue`: `components-next/.../ConversationCardExpanded.vue` na desktopie (lg + expanded layout) ORAZ legacy `components/widgets/conversation/ConversationCard.vue` na wąskim ekranie. Pierwotne założenie „tylko legacy" było błędne (zweryfikowane w przeglądarce: desktop używa expanded). Logikę wydzielono do composable `useConversationHandlingState.js` i użyto w **obu** kartach.
+
+Pliki: `composables/useConversationHandlingState.js` (logika) + `ConversationCard.vue` (legacy) + `ConversationCardExpanded.vue` (components-next).
 
 Dane są na froncie (serializer `_conversation.json.jbuilder`): `chat.status`, `chat.meta.assignee` (+ `assignee_type`), `chat.first_reply_created_at`.
 
