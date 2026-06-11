@@ -12,6 +12,8 @@ class ConversationFinder
     'waiting_since_asc' => %w[sort_on_waiting_since asc],
     'waiting_since_desc' => %w[sort_on_waiting_since desc],
     'priority_desc_created_at_asc' => %w[sort_on_priority_created_at desc],
+    'last_message_at_asc' => %w[sort_on_last_message_at asc], # KLIMABAZAR F9
+    'last_message_at_desc' => %w[sort_on_last_message_at desc], # KLIMABAZAR F9
 
     # To be removed in v3.5.0
     'latest' => %w[sort_on_last_activity_at desc],
@@ -204,7 +206,8 @@ class ConversationFinder
   def conversations
     @conversations = conversations_base_query
 
-    sort_by, sort_order = SORT_OPTIONS[params[:sort_by]] || SORT_OPTIONS['last_activity_at_desc']
+    # KLIMABAZAR F9: domyslny sort listy = ostatnia realna wiadomosc (zamiast last_activity_at)
+    sort_by, sort_order = SORT_OPTIONS[params[:sort_by]] || SORT_OPTIONS['last_message_at_desc']
     @conversations = @conversations.send(sort_by, sort_order)
 
     if params[:updated_within].present?
