@@ -12,7 +12,8 @@ const state = {
   allConversations: [],
   attachments: {},
   listLoadingStatus: true,
-  chatStatusFilter: wootConstants.STATUS_TYPE.OPEN,
+  // KLIMABAZAR F6: domyslny filtr listy = Wszystkie
+  chatStatusFilter: wootConstants.STATUS_TYPE.ALL,
   chatSortFilter: wootConstants.SORT_BY_TYPE.LATEST,
   currentInbox: null,
   selectedChatId: null,
