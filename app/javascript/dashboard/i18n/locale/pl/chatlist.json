@@ -36,6 +36,13 @@
         "TEXT": "Wszystkie"
       }
     },
+    "HANDLING_STATE": {
+      "NEW": "Nowy",
+      "IN_PROGRESS": "W toku",
+      "RESOLVED": "Rozwiązane",
+      "SNOOZED": "Uśpione",
+      "PENDING": "Oczekujące"
+    },
     "VIEW_FILTER": "Widok",
     "SORT_TOOLTIP_LABEL": "Sortuj rozmowy",
     "CHAT_SORT": {

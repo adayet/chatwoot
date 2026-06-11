@@ -36,6 +36,13 @@
         "TEXT": "All"
       }
     },
+    "HANDLING_STATE": {
+      "NEW": "New",
+      "IN_PROGRESS": "In progress",
+      "RESOLVED": "Resolved",
+      "SNOOZED": "Snoozed",
+      "PENDING": "Pending"
+    },
     "VIEW_FILTER": "View",
     "SORT_TOOLTIP_LABEL": "Sort conversations",
     "CHAT_SORT": {
