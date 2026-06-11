@@ -12,16 +12,15 @@ Zasada **sidecar-first**: co da się zrobić jako sidecar / feature-flag / custo
 | **F3** | Ukrycie modułów: Captain, Kampanie, (ew. Raporty) | Najpierw feature-flagi/config; residuum → front | Niskie | **Spike:** co wyłączysz w Super Admin → Features, a co trzeba ukryć w nawigacji |
 | **F4** | Integracja **wFirma** (po NIP: faktury, suma sprzedaży, zaległości) | **Sidecar** (FastAPI) + NIP jako custom attribute (natywnie) + wyświetlanie (patrz F5) | Backend: zero forka | **Zależność: dostęp do API wFirma** (token). Największy item |
 | **F5** | BaseLinker + wFirma jako **natywne sekcje w prawym panelu Kontakt** (zamiast iframe Dashboard App) | Fork — front (Vue) | Średnie (panel kontaktu) | Wspólna infra dla BL i wFirma — budujemy raz. Dane dalej z sidecarów |
-| **F6** | Wątki „rozwiązane": nie znikają, wyszarzone, **wracają po odpowiedzi klienta** | F6a back/config + F6b front | F6a: **może bez forka** (ustawienie); F6b: średnie | **Spike gotowy:** `F6-resolved-conversations-spike.md` |
+| **F6** | ✅ **ZROBIONE** — Wątki „rozwiązane": nie znikają (domyślny filtr=Wszystkie), status na pasku+chip, wracają po odpowiedzi (reopen działa natywnie) | F6b front | — | Spec/plan: `F6-design.md`, `F6-plan.md`. Deploy po 16:00 (sha `8d0eade16`) |
 | **F7** | Foldery/filtrowanie spamu z marketplace (Allegro, ERLI…) | Najpierw natywne Custom Views / Inboxy; residuum → automatyzacje | Niskie–średnie | **Spike:** jak wpadają powiadomienia marketplace (osobne inboxy są już: allegro@, erli@) |
 
-## Proponowana kolejność
-1. **F6** (wybór właściciela — spike gotowy) — resolved behavior
-2. **F1** — reorder zakładek
-3. **F3** — ukrycie modułów
-4. **F2** — kolory agentów + 2 linijki
-5. **F5 + F4** — natywny panel Kontakt + wFirma
-6. **F7** — foldery marketplace
+## Kolejność (wybór właściciela 2026-06-11)
+1. ~~**F6** — resolved behavior~~ ✅ ZROBIONE (deploy po 16:00)
+2. **F1** — reorder zakładek ← następny
+3. **F2** — kolory agentów + 2 linijki
+4. **F7** — foldery/spam marketplace
+- Później (nieuszeregowane): F3 (ukrycie modułów), F5+F4 (panel Kontakt + wFirma)
 
 ## Co realnie dotyka forka
 Tylko F1, F2, F5 oraz F6b. F4 (backend), F3 i F7 (w dużej części) oraz prawdopodobnie F6a idą **bez forka** → bez konfliktów przy aktualizacjach Chatwoota.
