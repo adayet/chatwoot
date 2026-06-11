@@ -13,8 +13,6 @@ import VoiceCallStatus from './VoiceCallStatus.vue';
 import Checkbox from 'dashboard/components-next/checkbox/Checkbox.vue';
 // KLIMABAZAR F6
 import { useConversationHandlingState } from 'dashboard/composables/useConversationHandlingState';
-// KLIMABAZAR F2
-import { agentColorClass } from 'dashboard/helper/agentColor';
 
 const props = defineProps({
   chat: { type: Object, required: true },
@@ -54,11 +52,8 @@ const voiceCallData = computed(() => {
 });
 
 const showMetaSection = computed(() => {
-  return (
-    props.showInboxName ||
-    (props.showAssignee && props.assignee.name) ||
-    props.chat.priority
-  );
+  // KLIMABAZAR F2: assignee przeniesiony do prawego gornego rogu, nie trzyma juz tego rzedu
+  return props.showInboxName || props.chat.priority;
 });
 
 const hasSlaPolicyId = computed(() => props.chat?.sla_policy_id);
@@ -171,20 +166,6 @@ watch(
             'flex-1 justify-between': !showInboxName,
           }"
         >
-          <span
-            v-if="showAssignee && assignee.name"
-            class="text-xs font-medium leading-3 py-0.5 px-0 inline-flex items-center gap-1 truncate"
-          >
-            <!-- KLIMABAZAR F2: avatar agenta zamiast ikony + kolorowa nazwa -->
-            <Avatar
-              :name="assignee.name"
-              :src="assignee.thumbnail"
-              :size="16"
-            />
-            <span class="truncate" :class="agentColorClass(assignee.id)">
-              {{ assignee.name }}
-            </span>
-          </span>
           <CardPriorityIcon
             :priority="chat.priority"
             class="flex-shrink-0 !size-3.5"
@@ -231,13 +212,31 @@ watch(
         class="absolute flex flex-col items-end gap-1 ltr:right-3 rtl:left-3"
         :class="showMetaSection ? 'top-3' : 'top-2'"
       >
-        <!-- KLIMABAZAR F6: chip stanu w prawym gornym rogu (linia agenta) -->
-        <span
-          class="inline-flex items-center px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 whitespace-nowrap"
-          :class="handlingState.badge"
-        >
-          {{ $t(handlingState.labelKey) }}
-        </span>
+        <!-- KLIMABAZAR F6/F2: agent (avatar+nazwa) • chip stanu, w prawym gornym rogu -->
+        <div class="flex items-center gap-1.5 min-w-0">
+          <span
+            v-if="showAssignee && assignee.name"
+            class="inline-flex items-center gap-1 text-xxs font-medium text-n-slate-11 min-w-0"
+          >
+            <Avatar
+              :name="assignee.name"
+              :src="assignee.thumbnail"
+              :size="14"
+            />
+            <span class="truncate max-w-20">{{ assignee.name }}</span>
+          </span>
+          <span
+            v-if="showAssignee && assignee.name"
+            class="size-1 rounded-full bg-n-slate-7 flex-shrink-0"
+            aria-hidden="true"
+          />
+          <span
+            class="inline-flex items-center px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 whitespace-nowrap flex-shrink-0"
+            :class="handlingState.badge"
+          >
+            {{ $t(handlingState.labelKey) }}
+          </span>
+        </div>
         <span class="ml-auto font-normal leading-4 text-xxs">
           <TimeAgo
             :last-activity-timestamp="chat.timestamp"
