@@ -14,14 +14,14 @@ Zasada **sidecar-first**: co da się zrobić jako sidecar / feature-flag / custo
 | **F5** | BaseLinker + wFirma jako **natywne sekcje w prawym panelu Kontakt** (zamiast iframe Dashboard App) | Fork — front (Vue) | Średnie (panel kontaktu) | Wspólna infra dla BL i wFirma — budujemy raz. Dane dalej z sidecarów |
 | **F6** | ✅ **ZROBIONE** — Wątki „rozwiązane": nie znikają (domyślny filtr=Wszystkie), status na pasku+chip, wracają po odpowiedzi (reopen działa natywnie) | F6b front | — | Spec/plan: `F6-design.md`, `F6-plan.md`. Deploy po 16:00 (sha `8d0eade16`) |
 | **F7** | ✅ **ZROBIONE** — Foldery/filtrowanie marketplace+spam | **Natywnie** (właściciel): reguły automatyzacji `email`→`add_label` + foldery/widoki etykiet. **+ mały fork (Droga B):** domyślna lista wyklucza etykietę `spam` (znika z „Rozmowy", zostaje w `#spam`) | niska | `F7-spike.md`; fork w `ChatList.vue` (`HIDDEN_LABELS`) |
-| **F8** | ✅ **ZROBIONE (czeka na deploy)** — Karta rozmowy: badge = liczba realnych wiadomości w wątku (zamiast nieprzeczytanych); data = czas ostatniej realnej wiadomości (zamiast `last_activity_at`) | Fork — backend (serializer listy, 2 pola przez scope `Message.chat`) + front (obie karty + nowy `MessageCountBadge`) | Średnie (karty + jbuilder) | Spec/plan: `F8-card-meta-design.md` / `F8-card-meta-plan.md`. Backend → deploy przez CI |
+| **F8** | ✅ **WDROŻONE (2026-06-11, `56b1b1734`)** — Karta rozmowy: badge = liczba realnych wiadomości w wątku (zamiast nieprzeczytanych); data = czas ostatniej realnej wiadomości (zamiast `last_activity_at`) | Fork — backend (serializer listy, 2 pola przez scope `Message.chat`) + front (obie karty + nowy `MessageCountBadge`) | Średnie (karty + jbuilder) | Spec/plan: `F8-card-meta-design.md` / `F8-card-meta-plan.md`. Backend → deploy przez CI |
 
 ## Postęp (2026-06-11)
-Zrobione (czeka na deploy po 16:00, obraz `c85f972cf`): ~~**F6**~~ ✅, ~~**F1**~~ ✅, ~~**F2**~~ ✅, ~~**F7**~~ ✅.
+**WDROŻONE NA PROD 2026-06-11** (obraz `56b1b1734`, deploy po 16:00): ~~**F1**~~ ✅, ~~**F2**~~ ✅, ~~**F3**~~ ✅, ~~**F6**~~ ✅, ~~**F7**~~ ✅ (front, Droga B), ~~**F8**~~ ✅. Backup bazy `2026-06-11-pre-F8.dump`. Brak migracji.
 
-Zrobione cd.: ~~**F3**~~ ✅ — Captain ukryty frontem (`Sidebar.vue`, `KLIMABAZAR_HIDDEN_SIDEBAR`); Kampanie/Raporty = flaga konta `campaigns`/`reports` (Super Admin → Features, bez forka).
-
-Zrobione cd.: ~~**F8**~~ ✅ — karta rozmowy: badge = liczba realnych wiadomości (scope `Message.chat`), data = ostatnia realna wiadomość. Backend (serializer) + front (obie karty). Czeka na build CI + deploy.
+- **F3** — Captain ukryty frontem (`Sidebar.vue`, `KLIMABAZAR_HIDDEN_SIDEBAR`); Kampanie/Raporty = flaga konta `campaigns`/`reports` (Super Admin → Features, bez forka; Raporty wyłączone na prod).
+- **F8** — karta rozmowy: badge = liczba realnych wiadomości (scope `Message.chat`, gdy >1), data = czas ostatniej realnej wiadomości (single `TimeAgo`). Backend (serializer, 2 pola) + front (obie karty + `MessageCountBadge`).
+- **F7-raporty** (backend, wykluczanie szumu z metryk) — zaimplementowane i **cofnięte** na życzenie właściciela (zrezygnacja ze statystyk; Raporty ukryte flagą). Plan zostaje: `F7-reports-plan.md`.
 
 Zostało:
 - **F4** — integracja wFirma (sidecar; zależy od dostępu do API wFirma)
