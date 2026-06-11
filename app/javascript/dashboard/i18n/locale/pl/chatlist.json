@@ -60,6 +60,12 @@
       }
     },
     "SORT_ORDER_ITEMS": {
+      "last_message_at_desc": {
+        "TEXT": "Ostatnia wiadomość: od najnowszych"
+      },
+      "last_message_at_asc": {
+        "TEXT": "Ostatnia wiadomość: od najstarszych"
+      },
       "last_activity_at_asc": {
         "TEXT": "Ostatnia aktywność: od najstarszych"
       },
