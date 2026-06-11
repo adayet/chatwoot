@@ -11,6 +11,8 @@ import UnreadBadge from 'dashboard/components-next/Conversation/ConversationCard
 import SLACardLabel from './components/SLACardLabel.vue';
 import VoiceCallStatus from './VoiceCallStatus.vue';
 import Checkbox from 'dashboard/components-next/checkbox/Checkbox.vue';
+// KLIMABAZAR F6
+import { useConversationHandlingState } from 'dashboard/composables/useConversationHandlingState';
 
 const props = defineProps({
   chat: { type: Object, required: true },
@@ -63,57 +65,12 @@ const showLabelsSection = computed(() => {
   return props.chat.labels?.length > 0 || hasSlaPolicyId.value;
 });
 
-// KLIMABAZAR F6: kolorowanie wiersza + badge wg stanu obslugi
-const HANDLING_STATES = {
-  new: {
-    labelKey: 'CHAT_LIST.HANDLING_STATE.NEW',
-    tone: 'bg-n-amber-2',
-    border: 'border-l-2 border-l-n-amber-9',
-    badge: 'bg-n-amber-3 text-n-amber-11',
-  },
-  inProgress: {
-    labelKey: 'CHAT_LIST.HANDLING_STATE.IN_PROGRESS',
-    tone: 'bg-n-blue-2',
-    border: 'border-l-2 border-l-n-blue-9',
-    badge: 'bg-n-blue-3 text-n-blue-11',
-  },
-  resolved: {
-    labelKey: 'CHAT_LIST.HANDLING_STATE.RESOLVED',
-    tone: 'bg-n-teal-2',
-    border: 'border-l-2 border-l-n-teal-9',
-    badge: 'bg-n-teal-3 text-n-teal-11',
-  },
-  snoozed: {
-    labelKey: 'CHAT_LIST.HANDLING_STATE.SNOOZED',
-    tone: 'bg-n-slate-2',
-    border: 'border-l-2 border-l-n-slate-8',
-    badge: 'bg-n-slate-3 text-n-slate-11',
-  },
-  pending: {
-    labelKey: 'CHAT_LIST.HANDLING_STATE.PENDING',
-    tone: 'bg-n-iris-2',
-    border: 'border-l-2 border-l-n-iris-9',
-    badge: 'bg-n-iris-3 text-n-iris-11',
-  },
-};
-
-const handlingStateKey = computed(() => {
-  const { status } = props.chat;
-  if (status === 'resolved') return 'resolved';
-  if (status === 'snoozed') return 'snoozed';
-  if (status === 'pending') return 'pending';
-  // open: rozroznienie nieobsluzony vs w toku
-  const hasAssignee = Boolean(props.chat.meta?.assignee?.id);
-  const hasReplied = Number(props.chat.first_reply_created_at) > 0;
-  return hasAssignee || hasReplied ? 'inProgress' : 'new';
-});
-
-const handlingState = computed(() => HANDLING_STATES[handlingStateKey.value]);
-
-// tlo tylko gdy wiersz nie jest aktywny/zaznaczony (zeby nie nadpisywac tych stanow)
-const handlingToneClass = computed(() =>
-  props.isActiveChat || props.selected ? '' : handlingState.value.tone
-);
+// KLIMABAZAR F6: kolorowanie wiersza + badge wg stanu obslugi (logika w composable)
+const { handlingState, toneClass: handlingToneClass } =
+  useConversationHandlingState(() => props.chat, {
+    isActiveChat: () => props.isActiveChat,
+    selected: () => props.selected,
+  });
 
 const messagePreviewClass = computed(() => {
   return [

@@ -12,6 +12,8 @@ import SLACardLabel from 'dashboard/components-next/Conversation/Sla/SLACardLabe
 import CardStatusIcon from './CardStatusIcon.vue';
 import Checkbox from 'dashboard/components-next/checkbox/Checkbox.vue';
 import Icon from 'dashboard/components-next/icon/Icon.vue';
+// KLIMABAZAR F6
+import { useConversationHandlingState } from 'dashboard/composables/useConversationHandlingState';
 
 const props = defineProps({
   chat: { type: Object, required: true },
@@ -34,6 +36,13 @@ const emit = defineEmits([
 
 const lastMessageInChat = computed(() => getLastMessage(props.chat));
 const showLabelsSection = computed(() => props.chat.labels?.length > 0);
+
+// KLIMABAZAR F6: kolor tla / lewy pasek / badge wg stanu obslugi
+const { handlingState, toneClass: handlingToneClass } =
+  useConversationHandlingState(() => props.chat, {
+    isActiveChat: () => props.isActiveChat,
+    selected: () => props.selected,
+  });
 
 const voiceCallData = computed(() => {
   const last = lastMessageInChat.value;
@@ -69,14 +78,18 @@ const selectedModel = computed({
 <template>
   <div
     class="conversation relative cursor-pointer group grid gap-4 items-center px-3 h-12 border-b border-n-slate-3 hover:border-n-surface-1 hover:z-[1] before:content-[none] before:absolute before:-top-px before:inset-x-0 before:h-px before:bg-n-surface-1 before:pointer-events-none hover:before:content-['']"
-    :class="{
-      'active animate-card-select bg-n-alpha-1 dark:bg-n-alpha-3 !border-n-surface-1':
-        isActiveChat,
-      'selected bg-n-slate-2 dark:bg-n-slate-3 !border-n-surface-1': selected,
-      'hover:bg-n-alpha-1': !isActiveChat && !selected,
-      'grid-cols-[minmax(0,2fr)_minmax(0,1fr)]': showLabelsSection,
-      'grid-cols-[minmax(0,2fr)_max-content]': !showLabelsSection,
-    }"
+    :class="[
+      {
+        'active animate-card-select bg-n-alpha-1 dark:bg-n-alpha-3 !border-n-surface-1':
+          isActiveChat,
+        'selected bg-n-slate-2 dark:bg-n-slate-3 !border-n-surface-1': selected,
+        'hover:bg-n-alpha-1': !isActiveChat && !selected,
+        'grid-cols-[minmax(0,2fr)_minmax(0,1fr)]': showLabelsSection,
+        'grid-cols-[minmax(0,2fr)_max-content]': !showLabelsSection,
+      },
+      handlingState.border,
+      handlingToneClass,
+    ]"
     @click="$emit('click', $event)"
     @contextmenu="$emit('contextmenu', $event)"
   >
@@ -167,6 +180,13 @@ const selectedModel = computed({
 
     <!-- RIGHT SECTION -->
     <div class="flex items-center justify-end gap-1.5 flex-shrink-0">
+      <!-- KLIMABAZAR F6: badge stanu obslugi -->
+      <span
+        class="inline-flex items-center px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 whitespace-nowrap flex-shrink-0"
+        :class="handlingState.badge"
+      >
+        {{ $t(handlingState.labelKey) }}
+      </span>
       <div v-if="showLabelsSection" class="min-w-0 w-full">
         <CardLabels
           :labels="chat.labels"
