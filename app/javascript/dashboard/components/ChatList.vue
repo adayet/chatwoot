@@ -881,7 +881,7 @@ const buildAutomationPrefill = conversation => {
   conditions[conditions.length - 1].query_operator = null;
   return {
     name: null,
-    description: null,
+    description: 'Powtarzalne wiadomości', // KLIMABAZAR F-auto: staly opis
     event_name: 'conversation_created',
     conditions,
     actions: [{ action_name: 'add_label', action_params: [] }],
