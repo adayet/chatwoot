@@ -6,7 +6,8 @@ import MessagePreview from './MessagePreview.vue';
 import InboxName from '../InboxName.vue';
 import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
-import CardPriorityIcon from 'dashboard/components-next/Conversation/ConversationCard/CardPriorityIcon.vue';
+// KLIMABAZAR F-prio: priorytet jako kolorowy chip w prawym gornym rogu (zamiast chowanej ikony)
+import Icon from 'dashboard/components-next/icon/Icon.vue';
 // KLIMABAZAR F8: licznik wiadomosci zamiast nieprzeczytanych
 import MessageCountBadge from 'dashboard/components-next/Conversation/ConversationCard/MessageCountBadge.vue';
 import SLACardLabel from './components/SLACardLabel.vue';
@@ -54,7 +55,8 @@ const voiceCallData = computed(() => {
 
 const showMetaSection = computed(() => {
   // KLIMABAZAR F2: assignee przeniesiony do prawego gornego rogu, nie trzyma juz tego rzedu
-  return props.showInboxName || props.chat.priority;
+  // KLIMABAZAR F-prio: priorytet wyszedl z tego rzedu do chipa w prawym gornym rogu
+  return props.showInboxName;
 });
 
 const hasSlaPolicyId = computed(() => props.chat?.sla_policy_id);
@@ -65,6 +67,32 @@ const showLabelsSection = computed(() => {
 
 // KLIMABAZAR F6: stan obslugi -> lewy pasek + chip (wariant C, bez pelnego tla)
 const { handlingState } = useConversationHandlingState(() => props.chat);
+
+// KLIMABAZAR F-prio: priorytet jako kolorowy chip (wariant C, obok chipa stanu).
+// Kolory spojne z chipami F6 (useConversationHandlingState), etykiety z istniejacych kluczy i18n.
+const PRIORITY_META = {
+  urgent: {
+    labelKey: 'CONVERSATION.PRIORITY.OPTIONS.URGENT',
+    badge: 'bg-n-ruby-3 text-n-ruby-11',
+    icon: 'i-woot-priority-urgent',
+  },
+  high: {
+    labelKey: 'CONVERSATION.PRIORITY.OPTIONS.HIGH',
+    badge: 'bg-n-amber-3 text-n-amber-11',
+    icon: 'i-woot-priority-high',
+  },
+  medium: {
+    labelKey: 'CONVERSATION.PRIORITY.OPTIONS.MEDIUM',
+    badge: 'bg-n-blue-3 text-n-blue-11',
+    icon: 'i-woot-priority-medium',
+  },
+  low: {
+    labelKey: 'CONVERSATION.PRIORITY.OPTIONS.LOW',
+    badge: 'bg-n-slate-3 text-n-slate-11',
+    icon: 'i-woot-priority-low',
+  },
+};
+const priorityChip = computed(() => PRIORITY_META[props.chat.priority] || null);
 
 // KLIMABAZAR F8: badge liczby wiadomosci pokazujemy gdy w watku jest >1 wiadomosc
 const showMessageCount = computed(
@@ -166,17 +194,6 @@ watch(
         }"
       >
         <InboxName v-if="showInboxName" :inbox="inbox" class="flex-1 min-w-0" />
-        <div
-          class="flex items-baseline gap-2 flex-shrink-0"
-          :class="{
-            'flex-1 justify-between': !showInboxName,
-          }"
-        >
-          <CardPriorityIcon
-            :priority="chat.priority"
-            class="flex-shrink-0 !size-3.5"
-          />
-        </div>
       </div>
       <h4
         class="conversation--user text-sm my-0 mx-2 capitalize pt-0.5 text-ellipsis overflow-hidden whitespace-nowrap flex-1 min-w-0 ltr:pr-16 rtl:pl-16 text-n-slate-12"
@@ -236,6 +253,15 @@ watch(
             class="size-1 rounded-full bg-n-slate-7 flex-shrink-0"
             aria-hidden="true"
           />
+          <!-- KLIMABAZAR F-prio: chip priorytetu obok chipa stanu -->
+          <span
+            v-if="priorityChip"
+            class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 whitespace-nowrap flex-shrink-0"
+            :class="priorityChip.badge"
+          >
+            <Icon :icon="priorityChip.icon" class="size-3" />
+            {{ $t(priorityChip.labelKey) }}
+          </span>
           <span
             class="inline-flex items-center px-1.5 py-0.5 rounded-md text-xxs font-medium leading-3 whitespace-nowrap flex-shrink-0"
             :class="handlingState.badge"
