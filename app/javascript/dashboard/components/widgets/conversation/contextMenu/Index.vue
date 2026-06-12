@@ -24,6 +24,7 @@ const MENU = {
   DELETE: 'delete',
   OPEN_NEW_TAB: 'open-new-tab',
   COPY_LINK: 'copy-link',
+  ADD_AUTOMATION: 'add-automation', // KLIMABAZAR F-auto
 };
 
 export default {
@@ -76,6 +77,7 @@ export default {
     'assignLabel',
     'removeLabel',
     'deleteConversation',
+    'addAutomation',
     'close',
   ],
   setup() {
@@ -174,6 +176,12 @@ export default {
         key: MENU.COPY_LINK,
         icon: 'copy',
         label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.COPY_LINK'),
+      },
+      // KLIMABAZAR F-auto
+      addAutomationOption: {
+        key: MENU.ADD_AUTOMATION,
+        icon: 'automation',
+        label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.ADD_AUTOMATION'),
       },
     };
   },
@@ -393,6 +401,15 @@ export default {
         :option="copyLinkOption"
         variant="icon"
         @click.stop="copyConversationLink"
+      />
+    </template>
+    <!-- KLIMABAZAR F-auto: tworzenie automatyzacji z prefillem z konwersacji -->
+    <template v-if="isAdmin">
+      <hr class="m-1 rounded border-b border-n-weak dark:border-n-weak" />
+      <MenuItem
+        :option="addAutomationOption"
+        variant="icon"
+        @click.stop="$emit('addAutomation')"
       />
     </template>
     <template v-if="isAdmin && isAllowed([MENU.DELETE])">
