@@ -184,6 +184,7 @@
       "OPEN_IN_NEW_TAB": "Otwórz w nowej karcie",
       "COPY_LINK": "Kopiuj link do rozmowy",
       "COPY_LINK_SUCCESS": "Link do rozmowy skopiowany do schowka",
+      "ADD_AUTOMATION": "Dodaj nową automatyzację",
       "API": {
         "AGENT_ASSIGNMENT": {
           "SUCCESFUL": "Konwersacja o identyfikatorze {conversationId} przypisana do \"{agentName}\"",
