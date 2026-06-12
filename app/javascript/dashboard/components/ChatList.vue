@@ -17,6 +17,8 @@ import DeleteCustomViews from 'dashboard/routes/dashboard/customviews/DeleteCust
 import ConversationBulkActions from './widgets/conversation/conversationBulkActions/Index.vue';
 import TeleportWithDirection from 'dashboard/components-next/TeleportWithDirection.vue';
 import ConversationResolveAttributesModal from 'dashboard/components-next/ConversationWorkflow/ConversationResolveAttributesModal.vue';
+// KLIMABAZAR F-auto
+import AddAutomationRule from 'dashboard/routes/dashboard/settings/automation/AddAutomationRule.vue';
 
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useAlert } from 'dashboard/composables';
@@ -848,6 +850,61 @@ const handleDelete = conversationId => {
   deleteConversationDialogRef.value.open();
 };
 
+// KLIMABAZAR F-auto: tworzenie automatyzacji z prefillem z konwersacji
+const automationFormRef = ref(null);
+
+const buildAutomationPrefill = conversation => {
+  const email = conversation.meta?.sender?.email;
+  const subject = conversation.additional_attributes?.mail_subject;
+
+  const conditions = [];
+  if (email) {
+    conditions.push({
+      attribute_key: 'email',
+      filter_operator: 'equal_to',
+      values: email,
+      query_operator: 'and',
+      custom_attribute_type: '',
+    });
+  }
+  if (subject) {
+    conditions.push({
+      attribute_key: 'mail_subject',
+      filter_operator: 'equal_to',
+      values: subject,
+      query_operator: 'and',
+      custom_attribute_type: '',
+    });
+  }
+  if (!conditions.length) return null;
+
+  conditions[conditions.length - 1].query_operator = null;
+  return {
+    name: null,
+    description: null,
+    event_name: 'conversation_created',
+    conditions,
+    actions: [{ action_name: 'add_label', action_params: [] }],
+  };
+};
+
+const openAutomationFromConversation = conversation => {
+  const prefill = buildAutomationPrefill(conversation);
+  automationFormRef.value?.open(prefill);
+};
+
+const onSaveAutomationFromConversation = async payload => {
+  try {
+    await store.dispatch('automations/create', payload);
+    useAlert(t('AUTOMATION.ADD.API.SUCCESS_MESSAGE'));
+    automationFormRef.value?.close();
+  } catch (error) {
+    useAlert(t('AUTOMATION.ADD.API.ERROR_MESSAGE'));
+  }
+};
+
+provide('openAutomationFromConversation', openAutomationFromConversation);
+
 provide('selectConversation', selectConversation);
 provide('deSelectConversation', deSelectConversation);
 provide('assignAgent', onAssignAgent);
@@ -1004,6 +1061,11 @@ watch(conversationFilters, (newVal, oldVal) => {
     <ConversationResolveAttributesModal
       ref="resolveAttributesModalRef"
       @submit="handleResolveWithAttributes"
+    />
+    <!-- KLIMABAZAR F-auto -->
+    <AddAutomationRule
+      ref="automationFormRef"
+      @save-automation="onSaveAutomationFromConversation"
     />
   </div>
 </template>
