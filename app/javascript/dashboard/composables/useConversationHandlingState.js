@@ -45,10 +45,10 @@ export function useConversationHandlingState(getChat) {
     if (chat.status === 'resolved') return 'resolved';
     if (chat.status === 'snoozed') return 'snoozed';
     if (chat.status === 'pending') return 'pending';
-    // open: nieobsluzony (brak assignee + zero odpowiedzi) vs w toku
-    const hasAssignee = Boolean(chat.meta?.assignee?.id);
+    // open: "w toku" TYLKO gdy agent odpisal klientowi (pierwsza odpowiedz wychodzaca).
+    // Samo przypisanie agenta NIE zmienia stanu - ticket zostaje "nowy" do czasu odpowiedzi.
     const hasReplied = Number(chat.first_reply_created_at) > 0;
-    return hasAssignee || hasReplied ? 'inProgress' : 'new';
+    return hasReplied ? 'inProgress' : 'new';
   });
 
   const handlingState = computed(() => HANDLING_STATES[stateKey.value]);
