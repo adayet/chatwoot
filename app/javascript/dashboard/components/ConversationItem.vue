@@ -34,6 +34,8 @@ const markAsRead = inject('markAsRead');
 const assignPriority = inject('assignPriority');
 const isConversationSelected = inject('isConversationSelected');
 const deleteConversation = inject('deleteConversation');
+// KLIMABAZAR F-auto
+const openAutomationFromConversation = inject('openAutomationFromConversation');
 
 // --- Context menu state (shared by both layouts) ---
 const showContextMenu = ref(false);
@@ -176,6 +178,12 @@ const onDeleteConversation = () => {
   deleteConversation(props.source.id);
   closeContextMenu();
 };
+
+// KLIMABAZAR F-auto
+const onAddAutomation = () => {
+  openAutomationFromConversation(props.source);
+  closeContextMenu();
+};
 </script>
 
 <template>
@@ -238,6 +246,7 @@ const onDeleteConversation = () => {
       @mark-as-read="onMarkAsRead"
       @assign-priority="onAssignPriority"
       @delete-conversation="onDeleteConversation"
+      @add-automation="onAddAutomation"
       @close="closeContextMenu"
     />
   </ContextMenu>
