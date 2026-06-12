@@ -44,8 +44,12 @@ const {
   manifestCustomAttributes,
 } = useAutomation(START_VALUE);
 
-const open = () => {
-  automation.value = structuredClone(START_VALUE);
+// KLIMABAZAR F-auto: opcjonalny prefill (otwarcie z listy konwersacji);
+// brak argumentu = zachowanie jak dotychczas (otwarcie z Ustawien).
+const open = prefill => {
+  automation.value = prefill
+    ? structuredClone(prefill)
+    : structuredClone(START_VALUE);
   manifestCustomAttributes();
   formRef.value?.open();
 };
