@@ -17,6 +17,10 @@ const props = defineProps({
 
 const emit = defineEmits(['chatTabChange', 'reorder']);
 
+// KLIMABAZAR F-tabord: wymus tryb fallback Sortable — `delay` (przytrzymanie) NIE dziala
+// z natywnym HTML5 drag-and-drop, tylko z fallbackiem (pointer/mouse)
+const useFallbackDrag = true;
+
 // KLIMABAZAR F-tabord: lokalna kopia do przeciagania (vuedraggable mutuje liste)
 const localItems = ref([...props.items]);
 watch(
@@ -75,6 +79,7 @@ useKeyboardEvents(keyboardEvents);
       class="contents"
       :delay="200"
       :delay-on-touch-only="false"
+      :force-fallback="useFallbackDrag"
       ghost-class="opacity-40"
       @end="onDragEnd"
     >
