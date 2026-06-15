@@ -68,7 +68,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['conversationLoad']);
-const { uiSettings } = useUISettings();
+const { uiSettings, updateUISettings } = useUISettings();
 const { t } = useI18n();
 const router = useRouter();
 const route = useRoute();
@@ -222,6 +222,23 @@ const listTabItems = computed(() => [
     count: tabCounts.value.unresolvedCount,
   },
 ]);
+
+// KLIMABAZAR F-tabord: domyslna kolejnosc zakladek (F1 + status); uzytkownik moze przestawic
+const DEFAULT_TAB_ORDER = ['all', 'me', 'unassigned', 'resolved', 'unresolved'];
+
+// KLIMABAZAR F-tabord: kolejnosc zakladek wg zapisu uzytkownika (ui_settings); brak -> domyslna
+const orderedTabItems = computed(() => {
+  const savedOrder = uiSettings.value.conversation_tabs_order;
+  const order = Array.isArray(savedOrder) ? savedOrder : DEFAULT_TAB_ORDER;
+  const rank = key => {
+    const savedIndex = order.indexOf(key);
+    // klucz spoza zapisu (np. nowa zakladka w przyszlosci) -> na koniec, wg kolejnosci domyslnej
+    return savedIndex === -1
+      ? order.length + DEFAULT_TAB_ORDER.indexOf(key)
+      : savedIndex;
+  };
+  return [...listTabItems.value].sort((a, b) => rank(a.key) - rank(b.key));
+});
 
 // KLIMABAZAR F-rozw: ktora zakladka podswietlona (status wygrywa nad przypisaniem)
 const activeListTab = computed(() => {
@@ -736,6 +753,11 @@ function updateListTab(selectedTab) {
   updateAssigneeTab(selectedTab);
 }
 
+// KLIMABAZAR F-tabord: zapisz kolejnosc zakladek per-user
+function onTabsReorder(keys) {
+  updateUISettings({ conversation_tabs_order: keys });
+}
+
 function onBasicFilterChange(value, type) {
   if (type === 'status') {
     activeStatus.value = value;
@@ -1107,10 +1129,11 @@ watch(conversationFilters, (newVal, oldVal) => {
 
     <ChatTypeTabs
       v-if="!hasAppliedFiltersOrActiveFolders"
-      :items="listTabItems"
+      :items="orderedTabItems"
       :active-tab="activeListTab"
       is-compact
       @chat-tab-change="updateListTab"
+      @reorder="onTabsReorder"
     />
 
     <p
