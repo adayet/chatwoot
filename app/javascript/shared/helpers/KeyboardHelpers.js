@@ -35,6 +35,14 @@ export const hasPressedCommandAndEnter = e => hasPressedMod(e) && isEnter(e);
 // https://github.com/chatwoot/chatwoot/issues/9492
 export const keysToModifyInQWERTZ = new Set(['Alt+KeyP', 'Alt+KeyL']);
 
+// KLIMABAZAR F-altgr: na Windows/Linux prawy Alt (AltGr) jest raportowany jako
+// Ctrl+Alt, wiec uklady z AltGr (polski, niemiecki...) wpisujac znak typu "a"
+// (AltGr+A) trafiaja w skroty Alt+* / $mod+Alt+* (np. ADD_ATTACHMENT = $mod+Alt+KeyA)
+// i zamiast litery uruchamiaja skrot. getModifierState('AltGraph') odroznia AltGr
+// od prawdziwego Ctrl+Alt. Pomijamy Apple: Option != AltGraph, a skroty uzywaja Cmd.
+export const isAltGraphPressed = e =>
+  !isApple() && Boolean(e.getModifierState?.('AltGraph'));
+
 export const LAYOUT_QWERTY = 'QWERTY';
 export const LAYOUT_QWERTZ = 'QWERTZ';
 export const LAYOUT_AZERTY = 'AZERTY';

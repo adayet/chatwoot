@@ -1,5 +1,6 @@
 import {
   isActiveElementTypeable,
+  isAltGraphPressed,
   isEscape,
   keysToModifyInQWERTZ,
   LAYOUT_QWERTZ,
@@ -15,6 +16,10 @@ import { onUnmounted, onMounted } from 'vue';
  * @returns {boolean} - True if the event should be ignored, false otherwise.
  */
 const shouldIgnoreEvent = (e, handler) => {
+  // KLIMABAZAR F-altgr: gdy wcisniety AltGr (np. polskie "a" = AltGr+A) ignoruj
+  // skrot, by wpisac znak zamiast odpalic kolidujacy skrot (np. Dodaj zalacznik).
+  if (isAltGraphPressed(e)) return true;
+
   const isTypeable = isActiveElementTypeable(e);
   const allowOnFocusedInput =
     typeof handler === 'function' ? false : handler.allowOnFocusedInput;
