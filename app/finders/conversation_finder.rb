@@ -162,6 +162,7 @@ class ConversationFinder
 
   def filter_by_status
     return if params[:status] == 'all'
+    return @conversations = @conversations.where.not(status: :resolved) if params[:status] == 'unresolved' # KLIMABAZAR F-rozw
 
     @conversations = @conversations.where(status: params[:status] || DEFAULT_STATUS)
   end
