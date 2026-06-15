@@ -17,7 +17,9 @@
     "ASSIGNEE_TYPE_TABS": {
       "me": "Moje",
       "unassigned": "Nieprzypisane",
-      "all": "Wszystkie"
+      "all": "Wszystkie",
+      "resolved": "Rozwiązane",
+      "unresolved": "Nierozwiązane"
     },
     "CHAT_STATUS_FILTER_ITEMS": {
       "open": {
