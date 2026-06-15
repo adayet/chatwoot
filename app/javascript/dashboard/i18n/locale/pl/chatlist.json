@@ -36,6 +36,9 @@
       },
       "all": {
         "TEXT": "Wszystkie"
+      },
+      "unresolved": {
+        "TEXT": "Nierozwiązane"
       }
     },
     "HANDLING_STATE": {
