@@ -54,6 +54,8 @@ import {
 import { matchesFilters } from '../store/modules/conversations/helpers/filterHelpers';
 import { CONVERSATION_EVENTS } from '../helper/AnalyticsHelper/events';
 import { ASSIGNEE_TYPE_TAB_PERMISSIONS } from 'dashboard/constants/permissions.js';
+// KLIMABAZAR F-rozw: licznik zakladek przez endpoint meta
+import ConversationApi from 'dashboard/api/inbox/conversation';
 
 const props = defineProps({
   conversationInbox: { type: [String, Number], default: 0 },
@@ -80,6 +82,16 @@ const activeAssigneeTab = ref(wootConstants.ASSIGNEE_TYPE.ALL);
 const activeStatus = ref(wootConstants.STATUS_TYPE.ALL);
 // KLIMABAZAR F9: domyslny sort listy = ostatnia realna wiadomosc
 const activeSortBy = ref(wootConstants.SORT_BY_TYPE.LAST_MESSAGE_AT_DESC);
+// KLIMABAZAR F-rozw: token filtra "wszystko oprocz rozwiazanych" (nienatywny status)
+const UNRESOLVED_STATUS = 'unresolved';
+// KLIMABAZAR F-rozw: liczniki zakladek niezalezne od aktywnego filtra (3x meta)
+const tabCounts = ref({
+  mineCount: 0,
+  unAssignedCount: 0,
+  allCount: 0,
+  resolvedCount: 0,
+  unresolvedCount: 0,
+});
 const showAdvancedFilters = ref(false);
 // chatsOnView is to store the chats that are currently visible on the screen,
 // which mirrors the conversationList.
@@ -188,12 +200,38 @@ const assigneeTabItems = computed(() => {
     .map(({ key, count: countKey }) => ({
       key,
       name: t(`CHAT_LIST.ASSIGNEE_TYPE_TABS.${key}`),
-      count: conversationStats.value[countKey] || 0,
+      count: tabCounts.value[countKey] || 0, // KLIMABAZAR F-rozw: liczniki niezalezne
     }))
     .sort(
       (a, b) =>
         ASSIGNEE_TAB_ORDER.indexOf(a.key) - ASSIGNEE_TAB_ORDER.indexOf(b.key)
     );
+});
+
+// KLIMABAZAR F-rozw: rzad zakladek = przypisanie + status (jeden wykluczajacy wybor)
+const listTabItems = computed(() => [
+  ...assigneeTabItems.value,
+  {
+    key: wootConstants.STATUS_TYPE.RESOLVED,
+    name: t('CHAT_LIST.ASSIGNEE_TYPE_TABS.resolved'),
+    count: tabCounts.value.resolvedCount,
+  },
+  {
+    key: UNRESOLVED_STATUS,
+    name: t('CHAT_LIST.ASSIGNEE_TYPE_TABS.unresolved'),
+    count: tabCounts.value.unresolvedCount,
+  },
+]);
+
+// KLIMABAZAR F-rozw: ktora zakladka podswietlona (status wygrywa nad przypisaniem)
+const activeListTab = computed(() => {
+  if (activeStatus.value === wootConstants.STATUS_TYPE.RESOLVED) {
+    return wootConstants.STATUS_TYPE.RESOLVED;
+  }
+  if (activeStatus.value === UNRESOLVED_STATUS) {
+    return UNRESOLVED_STATUS;
+  }
+  return activeAssigneeTab.value;
 });
 
 const showAssigneeInConversationCard = computed(() => {
@@ -404,6 +442,36 @@ function setFiltersFromUISettings() {
     : wootConstants.SORT_BY_TYPE.LAST_MESSAGE_AT_DESC; // KLIMABAZAR F9
 }
 
+// KLIMABAZAR F-rozw: licz rozmowy per zakladka niezaleznie od aktywnego widoku
+async function fetchTabCounts() {
+  if (hasAppliedFiltersOrActiveFolders.value) return;
+  const scope = {
+    inboxId: props.conversationInbox || undefined,
+    labels: props.label ? [props.label] : undefined,
+    teamId: props.teamId || undefined,
+    conversationType: props.conversationType || undefined,
+  };
+  try {
+    const [all, resolved, unresolved] = await Promise.all([
+      ConversationApi.meta({ ...scope, status: wootConstants.STATUS_TYPE.ALL }),
+      ConversationApi.meta({
+        ...scope,
+        status: wootConstants.STATUS_TYPE.RESOLVED,
+      }),
+      ConversationApi.meta({ ...scope, status: UNRESOLVED_STATUS }),
+    ]);
+    tabCounts.value = {
+      mineCount: all.data.meta.mine_count || 0,
+      unAssignedCount: all.data.meta.unassigned_count || 0,
+      allCount: all.data.meta.all_count || 0,
+      resolvedCount: resolved.data.meta.all_count || 0,
+      unresolvedCount: unresolved.data.meta.all_count || 0,
+    };
+  } catch (error) {
+    // liczniki to kosmetyka – ignoruj bledy
+  }
+}
+
 function emitConversationLoaded() {
   emit('conversationLoad');
 }
@@ -600,6 +668,7 @@ function resetAndFetchData() {
     return;
   }
   fetchConversations();
+  fetchTabCounts(); // KLIMABAZAR F-rozw
 }
 
 function loadMoreConversations() {
@@ -626,6 +695,45 @@ function updateAssigneeTab(selectedTab) {
       fetchConversations();
     }
   }
+}
+
+// KLIMABAZAR F-rozw: jeden wykluczajacy rzad – przypisanie LUB status
+function updateListTab(selectedTab) {
+  const isStatusTab =
+    selectedTab === wootConstants.STATUS_TYPE.RESOLVED ||
+    selectedTab === UNRESOLVED_STATUS;
+
+  if (isStatusTab) {
+    if (activeStatus.value === selectedTab) return;
+    activeAssigneeTab.value = wootConstants.ASSIGNEE_TYPE.ALL;
+    activeStatus.value = selectedTab;
+    // sync dropdownu tylko dla statusu, ktory dropdown zna (unresolved nie istnieje w dropdownie)
+    store.dispatch(
+      'setChatStatusFilter',
+      selectedTab === wootConstants.STATUS_TYPE.RESOLVED
+        ? selectedTab
+        : wootConstants.STATUS_TYPE.ALL
+    );
+    resetBulkActions();
+    emitter.emit('clearSearchInput');
+    resetAndFetchData();
+    return;
+  }
+
+  // zakladka przypisania -> status musi byc ALL
+  if (activeStatus.value !== wootConstants.STATUS_TYPE.ALL) {
+    // wracamy z zawezonego statusu (zakladka statusu lub dropdown) -> reset
+    activeStatus.value = wootConstants.STATUS_TYPE.ALL;
+    store.dispatch('setChatStatusFilter', wootConstants.STATUS_TYPE.ALL);
+    activeAssigneeTab.value = selectedTab;
+    resetBulkActions();
+    emitter.emit('clearSearchInput');
+    resetAndFetchData();
+    return;
+  }
+
+  // czysta zmiana przypisania (status juz ALL) -> natywne zachowanie z per-tab paginacja
+  updateAssigneeTab(selectedTab);
 }
 
 function onBasicFilterChange(value, type) {
@@ -817,6 +925,7 @@ function toggleSelectAll(check) {
 useEmitter('fetch_conversation_stats', () => {
   if (hasAppliedFiltersOrActiveFolders.value) return;
   store.dispatch('conversationStats/get', conversationFilters.value);
+  fetchTabCounts(); // KLIMABAZAR F-rozw: odswiez liczniki zakladek po zmianie statusu rozmowy
 });
 
 onMounted(() => {
@@ -998,10 +1107,10 @@ watch(conversationFilters, (newVal, oldVal) => {
 
     <ChatTypeTabs
       v-if="!hasAppliedFiltersOrActiveFolders"
-      :items="assigneeTabItems"
-      :active-tab="activeAssigneeTab"
+      :items="listTabItems"
+      :active-tab="activeListTab"
       is-compact
-      @chat-tab-change="updateAssigneeTab"
+      @chat-tab-change="updateListTab"
     />
 
     <p
