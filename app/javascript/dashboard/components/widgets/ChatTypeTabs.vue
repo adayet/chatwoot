@@ -23,6 +23,9 @@ const useFallbackDrag = true;
 
 // KLIMABAZAR F-tabord: lokalna kopia do przeciagania (vuedraggable mutuje liste)
 const localItems = ref([...props.items]);
+
+// KLIMABAZAR F-tabord: klucz zakladki "zlapanej" (po delayu) -> sygnal uniesienia
+const choosingKey = ref(null);
 watch(
   () => props.items,
   newItems => {
@@ -43,8 +46,18 @@ const onTabChange = selectedTabIndex => {
   }
 };
 
+// KLIMABAZAR F-tabord: zakladka zlapana (po delayu) -> uniesienie
+const onChoose = evt => {
+  choosingKey.value = localItems.value[evt.oldIndex]?.key ?? null;
+};
+
+const onUnchoose = () => {
+  choosingKey.value = null;
+};
+
 // KLIMABAZAR F-tabord: po przeciagnieciu wyemituj nowa kolejnosc kluczy
 const onDragEnd = () => {
+  choosingKey.value = null;
   emit(
     'reorder',
     localItems.value.map(item => item.key)
@@ -81,12 +94,18 @@ useKeyboardEvents(keyboardEvents);
       :delay-on-touch-only="false"
       :force-fallback="useFallbackDrag"
       ghost-class="opacity-40"
+      @choose="onChoose"
+      @unchoose="onUnchoose"
       @end="onDragEnd"
     >
       <template #item="{ element, index }">
         <woot-tabs-item
           :key="element.key"
-          class="text-sm [&_a]:font-medium cursor-grab"
+          class="text-sm [&_a]:font-medium cursor-grab transition-all duration-150"
+          :class="{
+            'scale-110 relative z-10 shadow-md rounded-md bg-n-alpha-2':
+              element.key === choosingKey,
+          }"
           :index="index"
           :name="element.name"
           :count="element.count"
