@@ -1,4 +1,5 @@
-import { Device } from '@twilio/voice-sdk';
+// KLIMABAZAR F-twilio: @twilio/voice-sdk (~0,6-1 MB) ładowany dynamicznie dopiero
+// przy starcie rozmowy (initializeDevice), nie w chunku startowym. Patrz CUSTOMIZATIONS.
 import VoiceAPI from './voiceAPIClient';
 
 const createCallDisconnectedEvent = () => new CustomEvent('call:disconnected');
@@ -14,6 +15,9 @@ class TwilioVoiceClient extends EventTarget {
 
   async initializeDevice(inboxId) {
     this.destroyDevice();
+
+    // KLIMABAZAR F-twilio: lazy-load SDK (osobny chunk, tylko gdy zaczyna się rozmowa).
+    const { Device } = await import('@twilio/voice-sdk');
 
     const response = await VoiceAPI.getToken(inboxId);
     const { token, account_id } = response || {};
