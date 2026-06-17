@@ -47,13 +47,30 @@
       box.style.display = 'flex';
     }
     function appMounted() {
-      // Vue montuje sie do #app i czysci jego zawartosc -> loader znika.
-      return !byId('kb-boot-loader');
+      // Vue (kazdy pack: dashboard, v3app/login...) renderuje dzieci do #app.
+      var app = byId('app');
+      return !!(app && app.children.length > 0);
+    }
+    function removeLoader() {
+      var l = byId('kb-boot-loader');
+      if (l && l.parentNode) { l.parentNode.removeChild(l); }
     }
     function onReady() {
       var reloadBtn = byId('kb-boot-reload');
       if (reloadBtn) {
         reloadBtn.onclick = function () { window.location.reload(); };
+      }
+      // Usun loader, gdy SPA zamontuje sie do #app. MutationObserver dziala dla WSZYSTKICH
+      // packow (dashboard, v3app/login) bez kodu w kazdym entrypoincie. Loader to overlay
+      // position:fixed inset:0 - jesli nie zniknie, zaslania UI (np. formularz logowania).
+      var appEl = byId('app');
+      if (appMounted()) {
+        removeLoader();
+      } else if (appEl && window.MutationObserver) {
+        var obs = new MutationObserver(function () {
+          if (appMounted()) { removeLoader(); obs.disconnect(); }
+        });
+        obs.observe(appEl, { childList: true });
       }
       // 45 s: realne ladowanie (po wlaczeniu kompresji Caddy) to kilka sekund; tak duzy
       // timeout lapie tylko prawdziwa awarie, a nie wolne-ale-dzialajace lacze.

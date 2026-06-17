@@ -121,7 +121,6 @@ window.addEventListener('vite:preloadError', () => {
 
 window.onload = () => {
   app.mount('#app');
-  // KLIMABAZAR F-boot: sygnal udanego montazu -> usun loader, by inline-fallback
-  // w layoucie wiedzial, ze panel wstal i nie pokazal nakladki bledu.
-  document.getElementById('kb-boot-loader')?.remove();
+  // KLIMABAZAR F-boot: usuwanie loadera obsluguje wspolny MutationObserver w
+  // layoucie (_kb_boot_fallback) - dziala dla wszystkich packow, nie tylko tego.
 };
