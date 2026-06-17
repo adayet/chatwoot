@@ -108,6 +108,20 @@ initializeChatwootEvents();
 initializeAnalyticsEvents();
 initalizeRouter();
 
+// KLIMABAZAR F-boot: po deployu stare lazy-chunki zwracaja 404 (karta otwarta przez
+// deploy) -> vite:preloadError. Bez obslugi = bialy ekran/zepsuty widok. Przeladuj raz
+// (pobiera swiezy index.html z nowymi hashami); guard chroni przed petla reloadow.
+window.addEventListener('vite:preloadError', () => {
+  const KEY = 'kbChunkReloadedAt';
+  const last = Number(window.sessionStorage?.getItem(KEY) || 0);
+  if (Date.now() - last < 10000) return; // juz proba reloadu < 10s temu -> nie zapetlaj
+  window.sessionStorage?.setItem(KEY, String(Date.now()));
+  window.location.reload();
+});
+
 window.onload = () => {
   app.mount('#app');
+  // KLIMABAZAR F-boot: sygnal udanego montazu -> usun loader, by inline-fallback
+  // w layoucie wiedzial, ze panel wstal i nie pokazal nakladki bledu.
+  document.getElementById('kb-boot-loader')?.remove();
 };

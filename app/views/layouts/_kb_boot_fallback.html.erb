@@ -1,0 +1,76 @@
+<%# KLIMABAZAR F-boot: bullet-proof fallback gdy panel SPA nie wstanie %>
+<%# Powod: bez konsoli u pracownika (Firefox/Windows) nie znamy przyczyny bialego %>
+<%# ekranu (stary chunk 404 po deployu / stary silnik nie parsuje bundla / zablokowany %>
+<%# storage). Ten kod jest CELOWO inline + ES5 + inline-style (wyjatek od reguly %>
+<%# "Tailwind only"): musi dzialac, gdy bundle JS/CSS sie nie zaladowal. %>
+<style>
+  @keyframes kb-boot-spin { to { transform: rotate(360deg); } }
+</style>
+
+<%# Loader w srodku #app -> Vue czysci #app przy montazu, wiec znika sam po sukcesie %>
+<div id="kb-boot-loader" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#64748b;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:14px;">
+    <div style="width:32px;height:32px;border:3px solid #e2e8f0;border-top-color:#1f93ff;border-radius:50%;animation:kb-boot-spin 0.8s linear infinite;"></div>
+    <div style="font-size:13px;">Ładowanie panelu…</div>
+  </div>
+</div>
+
+<%# Nakladka bledu (poza #app, by przetrwala czyszczenie kontenera); domyslnie ukryta %>
+<div id="kb-boot-error" style="display:none;position:fixed;inset:0;z-index:2147483647;background:#ffffff;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:24px;">
+  <div style="max-width:460px;text-align:center;">
+    <h1 style="font-size:20px;line-height:1.3;margin:0 0 12px;color:#0f172a;">Nie udało się załadować panelu</h1>
+    <p style="font-size:14px;line-height:1.6;margin:0 0 20px;color:#475569;">
+      Najczęściej pomaga odświeżenie strony. Jeśli to nie pomaga, zaktualizuj przeglądarkę
+      do najnowszej wersji i spróbuj ponownie.
+    </p>
+    <button id="kb-boot-reload" type="button" style="appearance:none;border:0;border-radius:8px;background:#1f93ff;color:#fff;font-size:14px;font-weight:600;padding:10px 18px;cursor:pointer;">
+      Odśwież stronę
+    </button>
+    <p style="font-size:11px;line-height:1.5;margin:18px 0 0;color:#94a3b8;word-break:break-word;">
+      Jeśli problem się powtarza, prześlij administratorowi tę informację:<br>
+      <span id="kb-boot-ua"></span>
+    </p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    function byId(id) { return document.getElementById(id); }
+    function showBootError() {
+      var box = byId('kb-boot-error');
+      if (!box || box.getAttribute('data-shown') === '1') return;
+      box.setAttribute('data-shown', '1');
+      var ua = byId('kb-boot-ua');
+      if (ua) { ua.textContent = navigator.userAgent; }
+      var loader = byId('kb-boot-loader');
+      if (loader && loader.parentNode) { loader.parentNode.removeChild(loader); }
+      box.style.display = 'flex';
+    }
+    function appMounted() {
+      // Vue montuje sie do #app i czysci jego zawartosc -> loader znika.
+      return !byId('kb-boot-loader');
+    }
+    function onReady() {
+      var reloadBtn = byId('kb-boot-reload');
+      if (reloadBtn) {
+        reloadBtn.onclick = function () { window.location.reload(); };
+      }
+      // 45 s: realne ladowanie (po wlaczeniu kompresji Caddy) to kilka sekund; tak duzy
+      // timeout lapie tylko prawdziwa awarie, a nie wolne-ale-dzialajace lacze.
+      var timeout = window.__KB_BOOT_TIMEOUT__ || 45000;
+      window.setTimeout(function () {
+        if (!appMounted()) { showBootError(); }
+      }, timeout);
+    }
+    // Jezeli module-script bundla padnie na ladowaniu/parsowaniu, leci window 'error'.
+    window.addEventListener('error', function (e) {
+      var t = e && e.target;
+      if (t && t.tagName === 'SCRIPT') { showBootError(); }
+    }, true);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', onReady);
+    } else {
+      onReady();
+    }
+  })();
+</script>

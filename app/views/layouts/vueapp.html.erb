@@ -76,6 +76,8 @@
   </head>
   <body class="text-slate-600">
     <div id="app"></div>
+    <%# KLIMABAZAR F-boot: fallback gdy SPA nie wstanie (zamiast bialego ekranu) %>
+    <%= render 'layouts/kb_boot_fallback' %>
     <noscript id="noscript">This app works best with JavaScript enabled.</noscript>
     <%= yield %>
     <% if @dashboard_scripts.present? %>
