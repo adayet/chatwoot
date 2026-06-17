@@ -7,13 +7,16 @@ import { useAccount } from 'dashboard/composables/useAccount';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 
 import FormSelect from 'v3/components/Form/Select.vue';
+// KLIMABAZAR F-i18n: doczytanie tłumaczeń wybranego języka przed przełączeniem.
+import { loadLocaleMessages } from 'dashboard/i18n';
 
 defineProps({
   label: { type: String, default: '' },
   description: { type: String, default: '' },
 });
 
-const { t, locale } = useI18n();
+const i18n = useI18n();
+const { t, locale } = i18n;
 const { updateUISettings, uiSettings } = useUISettings();
 const { enabledLanguages } = useConfig();
 const { currentAccount } = useAccount();
@@ -35,6 +38,7 @@ const updateLanguage = async languageCode => {
     if (!languageCode) {
       // Clear preference to use account default
       await updateUISettings({ locale: null });
+      await loadLocaleMessages(i18n, currentAccount.value.locale); // KLIMABAZAR F-i18n
       locale.value = currentAccount.value.locale;
       useAlert(
         t('PROFILE_SETTINGS.FORM.INTERFACE_SECTION.LANGUAGE.UPDATE_SUCCESS')
@@ -51,6 +55,7 @@ const updateLanguage = async languageCode => {
 
     await updateUISettings({ locale: languageCode });
     // Apply immediately if the user explicitly chose a preference
+    await loadLocaleMessages(i18n, languageCode); // KLIMABAZAR F-i18n
     locale.value = languageCode;
 
     useAlert(

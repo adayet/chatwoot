@@ -1,7 +1,8 @@
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 
-import i18nMessages from 'dashboard/i18n';
+// KLIMABAZAR F-i18n: default = EN (fallback); aktywny język doczytywany dynamicznie.
+import en, { loadLocaleMessages } from 'dashboard/i18n';
 import * as Sentry from '@sentry/vue';
 import {
   initializeAnalyticsEvents,
@@ -20,7 +21,8 @@ import FluentIcon from 'shared/components/FluentIcon/DashboardIcon.vue';
 const i18n = createI18n({
   legacy: false, // https://github.com/intlify/vue-i18n/issues/1902
   locale: 'en',
-  messages: i18nMessages,
+  fallbackLocale: 'en', // KLIMABAZAR F-i18n: nieznany/niedoczytany język -> EN
+  messages: { en },
 });
 
 const app = createApp(App);
@@ -61,6 +63,12 @@ initializeChatwootEvents();
 initializeAnalyticsEvents();
 initalizeRouter();
 
-window.onload = () => {
+window.onload = async () => {
+  // KLIMABAZAR F-i18n: doczytaj aktywny język PRZED mount (brak migotania; await
+  // pokrywa loader F-boot). Login (v3app) też po polsku bez wożenia wszystkich języków.
+  const activeLocale = window.chatwootConfig?.selectedLocale || 'en';
+  await loadLocaleMessages(i18n.global, activeLocale);
+  i18n.global.locale.value = activeLocale;
+
   app.mount('#app');
 };

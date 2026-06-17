@@ -10,7 +10,8 @@ import WootWizard from 'components/ui/Wizard.vue';
 import FloatingVue from 'floating-vue';
 import WootUiKit from 'dashboard/components';
 import App from 'dashboard/App.vue';
-import i18nMessages from 'dashboard/i18n';
+// KLIMABAZAR F-i18n: default = EN (fallback); aktywny język doczytywany dynamicznie.
+import en, { loadLocaleMessages } from 'dashboard/i18n';
 import createAxios from 'dashboard/helper/APIHelper';
 
 import commonHelpers, { isJSONValid } from 'dashboard/helper/commons';
@@ -36,7 +37,8 @@ import 'floating-vue/dist/style.css';
 const i18n = createI18n({
   legacy: false, // https://github.com/intlify/vue-i18n/issues/1902
   locale: 'en',
-  messages: i18nMessages,
+  fallbackLocale: 'en', // KLIMABAZAR F-i18n: nieznany/niedoczytany język -> EN
+  messages: { en },
 });
 
 sync(store, router);
@@ -119,7 +121,13 @@ window.addEventListener('vite:preloadError', () => {
   window.location.reload();
 });
 
-window.onload = () => {
+window.onload = async () => {
+  // KLIMABAZAR F-i18n: doczytaj aktywny język PRZED mount (brak migotania EN->PL;
+  // await pokrywa loader F-boot). Fallback EN gdy locale nieznany/nie doczyta się.
+  const activeLocale = window.chatwootConfig?.selectedLocale || 'en';
+  await loadLocaleMessages(i18n.global, activeLocale);
+  i18n.global.locale.value = activeLocale;
+
   app.mount('#app');
   // KLIMABAZAR F-boot: usuwanie loadera obsluguje wspolny MutationObserver w
   // layoucie (_kb_boot_fallback) - dziala dla wszystkich packow, nie tylko tego.

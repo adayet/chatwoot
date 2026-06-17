@@ -20,6 +20,8 @@ import {
 } from './helper/pushHelper';
 import ReconnectService from 'dashboard/helper/ReconnectService';
 import { useUISettings } from 'dashboard/composables/useUISettings';
+// KLIMABAZAR F-i18n: doczytanie locale na żądanie przy przełączaniu języka.
+import { loadLocaleMessages } from 'dashboard/i18n';
 
 export default {
   name: 'App',
@@ -98,10 +100,12 @@ export default {
       const mql = window.matchMedia('(prefers-color-scheme: dark)');
       mql.onchange = e => setColorTheme(e.matches);
     },
-    setLocale(locale) {
-      if (locale) {
-        this.$root.$i18n.locale = locale;
-      }
+    async setLocale(locale) {
+      // KLIMABAZAR F-i18n: doczytaj wiadomości locale zanim go ustawisz (obsługa
+      // przełączania języka w locie). No-op gdy EN/już-załadowany/nieznany.
+      if (!locale) return;
+      await loadLocaleMessages(this.$root.$i18n, locale);
+      this.$root.$i18n.locale = locale;
     },
     async initializeAccount() {
       await this.$store.dispatch('accounts/get');

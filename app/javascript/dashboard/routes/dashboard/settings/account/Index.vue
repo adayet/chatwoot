@@ -6,6 +6,8 @@ import { useAlert } from 'dashboard/composables';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useConfig } from 'dashboard/composables/useConfig';
 import { useAccount } from 'dashboard/composables/useAccount';
+// KLIMABAZAR F-i18n: doczytanie tłumaczeń przed zmianą języka konta.
+import { loadLocaleMessages } from 'dashboard/i18n';
 import { FEATURE_FLAGS } from '../../../../featureFlags';
 import WithLabel from 'v3/components/Form/WithLabel.vue';
 import NextInput from 'next/input/Input.vue';
@@ -105,6 +107,7 @@ export default {
 
         const effectiveLocale = this.uiSettings?.locale || locale;
         if (effectiveLocale) {
+          await loadLocaleMessages(this.$root.$i18n, effectiveLocale); // KLIMABAZAR F-i18n
           this.$root.$i18n.locale = effectiveLocale;
         }
         this.name = name;
@@ -134,6 +137,7 @@ export default {
         // If user locale is set, update the locale with user locale
         const updatedLocale = this.uiSettings?.locale || this.locale;
         if (updatedLocale) {
+          await loadLocaleMessages(this.$root.$i18n, updatedLocale); // KLIMABAZAR F-i18n
           this.$root.$i18n.locale = updatedLocale;
         }
         this.getAccount(this.id).locale = this.locale;
