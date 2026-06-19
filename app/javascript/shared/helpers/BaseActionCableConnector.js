@@ -2,6 +2,11 @@ import { createConsumer } from '@rails/actioncable';
 
 const PRESENCE_INTERVAL = 20000;
 const RECONNECT_INTERVAL = 1000;
+// KLIMABAZAR F-wswake: jeśli okno było ukryte/bez fokusu dłużej niż tyle ms,
+// po powrocie traktujemy socket jako potencjalnie martwy ("zombie") i wymuszamy
+// reopen — przeglądarka/PWA w tle zamraża JS, więc ActionCable nie wykrywa
+// martwego połączenia, a serwer go nie zamyka (wisi za NAT).
+const WAKE_REOPEN_THRESHOLD = 10000;
 
 class BaseActionCableConnector {
   static isDisconnected = false;
@@ -45,7 +50,47 @@ class BaseActionCableConnector {
       }, presenceInterval);
     };
     this.triggerPresenceInterval();
+
+    // KLIMABAZAR F-wswake: po wybudzeniu/powrocie do okna wymuś reopen socketu,
+    // żeby naprawić "zombie connection" (nieaktualne wiadomości do czasu ręcznego
+    // odświeżenia). reopen przechodzi przez istniejący łańcuch
+    // disconnected → checkConnection → onReconnect → dociągnięcie wiadomości.
+    this.lastHiddenAt = null;
+    this.lastReopenAt = null;
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
+    window.addEventListener('focus', this.handleWindowFocus);
   }
+
+  // KLIMABAZAR F-wswake
+  handleVisibilityChange = () => {
+    if (document.visibilityState === 'hidden') {
+      this.lastHiddenAt = Date.now();
+    } else {
+      this.reopenIfStale();
+    }
+  };
+
+  // KLIMABAZAR F-wswake
+  handleWindowFocus = () => {
+    this.reopenIfStale();
+  };
+
+  // KLIMABAZAR F-wswake
+  reopenIfStale = () => {
+    const now = Date.now();
+    // unik podwójnego reopen, gdy visibilitychange i focus odpalą razem
+    if (this.lastReopenAt && now - this.lastReopenAt < WAKE_REOPEN_THRESHOLD) {
+      return;
+    }
+    const hiddenMs = this.lastHiddenAt ? now - this.lastHiddenAt : 0;
+    this.lastHiddenAt = null;
+    const connection = this.consumer && this.consumer.connection;
+    if (!connection) return;
+    if (!connection.isOpen() || hiddenMs > WAKE_REOPEN_THRESHOLD) {
+      this.lastReopenAt = now;
+      connection.reopen();
+    }
+  };
 
   checkConnection() {
     const isConnectionActive = this.consumer.connection.isOpen();
@@ -81,6 +126,12 @@ class BaseActionCableConnector {
   onDisconnected = () => {};
 
   disconnect() {
+    // KLIMABAZAR F-wswake
+    document.removeEventListener(
+      'visibilitychange',
+      this.handleVisibilityChange
+    );
+    window.removeEventListener('focus', this.handleWindowFocus);
     this.consumer.disconnect();
   }
 
