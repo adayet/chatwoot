@@ -55,6 +55,8 @@ Każda edycja w źródłach oznaczona `KLIMABAZAR` (grep-owalne).
 
 | `store/.../conversations/helpers.js` (F9-fix, **współdzielony — czulszy przy mergach**) | `sortOnLastMessageAt`: fallback `last_chat_message_at \|\| timestamp \|\| created_at \|\| 0` (wszystko epoch). Bez tego sort F9 psuł **live-update listy**: pole `last_chat_message_at` dostarcza tylko API (jbuilder), a eventy WS (`conversation.created`/`message.created`) go nie niosą i `ADD_MESSAGE` aktualizuje tylko `timestamp` → nowe/zaktualizowane konwersacje miały sort-key 0 i spadały na dół listy (znikały z góry do ręcznego „Odśwież") | F9-fix: lista odświeża się na żywo (nowa konwersacja/wiadomość wskakuje na górę bez reloadu); spójne z kartami (`last_chat_message_at \|\| chat.timestamp`) | średnia (1 plik, grep `KLIMABAZAR F9`) | wyślij testowego maila na skrzynkę → nowa konwersacja pojawia się na górze „Wszystkie" bez ręcznego odświeżania; spec `helpers.spec.js` zielony |
 
+| `components-next/.../ConversationCardExpanded.vue` + `components/widgets/conversation/ConversationCard.vue` (F-unread) | niebieska kropka nieprzeczytanej rozmowy (`bg-n-blue-9`) jak w Sparku. Expanded: element flex `w-2 h-2` po lewej obok avatara nadawcy (warunek `unreadCount > 0`). Condensed: `absolute top-2 left-1 w-2.5 h-2.5 z-[2]` w lewym górnym rogu karty (warunek `hasUnread`). Uzupełnia istniejące pogrubienie nazwy, nie zastępuje | F-unread: szybciej widać nieprzeczytane na liście | niska–średnia (2 karty, grep `KLIMABAZAR F-unread`) | rozmowa z `unread_count > 0` → niebieska kropka (expanded: obok avatara; condensed: lewy górny róg); przeczytana = brak kropki |
+
 ## Cykl wciągania upstreamu
 1. `git fetch upstream --tags`
 2. Wybierz kolejny stabilny tag `vX.Y.Z` (NIE `develop`).

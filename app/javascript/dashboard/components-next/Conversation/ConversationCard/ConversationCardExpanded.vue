@@ -157,6 +157,13 @@ const selectedModel = computed({
         </span>
       </div>
 
+      <!-- KLIMABAZAR F-unread: niebieska kropka nieprzeczytanej (po lewej obok avatara nadawcy) -->
+      <span
+        v-if="unreadCount > 0"
+        class="w-2 h-2 rounded-full bg-n-blue-9 flex-shrink-0"
+        aria-hidden="true"
+      />
+
       <CardAvatar
         :contact="currentContact"
         :selected="false"

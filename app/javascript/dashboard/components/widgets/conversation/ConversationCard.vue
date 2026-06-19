@@ -158,6 +158,12 @@ watch(
       :class="handlingState.bar"
       aria-hidden="true"
     />
+    <!-- KLIMABAZAR F-unread: niebieska kropka nieprzeczytanej (lewy gorny rog karty) -->
+    <span
+      v-if="hasUnread"
+      class="absolute top-2 ltr:left-1 rtl:right-1 w-2.5 h-2.5 rounded-full bg-n-blue-9 z-[2]"
+      aria-hidden="true"
+    />
     <div
       class="relative"
       @mouseenter="onThumbnailHover"
