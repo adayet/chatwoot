@@ -134,10 +134,15 @@ const sortConfig = {
   sortOnLastActivityAt: (a, b, sortDirection) =>
     getSortOrderFunction(sortDirection)(a.last_activity_at, b.last_activity_at),
 
-  // KLIMABAZAR F9: sort po ostatniej realnej wiadomosci (pole last_chat_message_at z F8); brak -> na dol
+  // KLIMABAZAR F9: sort po ostatniej realnej wiadomosci (last_chat_message_at z F8).
+  // Pole dostarcza tylko API (jbuilder, epoch .to_i); eventy WS (conversation.created /
+  // message.created) go NIE niosa, a ADD_MESSAGE aktualizuje jedynie `timestamp`. Bez fallbacku
+  // nowe/zaktualizowane konwersacje z live-update mialyby av=0 i spadaly na dol listy (znikaly
+  // z gory do recznego reloadu). Fallback na timestamp/created_at (te same jednostki epoch)
+  // utrzymuje live-update sortu, spojnie z kartami (last_chat_message_at || chat.timestamp).
   sortOnLastMessageAt: (a, b, sortDirection) => {
-    const av = a.last_chat_message_at || 0;
-    const bv = b.last_chat_message_at || 0;
+    const av = a.last_chat_message_at || a.timestamp || a.created_at || 0;
+    const bv = b.last_chat_message_at || b.timestamp || b.created_at || 0;
     if (!av || !bv) return (bv ? 1 : 0) - (av ? 1 : 0);
     return getSortOrderFunction(sortDirection)(av, bv);
   },
