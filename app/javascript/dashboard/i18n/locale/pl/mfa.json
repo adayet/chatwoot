@@ -49,6 +49,11 @@
       "DISABLE_MFA_DESC": "Usuń uwierzytelnianie dwuskładnikowe z konta",
       "DISABLE_BUTTON": "Wyłącz uwierzytelnianie dwuskładnikowe"
     },
+    "LOW_BACKUP_CODES": {
+      "MESSAGE": "You have {n} backup code remaining. Generate new codes to avoid getting locked out if you lose access to your authenticator. | You have {n} backup codes remaining. Generate new codes to avoid getting locked out if you lose access to your authenticator.",
+      "NONE_LEFT": "You have no backup codes remaining. Generate new codes now to avoid getting locked out if you lose access to your authenticator.",
+      "ACTION": "Generate codes"
+    },
     "DISABLE": {
       "TITLE": "Wyłącz uwierzytelnianie dwuskładnikowe",
       "DESCRIPTION": "You'll need to enter your password and a verification code to disable two-factor authentication.",

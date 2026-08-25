@@ -29,6 +29,7 @@ export default {
     PRIORITY_DESC_CREATED_AT_ASC: 'priority_desc_created_at_asc',
     LAST_MESSAGE_AT_ASC: 'last_message_at_asc', // KLIMABAZAR F9
     LAST_MESSAGE_AT_DESC: 'last_message_at_desc', // KLIMABAZAR F9
+    UNREAD: 'unread',
   },
   ARTICLE_STATUS_TYPES: {
     DRAFT: 0,
@@ -79,3 +80,5 @@ export default {
   },
 };
 export const DEFAULT_REDIRECT_URL = '/app/';
+export const META_RESTRICTION_STATUS_URL =
+  'https://status.chatwoot.com/incidents';

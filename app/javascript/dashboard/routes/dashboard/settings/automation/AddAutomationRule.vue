@@ -10,6 +10,7 @@ const START_VALUE = {
   name: null,
   description: null,
   event_name: 'conversation_created',
+  execution_delay: null,
   conditions: [
     {
       attribute_key: 'status',
@@ -44,14 +45,16 @@ const {
   manifestCustomAttributes,
 } = useAutomation(START_VALUE);
 
-// KLIMABAZAR F-auto: opcjonalny prefill (otwarcie z listy konwersacji);
-// brak argumentu = zachowanie jak dotychczas (otwarcie z Ustawien).
-const open = prefill => {
-  automation.value = prefill
-    ? structuredClone(prefill)
+// KLIMABAZAR F-auto: obiekt = prefill (otwarcie z listy konwersacji), liczba/null =
+// executionDelay (upstream, otwarcie z Ustawien). Rozroznienie po typie argumentu.
+const open = (arg = null) => {
+  const isPrefill = arg !== null && typeof arg === 'object';
+  automation.value = isPrefill
+    ? structuredClone(arg)
     : structuredClone(START_VALUE);
+  const executionDelay = isPrefill ? null : arg;
   manifestCustomAttributes();
-  formRef.value?.open();
+  formRef.value?.open(executionDelay);
 };
 const close = () => formRef.value?.close();
 

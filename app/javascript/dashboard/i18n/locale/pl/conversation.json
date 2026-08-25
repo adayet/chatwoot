@@ -1,5 +1,43 @@
 {
   "CONVERSATION": {
+    "REFERRAL": {
+      "AD_LABEL": "Reklama",
+      "POST_LABEL": "Post",
+      "VIEW_AD": "Zobacz reklamę",
+      "WELCOME_MESSAGE_LABEL": "Wiadomość wstępna: ",
+      "REPLIED_BELOW": "Klient odpowiedział poniżej"
+    },
+    "WHATSAPP_REFERRAL": {
+      "AD": "Reklama"
+    },
+    "PICKER": {
+      "VARIABLE": {
+        "SEARCH_PLACEHOLDER": "Szukaj zmiennych",
+        "DESCRIPTION": "Opis",
+        "VALUE": "Wartość",
+        "NO_VALUE": "Brak wartości dla tej rozmowy"
+      },
+      "EMOJI": {
+        "SEARCH_PLACEHOLDER": "Szukaj emoji",
+        "EMPTY_STATE": "Zacznij pisać, aby wyszukać emoji"
+      },
+      "MACRO": {
+        "SEARCH_PLACEHOLDER": "Szukaj makr",
+        "ACTION_COUNT": "1 akcja | {count} akcje | {count} akcji"
+      },
+      "MENTION": {
+        "SEARCH_PLACEHOLDER": "Szukaj agentów i zespołów",
+        "FILTER": {
+          "ALL": "Wszyscy"
+        },
+        "AVAILABILITY": "Dostępność",
+        "ROLE": "Rola",
+        "AUTO_ASSIGN": "Automatyczne przypisanie",
+        "ENABLED": "Włączone",
+        "DISABLED": "Wyłączone",
+        "YOU_ARE_A_MEMBER": "Jesteś członkiem tego zespołu"
+      }
+    },
     "SELECT_A_CONVERSATION": "Wybierz konwersację z lewego panelu",
     "CSAT_REPLY_MESSAGE": "Oceń konwersację",
     "404": "Przepraszamy, nie można odnaleźć konwersacji. Spróbuj ponownie",
@@ -36,7 +74,8 @@
     "API_HOURS_WINDOW": "Na tę rozmowę możesz odpowiedzieć tylko w ciągu {hours} godzin",
     "NOT_ASSIGNED_TO_YOU": "Ta konwersacja nie jest Ci przypisana. Czy chcesz przypisać tę konwersację do siebie?",
     "ASSIGN_TO_ME": "Przypisz do mnie",
-    "BOT_HANDOFF_MESSAGE": "Odpowiadasz na rozmowę, którą obecnie obsługuje asystent lub bot.",
+    "BOT_HANDOFF_MESSAGE": "Tę rozmowę obsługuje obecnie {assigneeName}.",
+    "BOT_HANDOFF_FALLBACK_ASSIGNEE": "bot",
     "BOT_HANDOFF_ACTION": "Oznacz jako otwartą i przypisz do siebie",
     "BOT_HANDOFF_REOPEN_ACTION": "Oznacz rozmowę jako otwartą",
     "BOT_HANDOFF_SUCCESS": "Rozmowa została przekazana Tobie",
@@ -44,6 +83,8 @@
     "TWILIO_WHATSAPP_CAN_REPLY": "Możesz odpowiedzieć na tę rozmowę tylko za pomocą szablonu wiadomości, ponieważ",
     "TWILIO_WHATSAPP_24_HOURS_WINDOW": "Ograniczenie 24-godzinnego okna wiadomości",
     "OLD_INSTAGRAM_INBOX_REPLY_BANNER": "To konto Instagram zostało przeniesione do nowej skrzynki kanału Instagram. Wszystkie nowe wiadomości pojawią się tam. Z tej rozmowy nie możesz już wysyłać wiadomości.",
+    "INSTAGRAM_RESTRICTION_BANNER": "Wiadomości na Instagramie są obecnie zakłócone przez problem na poziomie API po stronie Meta, a nie błąd Chatwoota. Niektóre wiadomości lub akcje mogą być opóźnione lub niedostępne. Ściśle współpracujemy z Meta, aby rozwiązać to jak najszybciej.",
+    "INSTAGRAM_RESTRICTION_STATUS_LINK": "Zobacz aktualizacje statusu",
     "REPLYING_TO": "Osoba, której odpowiadasz to:",
     "REMOVE_SELECTION": "Usuń zaznaczenie",
     "DOWNLOAD": "Pobierz",
@@ -62,6 +103,8 @@
     "UNSUPPORTED_MESSAGE_FACEBOOK": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji Facebook Messenger.",
     "UNSUPPORTED_MESSAGE_INSTAGRAM": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji Instagram.",
     "UNSUPPORTED_MESSAGE_TIKTOK": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji TikTok.",
+    "UNSUPPORTED_MESSAGE_WHATSAPP": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji WhatsApp.",
+    "WHATSAPP_FLOW_RESPONSE": "Przesłano odpowiedź w formularzu",
     "SUCCESS_DELETE_MESSAGE": "Wiadomość usunięta pomyślnie",
     "FAIL_DELETE_MESSSAGE": "Nie można usunąć wiadomości! Spróbuj ponownie",
     "NO_RESPONSE": "Brak odpowiedzi",
@@ -69,6 +112,20 @@
     "RATING_TITLE": "Ocena",
     "FEEDBACK_TITLE": "Opinia",
     "REPLY_MESSAGE_NOT_FOUND": "Wiadomość niedostępna",
+    "CAPTAIN_GENERATION": {
+      "TITLE": "Jak wygenerowano tę odpowiedź?",
+      "GENERATED_BY": "Wygenerowane przez Captain",
+      "LOADING": "Wczytywanie szczegółów…",
+      "EMPTY": "Brak szczegółów generowania dla tej wiadomości.",
+      "TIMELINE": "Kroki generowania",
+      "STEP_TOOL": "Wywołano {name}",
+      "STEP_HANDOFF": "Przekazano do {name}",
+      "REASONING": "Rozumowanie",
+      "SOURCES": "Baza wiedzy",
+      "SOURCES_SUMMARY": "{count} wynik | {count} wyniki | {count} wyników",
+      "MODEL": "Wygenerowano z {model}",
+      "CREDITS": "Kredyty: {credits}"
+    },
     "CARD": {
       "SHOW_LABELS": "Pokaż etykiety",
       "HIDE_LABELS": "Ukryj etykiety",
@@ -109,6 +166,12 @@
       "SNOOZED_UNTIL_TOMORROW": "Uśpij do jutra",
       "SNOOZED_UNTIL_NEXT_WEEK": "Uśpione do następnego tygodnia",
       "SNOOZED_UNTIL_NEXT_REPLY": "Uśpione do następnej odpowiedzi",
+      "WHATSAPP_CALL": "Start WhatsApp call",
+      "WHATSAPP_CALL_FAILED": "Could not start the WhatsApp call.",
+      "VOICE_CALL": "Start call",
+      "VOICE_CALL_FAILED": "Could not start the call.",
+      "WHATSAPP_CALL_PERMISSION_REQUESTED": "Sent a call permission request to the contact. Try again once they accept.",
+      "WHATSAPP_CALL_PERMISSION_PENDING": "Call permission request already sent recently. Try again once the contact accepts.",
       "SLA_STATUS": {
         "FRT": "FRT {status}",
         "NRT": "NRT {status}",
@@ -178,6 +241,8 @@
       },
       "ASSIGN_AGENT": "Przypisz Agenta",
       "ASSIGN_LABEL": "Przypisz etykietę",
+      "SEARCH_LABELS": "Szukaj etykiet",
+      "NO_LABELS_FOUND": "Brak wyników",
       "AGENTS_LOADING": "Ładowanie agentów...",
       "ASSIGN_TEAM": "Przypisz zespół",
       "DELETE": "Usuń rozmowę",
@@ -231,7 +296,9 @@
       "TIP_AUDIORECORDER_ICON": "Nagrywaj audio",
       "TIP_AUDIORECORDER_PERMISSION": "Zezwól na dostęp do dźwięku",
       "TIP_AUDIORECORDER_ERROR": "Nie można otworzyć dźwięku",
+      "AUDIO_CONVERSION_FAILED": "Audio conversion failed. Please try again.",
       "DRAG_DROP": "Przeciągnij i upuść tutaj, aby dołączyć",
+      "IMAGE_UPLOAD_SUCCESS": "Obraz został pomyślnie przesłany",
       "START_AUDIO_RECORDING": "Rozpocznij nagrywanie audio",
       "STOP_AUDIO_RECORDING": "Zatrzymaj nagrywanie audio",
       "COPILOT_THINKING": "Copilot myśli",
@@ -302,6 +369,25 @@
         "MESSAGE": "Tej akcji nie można cofnąć",
         "DELETE": "Usuń",
         "CANCEL": "Anuluj"
+      },
+      "REPORT_MESSAGE": {
+        "LABEL": "Report message",
+        "TITLE": "Report Captain message",
+        "DESCRIPTION": "Found an issue with this AI response? Let us know what went wrong and our team will review it to help improve Captain's accuracy.",
+        "PROBLEM_TYPE": "Problem type",
+        "PROBLEM_TYPE_PLACEHOLDER": "Select a problem type",
+        "DESCRIPTION_LABEL": "Opis",
+        "DESCRIPTION_PLACEHOLDER": "Describe the problem in detail",
+        "SUBMIT": "Report",
+        "SUCCESS": "Thanks for reporting. Our team will take a look.",
+        "ERROR": "Could not report this message. Please try again.",
+        "REASONS": {
+          "incorrect_information": "Incorrect information",
+          "inappropriate_response": "Inappropriate response",
+          "incomplete_response": "Incomplete response",
+          "outdated_information": "Outdated information",
+          "other": "Other"
+        }
       }
     },
     "SIDEBAR": {
@@ -322,8 +408,7 @@
       "UNMUTE": "Włącz mikrofon",
       "VIEW_CHAT_HISTORY": "Zobacz historię czatu",
       "GO_TO_CONVERSATION": "Przejdź do wątku rozmowy"
-    },
-    "UNSUPPORTED_MESSAGE_WHATSAPP": "Ta wiadomość nie jest obsługiwana. Możesz ją zobaczyć w aplikacji WhatsApp."
+    }
   },
   "EMAIL_TRANSCRIPT": {
     "TITLE": "Wyślij transkrypt wiadomości",
@@ -400,7 +485,8 @@
       "VIEW_ALL": "Zobacz wszystkie",
       "SHOW_LESS": "Pokaż mniej",
       "MORE_COUNT": "+{count}",
-      "UNTITLED_FILE": "Plik bez nazwy"
+      "UNTITLED_FILE": "Plik bez nazwy",
+      "JUMP_TO_MESSAGE": "Przejdź do wiadomości"
     },
     "SHOPIFY": {
       "ORDER_ID": "Zamówienie #{id}",

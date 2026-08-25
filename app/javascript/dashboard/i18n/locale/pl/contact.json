@@ -20,6 +20,8 @@
     "CALL": "Zadzwoń",
     "CALL_INITIATED": "Dzwonię do kontaktu…",
     "CALL_FAILED": "Nie udało się rozpocząć połączenia. Spróbuj ponownie.",
+    "WHATSAPP_CALL_PERMISSION_REQUESTED": "Wysłano do kontaktu prośbę o zgodę na połączenie. Spróbuj ponownie, gdy ją zaakceptuje.",
+    "WHATSAPP_CALL_PERMISSION_PENDING": "Prośba o zgodę na połączenie została już niedawno wysłana. Spróbuj ponownie, gdy kontakt ją zaakceptuje.",
     "CLICK_TO_EDIT": "Kliknij, aby edytować",
     "VOICE_INBOX_PICKER": {
       "TITLE": "Wybierz skrzynkę głosową"
@@ -510,6 +512,7 @@
         "ATTRIBUTES": "Atrybuty",
         "HISTORY": "Historia",
         "NOTES": "Notatki",
+        "MEDIA": "Multimedia",
         "MERGE": "Scal"
       },
       "HISTORY": {
@@ -585,8 +588,11 @@
   },
   "CONTACTS_BULK_ACTIONS": {
     "ASSIGN_LABELS": "Przypisz etykiety",
+    "REMOVE_LABELS": "Remove Labels",
     "ASSIGN_LABELS_SUCCESS": "Etykiety zostały pomyślnie przypisane.",
     "ASSIGN_LABELS_FAILED": "Nie udało się przypisać etykiet",
+    "REMOVE_LABELS_SUCCESS": "Etykiety usunięte pomyślnie.",
+    "REMOVE_LABELS_FAILED": "Nie udało się usunąć etykiet",
     "DESCRIPTION": "Wybierz etykiety, które chcesz dodać do wybranych kontaktów.",
     "NO_LABELS_FOUND": "Brak dostępnych etykiet.",
     "SELECTED_COUNT": "{count} wybrano",
@@ -610,6 +616,9 @@
   "COMPOSE_NEW_CONVERSATION": {
     "CONTACT_SEARCH": {
       "ERROR_MESSAGE": "Nie udało się ukończyć wyszukiwania. Spróbuj ponownie."
+    },
+    "CONTACT_CREATE": {
+      "ERROR_MESSAGE": "We couldn’t create the contact. Please try again."
     },
     "FORM": {
       "GO_TO_CONVERSATION": "Widok",

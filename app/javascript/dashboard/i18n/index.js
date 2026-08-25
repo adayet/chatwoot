@@ -49,6 +49,8 @@ const localeLoaders = {
   zh_TW: () => import('./locale/zh_TW'),
   is: () => import('./locale/is'),
   lt: () => import('./locale/lt'),
+  sl: () => import('./locale/sl'), // KLIMABAZAR F-i18n: dodany w upstream v4.17.0 (Slovenian)
+  uz: () => import('./locale/uz'), // KLIMABAZAR F-i18n: dodany w upstream v4.16.0 (Uzbek)
 };
 
 // Doczytuje wiadomości danego locale do instancji vue-i18n (i18n.global / Composer).

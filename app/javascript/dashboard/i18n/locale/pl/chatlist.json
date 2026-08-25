@@ -7,6 +7,7 @@
       "404": "W tej grupie nie ma aktywnych konwersacji."
     },
     "FAILED_TO_SEND": "Nie wysłano",
+    "FETCH_ERROR": "Nie udało się wczytać rozmów. Spróbuj ponownie.",
     "TAB_HEADING": "Rozmowy",
     "MENTION_HEADING": "Wzmianki",
     "UNATTENDED_HEADING": "Nieobsługiwane",
@@ -97,6 +98,9 @@
       },
       "priority_desc_created_at_asc": {
         "TEXT": "Priorytet: od najwyższego, Utworzono: od najstarszych"
+      },
+      "unread": {
+        "TEXT": "Nieprzeczytane: od najwięcej"
       }
     },
     "ATTACHMENTS": {

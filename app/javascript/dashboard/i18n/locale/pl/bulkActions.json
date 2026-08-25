@@ -1,11 +1,6 @@
 {
   "BULK_ACTION": {
     "CONVERSATIONS_SELECTED": "{conversationCount} wybranych rozmów",
-    "AGENT_SELECT_LABEL": "Wybierz konsultanta",
-    "ASSIGN_CONFIRMATION_LABEL": "Czy na pewno chcesz przypisać {conversationCount} {conversationLabel} do",
-    "UNASSIGN_CONFIRMATION_LABEL": "Czy na pewno chcesz odwołać przypisanie {conversationCount} {conversationLabel}?",
-    "GO_BACK_LABEL": "Powróć",
-    "ASSIGN_LABEL": "Przypisz",
     "NONE": "Brak",
     "CLEAR_SELECTION": "Wyczyść",
     "ASSIGN_AGENT_CONFIRMATION_LABEL": "Czy na pewno chcesz przypisać {n} rozmowę do {agentName}? | Czy na pewno chcesz przypisać {n} rozmowy do {agentName}? | Czy na pewno chcesz przypisać {n} rozmów do {agentName}?",
@@ -20,7 +15,6 @@
     "RESOLVE_SUCCESFUL": "Rozmowy zostały pomyślnie zakończone.",
     "RESOLVE_FAILED": "Nie udało się rozwiązać rozmów. Spróbuj ponownie.",
     "ALL_CONVERSATIONS_SELECTED_ALERT": "Zaznaczone rozmowy widoczne na tej stronie.",
-    "AGENT_LIST_LOADING": "Ładowanie agentów",
     "UPDATE": {
       "CHANGE_STATUS": "Zmień status",
       "SNOOZE_UNTIL": "Uśpij",
@@ -35,6 +29,7 @@
       "ASSIGN_LABELS": "Przypisz etykiety",
       "NO_LABELS_FOUND": "Brak wyników",
       "ASSIGN_SELECTED_LABELS": "Przypisz wybrane etykiety",
+      "REMOVE_SELECTED_LABELS": "Remove selected labels",
       "ASSIGN_SUCCESFUL": "Etykiety zostały pomyślnie przypisane.",
       "ASSIGN_FAILED": "Nie udało się przypisać etykiet. Spróbuj ponownie.",
       "REMOVE_LABELS": "Usuń etykiety",
@@ -43,7 +38,6 @@
       "REMOVE_FAILED": "Nie udało się usunąć etykiet. Spróbuj ponownie."
     },
     "TEAMS": {
-      "TEAM_SELECT_LABEL": "Wybierz zespół",
       "NONE": "Brak",
       "NO_TEAMS_AVAILABLE": "Na tym koncie nie dodano jeszcze żadnych zespołów.",
       "ASSIGN_SELECTED_TEAMS": "Przypisz wybrany zespół.",

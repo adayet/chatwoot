@@ -1,7 +1,7 @@
 # Customizacje Klimabazar (fork chatwoot/chatwoot)
 
 Fork: `adayet/chatwoot`, gałąź `klimabazar`. Przypięta do stabilnego tagu upstream
-(start: **v4.14.1**, commit `d58b6a6`).
+(start: **v4.14.1**, commit `d58b6a6`; aktualnie wciągnięty **v4.17.0**).
 Build: GitHub Actions → `ghcr.io/adayet/chatwoot`. Serwer pobiera gotowy obraz (nie kompiluje).
 
 ## Reguła sidecar-first

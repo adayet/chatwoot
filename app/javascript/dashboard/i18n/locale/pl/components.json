@@ -64,6 +64,15 @@
     "BULLET_LIST": "Lista punktowana",
     "ORDERED_LIST": "Lista numerowana",
     "TABLE": "Tabela",
-    "IMAGE": "Obraz"
+    "IMAGE": "Obraz",
+    "VIDEO": "Wideo",
+    "DIVIDER": "Separator"
+  },
+  "VIDEO_EMBED": {
+    "PLACEHOLDER": "Wklej link do wideo",
+    "HINT": "Działa z YouTube, Vimeo, Loom, Wistia, Arcade, Bunny, CodePen, GuideJar i linkami mp4",
+    "ERROR": "To nie wygląda na obsługiwany link do wideo",
+    "ADD": "Osadź",
+    "CANCEL": "Anuluj"
   }
 }

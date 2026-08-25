@@ -30,5 +30,63 @@
     "VALIDATION_ERROR": "Wypełnij wszystkie wymagane pola",
     "SUCCESS": "Dane zapisane pomyślnie",
     "ERROR": "Nie udało się zapisać danych. Spróbuj ponownie."
+  },
+  "ONBOARDING_INBOX_SETUP": {
+    "GREETING": "Skonfigurujmy kilka rzeczy",
+    "SUBTITLE": "To da Ci przewagę na starcie w Twoim panelu",
+    "CONTINUE": "Kontynuuj",
+    "SKIP": "Pomiń",
+    "ERROR": "Wystąpił błąd. Spróbuj ponownie.",
+    "WHATSAPP_CONNECTED": "WhatsApp połączony pomyślnie",
+    "FACEBOOK_CONNECTED": "Facebook połączony pomyślnie",
+    "META_RESTRICTION": {
+      "MESSAGE": "Konfiguracja skrzynek dla Facebooka, Instagrama i WhatsApp jest tymczasowo niedostępna z powodu problemu na poziomie API po stronie Meta, a nie błędu Chatwoota. Ściśle współpracujemy z Meta, aby rozwiązać go jak najszybciej.",
+      "STATUS_LINK": "Zobacz aktualizacje statusu"
+    },
+    "CREATED_FOR_YOU": {
+      "TITLE": "Utworzyliśmy dla Ciebie następujące elementy",
+      "LIVE_CHAT": "Widżet Live Chat",
+      "LIVE_CHAT_DESCRIPTION": "Komunikator na Twoją stronę",
+      "LIVE_CHAT_STATUS": "Już prawie gotowe…",
+      "LIVE_CHAT_READY": "Gotowe",
+      "HELP_CENTER": "Centrum pomocy",
+      "HELP_CENTER_DESCRIPTION": "Twoja cyfrowa encyklopedia",
+      "HELP_CENTER_GENERATING": "Tworzenie centrum pomocy…",
+      "HELP_CENTER_ANALYZING_WEBSITE": "Analizowanie Twojej strony…",
+      "HELP_CENTER_SETTING_UP_CATEGORIES": "Konfigurowanie kategorii…",
+      "HELP_CENTER_CURATING_ARTICLES": "Dobieranie artykułów…",
+      "HELP_CENTER_ARTICLES": "Utworzono {count} artykuł | Utworzono {count} artykuły | Utworzono {count} artykułów",
+      "HELP_CENTER_CATEGORIES": "{count} kategoria | {count} kategorie | {count} kategorii",
+      "HELP_CENTER_SUMMARY": "Utworzono {count} artykuł w {categories} | Utworzono {count} artykuły w {categories} | Utworzono {count} artykułów w {categories}"
+    },
+    "CHANNELS": {
+      "TITLE": "Połącz wszystkie swoje kanały rozmów",
+      "HEADER": "Znaleźliśmy kilka kanałów, które możesz połączyć",
+      "CONNECT": "Połącz",
+      "CONNECTED": "Połączono",
+      "MORE_CHANNELS_NOTE": "Kanały {email} i {voice} skonfigurujesz później w aplikacji",
+      "MORE_CHANNELS_EMAIL": "E-mail",
+      "MORE_CHANNELS_VOICE": "Głos",
+      "VIEW_ALL": "Zobacz wszystkie",
+      "GMAIL": "Gmail",
+      "OUTLOOK": "Outlook",
+      "OTHER_EMAIL": "Inni dostawcy poczty"
+    },
+    "CHANNELS_DIALOG": {
+      "TITLE": "Połącz wszystkie kanały od razu",
+      "SUBTITLE": "Zarządzaj nimi z jednego panelu. Skrzynki możesz też skonfigurować i edytować później w aplikacji.",
+      "NOTE": "SMS, API, Głos i innych dostawców poczty można skonfigurować później z panelu.",
+      "CONNECT_TITLE": "Połącz swoje konto {name}",
+      "CONNECT_SUBTITLE": "Uzupełnij te szybkie dane",
+      "CONNECT": "Połącz",
+      "BACK": "Powrót",
+      "SETUP_LATER": "Skonfiguruj później w aplikacji",
+      "FACEBOOK_SUBTITLE": "Autoryzuj dostęp i wybierz stronę do połączenia.",
+      "FACEBOOK_LAUNCH": "Kontynuuj z Facebookiem",
+      "FACEBOOK_SELECT_PAGE": "Wybierz stronę do połączenia",
+      "FACEBOOK_LOADING": "Wczytywanie Twoich stron na Facebooku…",
+      "FACEBOOK_NO_PAGES": "Nie znaleziono stron do połączenia. Wszystkie Twoje strony są już połączone.",
+      "FACEBOOK_ERROR": "Nie udało się połączyć z Facebookiem. Spróbuj ponownie."
+    }
   }
 }

@@ -2,12 +2,11 @@
 import { computed, ref, watch } from 'vue';
 import { getLastMessage } from 'dashboard/helper/conversationHelper';
 import Avatar from 'next/avatar/Avatar.vue';
+import Icon from 'dashboard/components-next/icon/Icon.vue';
 import MessagePreview from './MessagePreview.vue';
 import InboxName from '../InboxName.vue';
 import TimeAgo from 'dashboard/components/ui/TimeAgo.vue';
 import CardLabels from './conversationCardComponents/CardLabels.vue';
-// KLIMABAZAR F-prio: priorytet jako kolorowy chip w prawym gornym rogu (zamiast chowanej ikony)
-import Icon from 'dashboard/components-next/icon/Icon.vue';
 // KLIMABAZAR F8: licznik wiadomosci zamiast nieprzeczytanych
 import MessageCountBadge from 'dashboard/components-next/Conversation/ConversationCard/MessageCountBadge.vue';
 import SLACardLabel from './components/SLACardLabel.vue';
@@ -59,7 +58,9 @@ const showMetaSection = computed(() => {
   return props.showInboxName;
 });
 
-const hasSlaPolicyId = computed(() => props.chat?.sla_policy_id);
+const hasSlaPolicyId = computed(
+  () => props.chat?.applied_sla?.id && !props.currentContact?.blocked
+);
 
 const showLabelsSection = computed(() => {
   return props.chat.labels?.length > 0 || hasSlaPolicyId.value;
@@ -200,6 +201,9 @@ watch(
         }"
       >
         <InboxName v-if="showInboxName" :inbox="inbox" class="flex-1 min-w-0" />
+        <!-- KLIMABAZAR F2/F-prio: upstream v4.17.0 dodaje tu blok agent+CardPriorityIcon.
+             Pomijamy swiadomie - agent (F2) i priorytet (F-prio) sa juz w prawym gornym
+             rogu karty (ponizej); w tym rzedzie priorytet chowal sie pod blokiem agenta. -->
       </div>
       <h4
         class="conversation--user text-sm my-0 mx-2 capitalize pt-0.5 text-ellipsis overflow-hidden whitespace-nowrap flex-1 min-w-0 ltr:pr-16 rtl:pl-16 text-n-slate-12"
