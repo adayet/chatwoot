@@ -53,10 +53,19 @@ class ConversationReplyMailer < ApplicationMailer
     Rails.logger.info("Email sent from #{from_email_with_name} \
       to #{to_email} with subject #{@conversation.display_id} \
       #{I18n.t('conversations.reply.transcript_subject')} ")
+    # KLIMABAZAR F-transkrypcja: subject = [#id] tytul watku — email rozmowcy (dla rozmow e-mail);
+    # dla nie-email fallback na "Transkrypcja rozmowy" bez czlonu z e-mailem.
+    thread_subject = @conversation.additional_attributes&.dig('mail_subject').presence
+    transcript_subject =
+      if thread_subject && @contact&.email.present?
+        "[##{@conversation.display_id}] #{thread_subject} — #{@contact.email}"
+      else
+        "[##{@conversation.display_id}] #{I18n.t('conversations.reply.transcript_subject')}"
+      end
     mail({
            to: to_email,
            from: from_email_with_name,
-           subject: "[##{@conversation.display_id}] #{I18n.t('conversations.reply.transcript_subject')}"
+           subject: transcript_subject
          })
   end
 

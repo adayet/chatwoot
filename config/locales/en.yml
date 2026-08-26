@@ -30,6 +30,13 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  # KLIMABAZAR F-transkrypcja: format daty dla maila transkrypcji
+  time:
+    formats:
+      transcript: '%-d %b %Y, %H:%M'
+  # KLIMABAZAR F-transkrypcja: stopka maili (i18n)
+  mailer_footer:
+    sent_by: 'This email was sent by'
   hello: 'Hello world'
   inbox:
     reauthorization:
@@ -383,6 +390,13 @@ en:
           reply_with_inbox_name: '%{inbox_name} <%{from_email}>'
       email_subject: 'New messages on this conversation'
       transcript_subject: 'Conversation Transcript'
+      transcript_labels:
+        from: 'From'
+        subject: 'Subject'
+        to: 'To'
+        cc: 'CC'
+        bcc: 'BCC'
+        attachments: 'Attachments'
     survey:
       response: 'Please rate this conversation, %{link}'
   contacts:

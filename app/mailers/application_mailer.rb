@@ -55,7 +55,8 @@ class ApplicationMailer < ActionMailer::Base
     # expose variables you want to be exposed in liquid
     locals = {
       global_config: GlobalConfig.get('BRAND_NAME', 'BRAND_URL'),
-      action_url: @action_url
+      action_url: @action_url,
+      footer_sent_by: I18n.t('mailer_footer.sent_by') # KLIMABAZAR F-transkrypcja: stopka i18n
     }
 
     locals.merge({ attachment_url: @attachment_url }) if @attachment_url

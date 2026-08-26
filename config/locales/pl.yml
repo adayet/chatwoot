@@ -17,6 +17,29 @@
 #To learn more, please read the Rails Internationalization guide
 #available at https://guides.rubyonrails.org/i18n.html.
 pl:
+  # KLIMABAZAR F-transkrypcja: format daty + polskie skroty miesiecy
+  # (rails-i18n pl nie jest zaladowane w tej instalacji, wiec definiujemy wlasne)
+  time:
+    formats:
+      transcript: '%-d %b %Y, %H:%M'
+  date:
+    abbr_month_names:
+      -
+      - sty
+      - lut
+      - mar
+      - kwi
+      - maj
+      - cze
+      - lip
+      - sie
+      - wrz
+      - paź
+      - lis
+      - gru
+  # KLIMABAZAR F-transkrypcja: stopka maili (i18n)
+  mailer_footer:
+    sent_by: 'Ten e-mail został wysłany przez'
   hello: 'Witaj świecie'
   inbox:
     reauthorization:
@@ -365,6 +388,13 @@ pl:
           reply_with_inbox_name: '%{inbox_name} <%{from_email}>'
       email_subject: 'Nowe wiadomości w tej dyskusji'
       transcript_subject: 'Transkrypcja rozmowy'
+      transcript_labels:
+        from: 'Od'
+        subject: 'Temat'
+        to: 'Do'
+        cc: 'DW'
+        bcc: 'UDW'
+        attachments: 'Załączniki'
     survey:
       response: 'Oceń tę rozmowę, %{link}'
   contacts:
