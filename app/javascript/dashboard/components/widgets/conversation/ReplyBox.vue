@@ -714,28 +714,22 @@ export default {
           this.$store.getters['draftMessages/get'](key) || '';
 
         // ensure that the message has signature set based on the ui setting
-        this.message = this.toggleSignatureForDraft(messageFromStore);
+        this.message = this.stripSignatureFromDraft(messageFromStore);
       }
     },
-    toggleSignatureForDraft(message) {
+    // KLIMABAZAR F-podpis: stopka nigdy nie żyje w treści edytora. Odejmujemy ją
+    // bezwarunkowo, bo drafty zapisane przed tą zmianą mają ją wklejoną — bez tego
+    // agent dostałby ją dwa razy (raz w treści, raz przy wysyłce).
+    stripSignatureFromDraft(message) {
       if (this.isPrivate) {
         return message;
       }
 
-      // Even when editor is disabled (e.g. WhatsApp/API can't reply), we must
-      // still normalize stale signatures out of drafts when signature is off.
-      if (this.isEditorDisabled && this.sendWithSignature) {
-        return message;
-      }
-
-      const effectiveChannelType = getEffectiveChannelType(
-        this.channelType,
-        this.inbox?.medium || ''
+      return removeSignature(
+        message,
+        this.messageSignature,
+        getEffectiveChannelType(this.channelType, this.inbox?.medium || '')
       );
-
-      return this.sendWithSignature
-        ? appendSignature(message, this.messageSignature, effectiveChannelType)
-        : removeSignature(message, this.messageSignature, effectiveChannelType);
     },
     removeFromDraft() {
       if (this.conversationIdByRoute) {
@@ -878,16 +872,30 @@ export default {
         // To handle both cases, text and attachments are always sent as separate messages.
         const isOnInstagram = this.isAnInstagramChannel;
         const isOnTiktok = this.isATiktokChannel;
+        // KLIMABAZAR F-podpis: stopki nie ma już w treści edytora, więc doklejamy ją
+        // tutaj — tym samym helperem, którego używał edytor, żeby wysłana treść była
+        // identyczna z dotychczasową. Warunek kopiuje dotychczasowy.
+        const messageWithSignature =
+          !this.isPrivate && this.sendWithSignature && this.messageSignature
+            ? appendSignature(
+                this.message,
+                this.messageSignature,
+                getEffectiveChannelType(
+                  this.channelType,
+                  this.inbox?.medium || ''
+                )
+              )
+            : this.message;
         if ((isOnWhatsApp || isOnInstagram || isOnTiktok) && !this.isPrivate) {
           this.sendMessageAsMultipleMessages(
-            this.message,
+            messageWithSignature,
             copilotAcceptedMessage
           );
         } else {
-          const messagePayload = this.getMessagePayload(this.message);
+          const messagePayload = this.getMessagePayload(messageWithSignature);
           this.sendMessage(
             messagePayload,
-            this.message,
+            messageWithSignature,
             copilotAcceptedMessage
           );
         }
@@ -1039,20 +1047,10 @@ export default {
       this.copilot.execute(action, data);
     },
     clearMessage() {
+      // KLIMABAZAR F-podpis: stopka nie wraca do pola po wysyłce — jest doklejana
+      // dopiero przy wysyłce, a agent widzi ją jako podgląd pod edytorem.
       this.message = '';
       this.clearCopilotAcceptedMessage();
-      if (this.sendWithSignature && !this.isPrivate) {
-        // if signature is enabled, append it to the message
-        const effectiveChannelType = getEffectiveChannelType(
-          this.channelType,
-          this.inbox?.medium || ''
-        );
-        this.message = appendSignature(
-          this.message,
-          this.messageSignature,
-          effectiveChannelType
-        );
-      }
       this.attachedFiles = [];
       this.isRecordingAudio = false;
       this.resetReplyToMessage();
@@ -1417,6 +1415,7 @@ export default {
           @content-ready="copilot.setContentReady"
           @send="copilot.sendFollowUp"
         />
+        <!-- KLIMABAZAR F-podpis: stopka nie trafia do edytora; podgląd pod polem, doklejenie przy wysyłce -->
         <WootMessageEditor
           v-else-if="!showAudioRecorderEditor"
           ref="messageEditor"
@@ -1432,8 +1431,6 @@ export default {
           :enable-macros="isMacrosEnabled"
           enable-variables
           :variables="messageVariables"
-          :signature="messageSignature"
-          allow-signature
           :channel-type="channelType"
           :medium="inbox.medium"
           @typing-off="onTypingOff"
