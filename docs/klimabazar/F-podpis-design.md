@@ -68,6 +68,24 @@ Dlatego `toggleSignatureForDraft()` nie znika, tylko upraszcza się do **bezwaru
 
 Zgodnie z regułą projektu „Remove dead/unreachable/unused code" martwe gałęzie usuwamy, a nie zostawiamy zakomentowane.
 
+## Uzupełnienie (2026-09-07, po pierwszym wdrożeniu)
+
+Pierwsza wersja spec obejmowała wyłącznie `ReplyBox.vue` — i to był **błąd w rozpoznaniu zakresu**. Chatwoot ma **dwa niezależne komponenty kompozycji** i oba wplatały stopkę w treść:
+
+| | Odpowiedź w rozmowie | Nowa rozmowa (modal) |
+|---|---|---|
+| Komponent | `ReplyBox.vue` | `components-next/NewConversation/ComposeNewConversationForm.vue` + `MessageEditor.vue` |
+| Wstawianie | `toggleSignatureForDraft` / `clearMessage` | `handleAddSignature` / `handleRemoveSignature` (zdarzenia z `ActionButtons.vue`) |
+| Doklejenie przy wysyłce | `confirmOnSendReply` | `newMessagePayload()` |
+
+W modalu zastosowano ten sam wzorzec: `MessageEditor.vue` przestaje przekazywać `:signature`/`allow-signature` do `Editor` (ten sam kill switch, `Editor.vue` znów nietknięty), handlery i listenery `@add-signature`/`@remove-signature` znikają, a stopka dokleja się w `newMessagePayload()`. `removeSignatureFromMessage()` zostaje — czyści resztki przy zmianie skrzynki/kontaktu.
+
+`SignaturePreview.vue` przeniesiony do `components-next/` i współdzielony przez oba miejsca (zgodnie z regułą z `CLAUDE.md`, że reszta jest wygaszana).
+
+`ActionButtons.vue` zostaje nietknięty — nadal emituje `addSignature`/`removeSignature`, których nikt nie słucha. Świadoma decyzja: to plik upstreamowy, a puste zdarzenia nie mają żadnego efektu; nie warto płacić za to kruchością przy mergach.
+
+**Zastana normalizacja CRLF:** ścieżka nowej rozmowy zapisuje treść z `\r\n` zamiast `\n`. Zachowanie sprzed zmiany (stary kod też doklejał stopkę przez `appendSignature` z `\n`), więc nie jest to regres — treść jest identyczna z wzorcem po normalizacji.
+
 ## Czego ta zmiana NIE robi
 
 - **Nie naprawia dymka wysłanej wiadomości.** W historii rozmowy stopka nadal pokaże się jako źródło HTML, bo `MessageFormatter` tworzy markdown-it z `html: false`. Globalne włączenie `html: true` odpada — przez ten sam formatter przechodzą przychodzące maile od klientów, czyli byłby to wektor XSS. Osobny temat, świadomie poza zakresem.

@@ -25,6 +25,8 @@ import MessageEditor from './MessageEditor.vue';
 import ActionButtons from './ActionButtons.vue';
 import InboxEmptyState from './InboxEmptyState.vue';
 import AttachmentPreviews from './AttachmentPreviews.vue';
+// KLIMABAZAR F-podpis
+import SignaturePreview from 'dashboard/components-next/SignaturePreview.vue';
 import CopilotReplyBottomPanel from 'dashboard/components/widgets/WootWriter/CopilotReplyBottomPanel.vue';
 
 const props = defineProps({
@@ -130,10 +132,21 @@ const validationStates = computed(() => ({
 
 const newMessagePayload = () => {
   const { message, subject, ccEmails, bccEmails, attachedFiles } = state;
+  // KLIMABAZAR F-podpis: stopki nie ma już w treści edytora (agent widzi podgląd
+  // pod polem), więc doklejamy ją tutaj — tym samym helperem, którego używał
+  // edytor, żeby wysłana treść była identyczna z dotychczasową.
+  const messageWithSignature =
+    props.sendWithSignature && props.messageSignature
+      ? appendSignature(
+          message,
+          props.messageSignature,
+          effectiveChannelType.value
+        )
+      : message;
   return prepareNewMessagePayload({
     targetInbox: props.targetInbox,
     selectedContact: props.selectedContact,
-    message,
+    message: messageWithSignature,
     subject,
     ccEmails,
     bccEmails,
@@ -255,22 +268,6 @@ const clearSelectedContact = () => {
 
 const onClickInsertEmoji = emoji => {
   state.message += emoji;
-};
-
-const handleAddSignature = signature => {
-  state.message = appendSignature(
-    state.message,
-    signature,
-    effectiveChannelType.value
-  );
-};
-
-const handleRemoveSignature = signature => {
-  state.message = removeSignature(
-    state.message,
-    signature,
-    effectiveChannelType.value
-  );
 };
 
 const handleAttachFile = files => {
@@ -413,12 +410,17 @@ useKeyboardEvents({
       <MessageEditor
         v-if="shouldShowMessageEditor"
         v-model="state.message"
-        :message-signature="messageSignature"
-        :send-with-signature="sendWithSignature"
         :has-errors="validationStates.isMessageInvalid"
         :channel-type="inboxChannelType"
         :medium="targetInbox?.medium || ''"
         :copilot="copilot"
+      />
+
+      <!-- KLIMABAZAR F-podpis: stopka jako podgląd, nie jako treść edytora -->
+      <SignaturePreview
+        v-if="shouldShowMessageEditor && sendWithSignature && messageSignature"
+        :signature="messageSignature"
+        class="px-4"
       />
 
       <AttachmentPreviews
@@ -453,8 +455,6 @@ useKeyboardEvents({
       :is-dropdown-active="isAnyDropdownActive"
       :message-signature="messageSignature"
       @insert-emoji="onClickInsertEmoji"
-      @add-signature="handleAddSignature"
-      @remove-signature="handleRemoveSignature"
       @attach-file="handleAttachFile"
       @discard="$emit('discard')"
       @send-message="handleSendMessage"

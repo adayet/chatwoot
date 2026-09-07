@@ -5,10 +5,11 @@ import { useI18n } from 'vue-i18n';
 import Editor from 'dashboard/components-next/Editor/Editor.vue';
 import CopilotEditorSection from 'dashboard/components/widgets/conversation/CopilotEditorSection.vue';
 
+// KLIMABAZAR F-podpis: stopka nie trafia do edytora (usunięte `signature`/
+// `allow-signature` przy <Editor>, co wyłącza całą ścieżkę wstawiania).
+// Podgląd renderuje ComposeNewConversationForm, doklejenie idzie przy wysyłce.
 const props = defineProps({
   hasErrors: { type: Boolean, default: false },
-  sendWithSignature: { type: Boolean, default: false },
-  messageSignature: { type: String, default: '' },
   channelType: { type: String, default: '' },
   medium: { type: String, default: '' },
   copilot: { type: Object, default: null },
@@ -75,9 +76,6 @@ const executeCopilotAction = (action, data) => {
           enable-variables
           enable-captain-tools
           :show-character-count="false"
-          :signature="messageSignature"
-          allow-signature
-          :send-with-signature="sendWithSignature"
           :channel-type="channelType"
           :medium="medium"
           @execute-copilot-action="executeCopilotAction"
