@@ -47,7 +47,6 @@ import {
 } from '../../../helper/AnalyticsHelper/events';
 import fileUploadMixin from 'dashboard/mixins/fileUploadMixin';
 import {
-  appendSignature,
   removeSignature,
   getEffectiveChannelType,
   getAgentVariables,
@@ -865,30 +864,19 @@ export default {
         // To handle both cases, text and attachments are always sent as separate messages.
         const isOnInstagram = this.isAnInstagramChannel;
         const isOnTiktok = this.isATiktokChannel;
-        // KLIMABAZAR F-podpis: stopki nie ma już w treści edytora, więc doklejamy ją
-        // tutaj — tym samym helperem, którego używał edytor, żeby wysłana treść była
-        // identyczna z dotychczasową. Warunek kopiuje dotychczasowy.
-        const messageWithSignature =
-          !this.isPrivate && this.sendWithSignature && this.messageSignature
-            ? appendSignature(
-                this.message,
-                this.messageSignature,
-                getEffectiveChannelType(
-                  this.channelType,
-                  this.inbox?.medium || ''
-                )
-              )
-            : this.message;
+        // KLIMABAZAR F-podpis: stopki nie dokleja już front — robi to backend
+        // (Messages::MessageBuilder), żeby dostała ją też aplikacja mobilna i API.
+        // Tutaj treść leci taka, jaką agent widzi w polu edycji.
         if ((isOnWhatsApp || isOnInstagram || isOnTiktok) && !this.isPrivate) {
           this.sendMessageAsMultipleMessages(
-            messageWithSignature,
+            this.message,
             copilotAcceptedMessage
           );
         } else {
-          const messagePayload = this.getMessagePayload(messageWithSignature);
+          const messagePayload = this.getMessagePayload(this.message);
           this.sendMessage(
             messagePayload,
-            messageWithSignature,
+            this.message,
             copilotAcceptedMessage
           );
         }
@@ -915,23 +903,9 @@ export default {
       isPrivate,
       { editorMessage = '', copilotAcceptedMessage = '' } = {}
     ) {
-      const normalizeForComparison = message => {
-        let normalizedMessage = message || '';
-
-        if (this.sendWithSignature && this.messageSignature && !isPrivate) {
-          const effectiveChannelType = getEffectiveChannelType(
-            this.channelType,
-            this.inbox?.medium || ''
-          );
-          normalizedMessage = removeSignature(
-            normalizedMessage,
-            this.messageSignature,
-            effectiveChannelType
-          );
-        }
-
-        return trimContent(normalizedMessage);
-      };
+      // KLIMABAZAR F-podpis: porównywane treści nie zawierają już stopki — ani
+      // treść z edytora, ani podpowiedź Copilota. Backend dokleja ją później.
+      const normalizeForComparison = message => trimContent(message || '');
 
       const normalizedAcceptedMessage = normalizeForComparison(
         copilotAcceptedMessage

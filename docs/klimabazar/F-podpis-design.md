@@ -86,6 +86,26 @@ W modalu zastosowano ten sam wzorzec: `MessageEditor.vue` przestaje przekazywać
 
 **Zastana normalizacja CRLF:** ścieżka nowej rozmowy zapisuje treść z `\r\n` zamiast `\n`. Zachowanie sprzed zmiany (stary kod też doklejał stopkę przez `appendSignature` z `\n`), więc nie jest to regres — treść jest identyczna z wzorcem po normalizacji.
 
+## Uzupełnienie 2 (2026-09-07): doklejanie przeniesione na backend
+
+**Powód:** wiadomości wysyłane z **natywnej aplikacji mobilnej** szły bez stopki. Potwierdzone przez właściciela na produkcji. Przyczyna: stopkę doklejał front, a aplikacja mobilna to osobny klient, który używa wyłącznie API — nie uruchamia naszego panelu. Weryfikacja w kodzie: backend nigdzie nie dotykał `message_signature` przy tworzeniu wiadomości (jedyne wystąpienia to kolumna modelu, strong params profilu i podpowiedzi Captaina).
+
+**Rozwiązanie:** doklejanie przeniesione z frontu do `Messages::MessageBuilder` — jedynego wspólnego punktu wejścia dla panelu, aplikacji mobilnej i integracji przez API (`conversations_controller`, `messages_controller`, makra). Zgodne z regułą z `CLAUDE.md`: „Enforce eligibility and exclusivity rules at the earliest shared entry point".
+
+**Front przestaje doklejać** — inaczej z panelu szłyby dwie stopki. Zostaje wyłącznie podgląd pod polem edycji, w obu komponentach kompozycji. Usunięte: `messageWithSignature` w `confirmOnSendReply`, doklejanie w `newMessagePayload()`, import `appendSignature` w obu plikach. `normalizeForComparison` **teraz** faktycznie staje się martwy (bo `editorMessage` znów nie zawiera stopki) i został uproszczony.
+
+**Kształt zmiany:** cała logika w nowym `app/builders/messages/agent_signature.rb`; w pliku upstreamowym zostaje jedna linia funkcjonalna (`Messages::AgentSignature.new(@message).apply!`) plus wyciszenie `Metrics/ClassLength` — klasa upstreamowa była dokładnie na limicie 175 linii. Klasa operuje na zbudowanym, jeszcze niezapisanym rekordzie, więc bierze jeden argument zamiast sześciu.
+
+**Warunki doklejenia:** wiadomość wychodząca, nie notatka, nadawcą jest `User`, ma podpis, ma włączoną flagę `<slug_kanału>_signature_enabled` (ten sam slug co `slugifyChannel` w panelu), treść niepusta, `content_type` = `text` **lub `nil`**.
+
+**Pułapka `content_type` (znaleziona w trakcie testów):** `message_params` ustawia `content_type` wprost na `nil`, gdy klient go nie podał — domyślne `text` wchodzi dopiero z bazy przy zapisie. Warunek `@message.text?` zwracał więc `false` i stopka nie była doklejana przy wysyłce z API. Stąd jawne dopuszczenie `nil`.
+
+**Zweryfikowane wykluczenia** (jednostkowo, na zbudowanych rekordach): automatyzacja (`sender` = nil) → nie; bot (`AgentBot`) → nie; połączenie głosowe (`voice_call`) → nie; karta (`cards`) → nie; agent z tekstem → tak. Notatka prywatna przez API → bez stopki.
+
+**Makra dostają stopkę** — decyzja właściciela: makro uruchomione przez agenta wysyła w jego imieniu.
+
+**Różnica względem starej ścieżki:** backend nie uruchomi `cleanSignature` (to ProseMirror w JS), więc dokleja podpis w surowej postaci — z `&#160;` zamiast twardej spacji. W wyrenderowanym mailu bez różnicy, encja renderuje się identycznie.
+
 ## Czego ta zmiana NIE robi
 
 - **Nie naprawia dymka wysłanej wiadomości.** W historii rozmowy stopka nadal pokaże się jako źródło HTML, bo `MessageFormatter` tworzy markdown-it z `html: false`. Globalne włączenie `html: true` odpada — przez ten sam formatter przechodzą przychodzące maile od klientów, czyli byłby to wektor XSS. Osobny temat, świadomie poza zakresem.

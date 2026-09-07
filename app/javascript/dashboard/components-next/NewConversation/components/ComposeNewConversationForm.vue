@@ -4,7 +4,6 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, requiredIf } from '@vuelidate/validators';
 import { INBOX_TYPES, isVoiceCallEnabled } from 'dashboard/helper/inbox';
 import {
-  appendSignature,
   removeSignature,
   getEffectiveChannelType,
   stripUnsupportedMarkdown,
@@ -132,21 +131,12 @@ const validationStates = computed(() => ({
 
 const newMessagePayload = () => {
   const { message, subject, ccEmails, bccEmails, attachedFiles } = state;
-  // KLIMABAZAR F-podpis: stopki nie ma już w treści edytora (agent widzi podgląd
-  // pod polem), więc doklejamy ją tutaj — tym samym helperem, którego używał
-  // edytor, żeby wysłana treść była identyczna z dotychczasową.
-  const messageWithSignature =
-    props.sendWithSignature && props.messageSignature
-      ? appendSignature(
-          message,
-          props.messageSignature,
-          effectiveChannelType.value
-        )
-      : message;
+  // KLIMABAZAR F-podpis: stopki nie dokleja już front — robi to backend
+  // (Messages::MessageBuilder), żeby dostała ją też aplikacja mobilna i API.
   return prepareNewMessagePayload({
     targetInbox: props.targetInbox,
     selectedContact: props.selectedContact,
-    message: messageWithSignature,
+    message,
     subject,
     ccEmails,
     bccEmails,

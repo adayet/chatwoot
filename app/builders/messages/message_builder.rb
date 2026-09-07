@@ -1,3 +1,6 @@
+# rubocop:disable Metrics/ClassLength
+# KLIMABAZAR F-podpis: klasa upstreamowa była już dokładnie na limicie 175 linii,
+# a doklejenie stopki dodaje jedną. Wyciszenie zamiast sztucznego dzielenia klasy upstreamu.
 class Messages::MessageBuilder
   include ::FileTypeHelper
   include ::EmailHelper
@@ -23,6 +26,7 @@ class Messages::MessageBuilder
 
   def perform
     @message = @conversation.messages.build(message_params)
+    Messages::AgentSignature.new(@message).apply! # KLIMABAZAR F-podpis
     process_attachments
     process_emails
     # When the message has no quoted content, it will just be rendered as a regular message
@@ -233,5 +237,7 @@ class Messages::MessageBuilder
                                        })
   end
 end
+
+# rubocop:enable Metrics/ClassLength
 
 Messages::MessageBuilder.prepend_mod_with('Messages::MessageBuilder')
