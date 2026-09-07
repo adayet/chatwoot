@@ -62,7 +62,7 @@ Dlatego `toggleSignatureForDraft()` nie znika, tylko upraszcza się do **bezwaru
 ### 5. Uproszczenia wynikające z tego, że treść nie zawiera już stopki
 
 - `hasMeaningfulEditorContent()` → `!!body.trim()`; cała gałąź z `removeSignature` i komentarz o przypadkowym zbiegu treści z podpisem stają się martwe.
-- `normalizeForComparison()` w `sendMessageAnalyticsData()` → samo `trimContent(message)`.
+- `normalizeForComparison()` w `sendMessageAnalyticsData()` — **bez zmian**. Pierwotnie zakładaliśmy, że też staje się martwy; weryfikacja w trakcie implementacji (2026-09-07) pokazała, że nie: jego argument `editorMessage` to trzeci parametr `sendMessage()`, któremu przekazujemy treść **już z doklejoną stopką**. Odejmowanie stopki jest tam nadal osiągalne i potrzebne, inaczej porównanie z podpowiedzią Copilota liczyłoby stopkę jako treść agenta.
 - `clearMessage()` → `this.message = ''`, bez ponownego doklejania podpisu.
 - `onReplyToMessage()` (l. ~1292) — **bez zmian**. `isSignatureEnabledForInbox` nadal istnieje (steruje podglądem), a wybór `start`/`end` przestaje mieć znaczenie dla pustego pola i pozostaje poprawny, gdy w treści jest cytat.
 

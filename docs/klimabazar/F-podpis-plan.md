@@ -395,7 +395,11 @@ Ma być:
     },
 ```
 
-- [ ] **Step 2: Uprość `normalizeForComparison` w `sendMessageAnalyticsData` (~l. 917)**
+- [x] **Step 2: ~~Uprość `normalizeForComparison`~~ — KROK ANULOWANY (2026-09-07)**
+
+Weryfikacja w trakcie implementacji: `normalizeForComparison` **nie jest martwy**. Jego argument `editorMessage` to trzeci parametr `sendMessage()`, a po Zadaniu 2 przekazujemy tam treść **z doklejoną stopką** (`messageWithSignature`, a w ścieżce wielowiadomościowej `messagePayload.message`). Usunięcie odejmowania stopki sprawiłoby, że porównanie z podpowiedzią Copilota liczyłoby stopkę jako treść napisaną przez agenta.
+
+**Zostaw ten kod bez zmian.** Poniższy blok „było" zachowany wyłącznie jako zapis tego, czego NIE ruszamy:
 
 Było:
 ```js
@@ -418,11 +422,6 @@ Było:
       };
 ```
 
-Ma być:
-```js
-      // KLIMABAZAR F-podpis: porównywane treści nie zawierają już stopki.
-      const normalizeForComparison = message => trimContent(message || '');
-```
 
 - [ ] **Step 3: Sprawdź, czy `removeSignature` jest jeszcze używany**
 

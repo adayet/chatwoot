@@ -17,6 +17,8 @@ import CopilotEditorSection from './CopilotEditorSection.vue';
 import MessageSignatureMissingAlert from './MessageSignatureMissingAlert.vue';
 import ReplyBoxBanner from './ReplyBoxBanner.vue';
 import QuotedEmailPreview from './QuotedEmailPreview.vue';
+// KLIMABAZAR F-podpis
+import SignaturePreview from './SignaturePreview.vue';
 import { REPLY_EDITOR_MODES } from 'dashboard/components/widgets/WootWriter/constants';
 import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor.vue';
 import AudioRecorder from 'dashboard/components/widgets/WootWriter/AudioRecorder.vue';
@@ -82,6 +84,7 @@ export default {
     WhatsappTemplates,
     WootMessageEditor,
     QuotedEmailPreview,
+    SignaturePreview,
     CopilotEditorSection,
     CopilotReplyBottomPanel,
     ConversationResolveAttributesModal,
@@ -226,20 +229,10 @@ export default {
         ? REPLY_EDITOR_MODES.NOTE
         : REPLY_EDITOR_MODES.REPLY;
     },
+    // KLIMABAZAR F-podpis: treść edytora nigdy nie zawiera stopki, więc nie ma
+    // czego odejmować — puste pole to po prostu puste pole.
     hasMeaningfulEditorContent() {
-      const body = this.message || '';
-      // Only strip the signature when it's actually being auto-appended.
-      // If the toggle is off, the agent's text might happen to match their
-      // saved signature and we'd incorrectly treat it as empty.
-      const shouldStripSignature =
-        !this.isPrivate && this.sendWithSignature && !!this.messageSignature;
-      if (!shouldStripSignature) return !!body.trim();
-      const stripped = removeSignature(
-        body,
-        this.messageSignature,
-        getEffectiveChannelType(this.channelType, this.inbox?.medium || '')
-      );
-      return !!stripped.trim();
+      return !!(this.message || '').trim();
     },
     isBotOwnedPendingConversation() {
       return (
@@ -1452,6 +1445,17 @@ export default {
           :preview-text="quotedEmailPreviewText"
           class="mb-2"
           @toggle="toggleQuotedReply"
+        />
+
+        <!-- KLIMABAZAR F-podpis: stopka jako podgląd, nie jako treść edytora -->
+        <SignaturePreview
+          v-if="
+            isSignatureEnabledForInbox &&
+            isSignatureAvailable &&
+            isDefaultEditorMode
+          "
+          :signature="messageSignature"
+          class="mb-2"
         />
 
         <div
