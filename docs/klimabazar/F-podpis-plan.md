@@ -470,20 +470,26 @@ Na `localhost:3001`, po `pnpm eslint` bez błędów:
 
 - [ ] **Step 2: Zasymuluj stary draft (scenariusz 6)**
 
-W konsoli przeglądarki, przy otwartej rozmowie, wstrzyknij draft z wklejoną stopką i przeładuj widok rozmowy:
+**PUŁAPKA (potwierdzona 2026-09-07).** Nie wstrzykuj **surowego** podpisu z bazy — to nie jest wierne odwzorowanie i daje fałszywy alarm. Stare drafty zapisywał edytor **po** `appendSignature` → `cleanSignature`, czyli z podpisem po round-tripie ProseMirror. Dla naszych podpisów jedyna różnica to `&#160;` zdekodowane do twardej spacji. `removeSignature` dopasowuje dokładnie, więc surowy wariant się nie dopasuje i wyjdzie, że kod nie działa — a działa.
+
+Drafty leżą w `localStorage` pod kluczem `draftMessages` (mapa `draft-<conversationId>-REPLY` → treść) i wczytują się przy inicjalizacji store'u, więc po zapisie trzeba **przeładować stronę**.
+
+W konsoli przeglądarki, przy otwartej rozmowie:
 
 ```js
-// podmień <ID> na id otwartej rozmowy (widoczne w URL)
-const sig = window.__store.getters.getMessageSignature;
-window.__store.dispatch('draftMessages/set', {
-  key: `draft-<ID>-REPLY`,
-  message: `Stara tresc\n\n--\n\n${sig}`,
-});
+// podmień 8 na id rozmowy z URL-a
+const store = document.querySelector('#app').__vue_app__.config.globalProperties.$store;
+const sig = store.getters.getMessageSignature;
+const cleaned = sig.split('&#160;').join('\u00a0'); // odwzorowanie cleanSignature
+localStorage.setItem('draftMessages', JSON.stringify({
+  'draft-8-REPLY': 'Stara tresc drafta\n\n--\n\n' + cleaned,
+}));
+location.reload();
 ```
 
-Jeśli `window.__store` nie jest wystawiony w tym buildzie, alternatywa: wpisz treść, przełącz rozmowę, a draft z podpisem wygeneruj przez tymczasowe cofnięcie Step 5 z Zadania 2 (przywrócenie doklejania w `clearMessage`), wyślij wiadomość, cofnij zmianę i wróć do rozmowy.
+Expected: po przeładowaniu pole zawiera samo `Stara tresc drafta` (18 znaków), bez HTML-a i bez `--`.
 
-Expected: po wczytaniu pole zawiera `Stara tresc`, bez HTML-a, a wysyłka daje pojedynczą stopkę.
+Sprzątanie po teście: `localStorage.removeItem('draftMessages')`.
 
 - [ ] **Step 3: Dopisz wiersz do `CUSTOMIZATIONS.md`**
 
