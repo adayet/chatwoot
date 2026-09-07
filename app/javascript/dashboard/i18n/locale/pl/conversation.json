@@ -279,6 +279,7 @@
       "MESSAGING_RESTRICTED_WHATSAPP": "Z powodu ograniczenia okna 24 godzin możesz odpowiedzieć tylko za pomocą szablonu wiadomości",
       "MESSAGING_RESTRICTED_API": "Z powodu ograniczenia okna wiadomości możesz odpowiedzieć tylko za pomocą szablonu wiadomości",
       "MESSAGE_SIGNATURE_NOT_CONFIGURED": "Podpis wiadomości nie jest skonfigurowany, należy go skonfigurować w ustawieniach profilu.",
+      "SIGNATURE_PREVIEW_LABEL": "Podpis",
       "COPILOT_MSG_INPUT": "Podaj copilota dodatkowe wskazówki lub zapytaj o cokolwiek... Naciśnij Enter, aby wysłać odpowiedź uzupełniającą",
       "CLICK_HERE": "Kliknij tutaj, aby zaktualizować",
       "WHATSAPP_TEMPLATES": "Szablony WhatsApp"
