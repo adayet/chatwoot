@@ -58,6 +58,24 @@ describe('DataManager', () => {
       expect(await legacyManager.getCacheKey('inbox')).toBe('existing-key');
       legacyManager.db.close();
     });
+
+    // KLIMABAZAR F-idb: logout in another tab deletes this database. An open connection
+    // that ignores the request keeps the delete pending, and every later open of the
+    // same database queues behind it forever.
+    it('should release its connection when another tab deletes the database', async () => {
+      const outcome = await Promise.race([
+        deleteDB(`cw-store-${accountId}`).then(() => 'deleted'),
+        new Promise(resolve => {
+          setTimeout(() => resolve('blocked'), 1000);
+        }),
+      ]);
+
+      expect(outcome).toBe('deleted');
+      expect(dataManager.db).toBeNull();
+
+      await dataManager.initDb();
+      expect(dataManager.db).not.toBeNull();
+    });
   });
 
   describe('validateModel', () => {

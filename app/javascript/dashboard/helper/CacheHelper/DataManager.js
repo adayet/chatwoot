@@ -12,6 +12,14 @@ export class DataManager {
     if (this.db) return this.db;
     const dbName = `cw-store-${this.accountId}`;
     this.db = await openDB(`cw-store-${this.accountId}`, DATA_VERSION, {
+      // KLIMABAZAR F-idb: logout in another tab deletes this database and a newer build
+      // upgrades it. Both wait until every open connection closes, and every later open
+      // queues behind them, so a connection that stays open hangs all other tabs.
+      // Let go and reopen on the next read.
+      blocking: (currentVersion, blockedVersion, event) => {
+        event.target.close();
+        this.db = null;
+      },
       upgrade(db) {
         // Existing databases already carry the stores added in earlier versions,
         // and createObjectStore throws on a name that is already taken.

@@ -2,6 +2,9 @@
 import { DataManager } from '../helper/CacheHelper/DataManager';
 import ApiClient from './ApiClient';
 
+// KLIMABAZAR F-idb: an open blocked by another tab never settles on its own
+const DB_OPEN_TIMEOUT_MS = 3000;
+
 class CacheEnabledApiClient extends ApiClient {
   constructor(resource, options = {}) {
     super(resource, options);
@@ -50,10 +53,27 @@ class CacheEnabledApiClient extends ApiClient {
     return { data: { payload: dataToParse } };
   }
 
+  // KLIMABAZAR F-idb: a tab still running a build without the release handler in
+  // DataManager can hold the database through a logout delete or an upgrade. Give up
+  // on the cache after a while so the caller falls back to the network.
+  initDbWithTimeout() {
+    let timer;
+    const timeout = new Promise((_, reject) => {
+      timer = setTimeout(
+        () => reject(new Error('IndexedDB open timed out')),
+        DB_OPEN_TIMEOUT_MS
+      );
+    });
+
+    return Promise.race([this.dataManager.initDb(), timeout]).finally(() =>
+      clearTimeout(timer)
+    );
+  }
+
   async getFromCache() {
     try {
       // IDB is not supported in Firefox private mode: https://bugzilla.mozilla.org/show_bug.cgi?id=781982
-      await this.dataManager.initDb();
+      await this.initDbWithTimeout();
     } catch {
       return this.getFromNetwork();
     }
@@ -82,7 +102,7 @@ class CacheEnabledApiClient extends ApiClient {
     const response = await this.getFromNetwork();
 
     try {
-      await this.dataManager.initDb();
+      await this.initDbWithTimeout();
 
       await this.dataManager.replace({
         modelName: this.cacheModelName,
@@ -101,7 +121,7 @@ class CacheEnabledApiClient extends ApiClient {
 
   async validateCacheKey(cacheKeyFromApi) {
     if (!this.dataManager.db) {
-      await this.dataManager.initDb();
+      await this.initDbWithTimeout();
     }
 
     const cachekey = await this.dataManager.getCacheKey(this.cacheModelName);

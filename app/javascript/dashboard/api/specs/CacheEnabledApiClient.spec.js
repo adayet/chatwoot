@@ -2,7 +2,7 @@
 // cached clients have to support
 /* eslint-disable max-classes-per-file */
 import axios from 'axios';
-import { deleteDB } from 'idb';
+import { deleteDB, openDB } from 'idb';
 import CacheEnabledApiClient from '../CacheEnabledApiClient';
 
 global.axios = axios;
@@ -219,5 +219,32 @@ describe('CacheEnabledApiClient', () => {
     const response = await client.get(true);
 
     expect(response.data.payload).toEqual(inboxes);
+  });
+
+  // KLIMABAZAR F-idb: an open that never settles (a tab holding the database through a
+  // pending logout delete or a version upgrade) used to leave the store fetching forever,
+  // so inbox settings spun without end.
+  it('falls back to the network when the database stays blocked by a tab that never lets go', async () => {
+    stubEndpoints({
+      cacheKeys: { inbox: 'key-1' },
+      payload: { payload: inboxes },
+    });
+    // A tab still running a build without the release handler
+    const foreignTab = await openDB(`cw-store-${ACCOUNT_ID}`, 1);
+    const pendingDelete = deleteDB(`cw-store-${ACCOUNT_ID}`);
+    const client = buildClient(WrappedClient);
+
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    try {
+      const request = client.get(true);
+      await vi.advanceTimersByTimeAsync(3000);
+      const response = await request;
+
+      expect(response.data.payload).toEqual(inboxes);
+    } finally {
+      vi.useRealTimers();
+      foreignTab.close();
+      await pendingDelete;
+    }
   });
 });
