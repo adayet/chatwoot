@@ -25,7 +25,13 @@ class Messages::AgentSignature
   private
 
   def applicable?
-    outgoing_text_message? && agent_with_signature? && enabled_for_channel?
+    outgoing_text_message? && !already_signed? && agent_with_signature? && enabled_for_channel?
+  end
+
+  # Karty otwarte przed wdrożeniem tej zmiany działają na starym froncie, który sam
+  # dokleja stopkę z tym samym separatorem — bez tego klient dostałby ją dwa razy.
+  def already_signed?
+    @message.content.include?(DELIMITER)
   end
 
   # `content_type` inne niż `text` to wiadomości strukturalne (karty, formularze)
