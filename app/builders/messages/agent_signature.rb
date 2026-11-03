@@ -9,8 +9,13 @@
 # dzięki czemu zmiana w pliku upstreamowym to jedna linia — mniej konfliktów przy mergach.
 #
 # Front NIE dokleja już stopki — pokazuje wyłącznie podgląd pod polem edycji.
+# Wyjątek kolejności: doklejony przez front cytat poprzedniego maila zostaje pod stopką.
 class Messages::AgentSignature
   DELIMITER = "\n\n--\n\n".freeze
+  # Cytat poprzedniego maila (przełącznik „Dołącz cytowany wątek") front dokleja na końcu
+  # treści jako blok linii zaczynających się od ">" (`appendQuotedTextToMessage`).
+  # Stopka ma stać nad cytatem, tak jak w zwykłym programie pocztowym.
+  QUOTED_REPLY = /\n\n(?:>[^\n]*(?:\n|\z))+\z/
 
   def initialize(message)
     @message = message
@@ -19,7 +24,9 @@ class Messages::AgentSignature
   def apply!
     return unless applicable?
 
-    @message.content = "#{@message.content.rstrip}#{DELIMITER}#{@message.sender.message_signature}"
+    quote = @message.content[QUOTED_REPLY]
+    reply = quote ? @message.content.delete_suffix(quote) : @message.content
+    @message.content = "#{reply.rstrip}#{DELIMITER}#{@message.sender.message_signature}#{quote}"
   end
 
   private
