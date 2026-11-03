@@ -112,7 +112,8 @@ const fetchQuotedReplyFlagFromUISettings = (channelType, uiSettings) => {
   if (!channelType) return false;
 
   const slugifiedChannel = slugifyChannel(channelType);
-  return uiSettings.value[`${slugifiedChannel}_quoted_reply_enabled`];
+  // KLIMABAZAR F-mail-multipart: cytat wątku domyślnie włączony — bez historii klient widzi odpowiedź jako osobny mail
+  return uiSettings.value[`${slugifiedChannel}_quoted_reply_enabled`] ?? true;
 };
 
 /**
