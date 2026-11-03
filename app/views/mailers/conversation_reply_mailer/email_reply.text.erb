@@ -1,0 +1,8 @@
+<%# KLIMABAZAR F-mail-multipart: wersja tekstowa odpowiedzi — obecność obu części
+    (multipart/alternative) zmniejsza ryzyko trafienia do spamu. Własny tekst z API
+    (`text_content.reply`) ma pierwszeństwo, inaczej tekst wyprowadzony z wersji HTML. %>
+<% if @message.content_attributes.dig('email', 'text_content', 'reply').present? %>
+<%= raw @message.content_attributes.dig('email', 'text_content', 'reply') %>
+<% else %>
+<%= raw Html2Text.convert(render(template: 'mailers/conversation_reply_mailer/email_reply', formats: [:html])) %>
+<% end %>

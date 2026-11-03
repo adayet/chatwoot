@@ -1,7 +1,9 @@
 module ConversationReplyMailerHelper
   include ConversationReplyMailerAttachmentHelper
 
-  def prepare_mail(cc_bcc_enabled)
+  # KLIMABAZAR F-mail-multipart: rozgałęzienie HTML + tekst wydłuża metodę upstreamu ponad limit.
+  # Wyciszenie zamiast wydzielania jednorazowego helpera z metody upstreamu.
+  def prepare_mail(cc_bcc_enabled) # rubocop:disable Metrics/MethodLength
     @options = {
       to: to_emails,
       from: email_from,
@@ -26,6 +28,14 @@ module ConversationReplyMailerHelper
     # So this check implicitly determines we're handling an email_reply
     # and not one of the other email types (summary, transcript, etc.)
     process_attachments_as_files_for_email_reply if @message&.attachments.present?
+    # KLIMABAZAR F-mail-multipart: odpowiedź idzie jako HTML + tekst; tekst bez layoutu (layouty maili są HTML-owe)
+    if action_name == 'email_reply'
+      return mail(@options) do |format|
+        format.html
+        format.text { render layout: false }
+      end
+    end
+
     mail(@options)
   end
 

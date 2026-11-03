@@ -268,7 +268,7 @@ RSpec.describe ConversationReplyMailer do
       end
 
       it 'renders the body' do
-        expect(mail.decoded).to include message.content
+        expect(mail.html_part.decoded).to include message.content
       end
 
       it 'does not apply branded email layout when feature is disabled' do
@@ -280,8 +280,8 @@ RSpec.describe ConversationReplyMailer do
           body: '<html><body>Inbox Brand {{ content_for_layout }}</body></html>'
         )
 
-        expect(mail.decoded).not_to include('Inbox Brand')
-        expect(mail.decoded).to include(message.content)
+        expect(mail.html_part.decoded).not_to include('Inbox Brand')
+        expect(mail.html_part.decoded).to include(message.content)
       end
 
       it 'exposes the reply sender in inbox branded email layouts' do
@@ -300,11 +300,11 @@ RSpec.describe ConversationReplyMailer do
           ].join
         )
 
-        expect(mail.decoded).to include('Acme Support')
-        expect(mail.decoded).to include(message.content)
+        expect(mail.html_part.decoded).to include('Acme Support')
+        expect(mail.html_part.decoded).to include(message.content)
         expect(message.sender).not_to eq(agent)
-        expect(mail.decoded).to include(message.sender.email)
-        expect(mail.decoded).to include(message.sender.available_name)
+        expect(mail.html_part.decoded).to include(message.sender.email)
+        expect(mail.html_part.decoded).to include(message.sender.available_name)
       end
 
       it 'falls back to account branded email layout when inbox layout is absent' do
@@ -316,8 +316,8 @@ RSpec.describe ConversationReplyMailer do
           body: '<html><body>Account Brand {{ content_for_layout }}</body></html>'
         )
 
-        expect(mail.decoded).to include('Account Brand')
-        expect(mail.decoded).to include(message.content)
+        expect(mail.html_part.decoded).to include('Account Brand')
+        expect(mail.html_part.decoded).to include(message.content)
       end
 
       it 'applies inbox branded email layout to template messages' do
@@ -334,8 +334,8 @@ RSpec.describe ConversationReplyMailer do
 
         template_mail = described_class.email_reply(template_message).deliver_now
 
-        expect(template_mail.decoded).to include('Template Brand')
-        expect(template_mail.decoded).to include('Automation template response')
+        expect(template_mail.html_part.decoded).to include('Template Brand')
+        expect(template_mail.html_part.decoded).to include('Automation template response')
       end
 
       it 'builds messageID properly' do
@@ -370,14 +370,14 @@ RSpec.describe ConversationReplyMailer do
         it 'includes CSAT survey URL in outgoing_content' do
           with_modified_env 'FRONTEND_URL' => 'https://app.chatwoot.com' do
             mail = described_class.email_reply(csat_message).deliver_now
-            expect(mail.decoded).to include "https://app.chatwoot.com/survey/responses/#{conversation.uuid}"
+            expect(mail.html_part.decoded).to include "https://app.chatwoot.com/survey/responses/#{conversation.uuid}"
           end
         end
 
         it 'uses outgoing_content for CSAT message body' do
           with_modified_env 'FRONTEND_URL' => 'https://app.chatwoot.com' do
             mail = described_class.email_reply(csat_message).deliver_now
-            expect(mail.decoded).to include csat_message.outgoing_content
+            expect(mail.html_part.decoded).to include csat_message.outgoing_content
           end
         end
       end

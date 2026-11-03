@@ -1,3 +1,6 @@
+# rubocop:disable Metrics/ClassLength
+# KLIMABAZAR F-transkrypcja + F-mail-multipart: klasa upstreamu przekroczyła limit 175 linii
+# przez dopiski forka. Wyciszenie zamiast sztucznego dzielenia klasy upstreamu.
 class ConversationReplyMailer < ApplicationMailer
   # We needs to expose large attachments to the view as links
   # Small attachments are linked as mail attachments directly
@@ -217,6 +220,7 @@ class ConversationReplyMailer < ApplicationMailer
 
   def choose_layout
     return 'mailer/base' if branded_email_layout_action?
+    return 'mailer/reply' if action_name == 'email_reply' # KLIMABAZAR F-mail-multipart: szkielet HTML
     return false if action_name == 'reply_without_summary' || action_name == 'email_reply'
 
     'mailer/base'
@@ -237,3 +241,4 @@ class ConversationReplyMailer < ApplicationMailer
                 })
   end
 end
+# rubocop:enable Metrics/ClassLength

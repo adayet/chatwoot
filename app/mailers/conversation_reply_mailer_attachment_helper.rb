@@ -37,7 +37,9 @@ module ConversationReplyMailerAttachmentHelper
 
     if current_total_size + file_size <= 20.megabytes
       content = read_blob_content(blob)
-      mail.attachments[attachment_name] = {
+      # KLIMABAZAR F-mail-multipart: `attachments` zamiast `mail.attachments` — samo `mail`
+      # renderuje szablony, a przy wersji HTML + tekst dublowało to części treści w mailu.
+      attachments[attachment_name] = {
         mime_type: attachment.file.content_type || 'application/octet-stream',
         content: content
       }
